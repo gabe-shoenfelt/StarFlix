@@ -1,24 +1,10 @@
-@import url('https://fonts.googleapis.com/css2?family=Roboto:wght@300;400;500;700&family=Impact&display=swap');
-
 :root {
   --bg: #141414;
   --text: #ffffff;
-  --text-muted: #b3b3b3;
-  --netflix-red: #e50914;
-  --star-gold: #ffd700;
-  --card-shadow: 0 6px 20px rgba(0,0,0,0.55);
+  --muted: #b3b3b3;
+  --netflix-red: #E50914;     /* Official Netflix brand red – direct from brand.netflix.com */
+  --gold: #ffd700;
   --transition: all 0.35s cubic-bezier(0.165, 0.84, 0.44, 1);
-}
-
-@media (prefers-color-scheme: light) {
-  :root {
-    --bg: #f5f5f5;
-    --text: #0f0f0f;
-    --text-muted: #555;
-  }
-  body { background: var(--bg); color: var(--text); }
-  nav { background: rgba(245,245,245,0.92) !important; }
-  .hero::before { background: linear-gradient(to right, rgba(245,245,245,0.9) 30%, rgba(245,245,245,0.6) 60%, rgba(245,245,245,0.9) 100%); }
 }
 
 * {
@@ -32,75 +18,98 @@ body {
   background: var(--bg);
   color: var(--text);
   overflow-x: hidden;
-  scroll-behavior: smooth;
+  line-height: 1.4;
 }
 
 /* ── NAVBAR ──────────────────────────────────────────────── */
 nav {
   position: fixed;
   inset: 0 0 auto;
-  height: 68px;
+  height: clamp(60px, 10vw, 70px);
   padding: 0 4%;
   background: linear-gradient(to bottom, rgba(20,20,20,0.92), transparent);
-  backdrop-filter: blur(12px);
-  -webkit-backdrop-filter: blur(12px);
   z-index: 1000;
-  transition: background 0.4s, backdrop-filter 0.4s;
+  transition: background 0.4s ease;
 }
 
 nav.scrolled {
   background: var(--bg);
-  backdrop-filter: blur(16px);
-  box-shadow: 0 4px 16px rgba(0,0,0,0.4);
+}
+
+.nav-content {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  height: 100%;
+  max-width: 1600px;
+  margin: 0 auto;
 }
 
 .logo {
   font-family: 'Impact', sans-serif;
-  font-size: clamp(1.9rem, 5vw, 2.6rem);
+  font-size: clamp(2rem, 6vw, 2.8rem);
   letter-spacing: -3px;
-  color: var(--star-gold);
-  text-shadow: 0 0 20px color-mix(in srgb, var(--star-gold) 70%, transparent);
+  color: var(--gold);
+  text-shadow: 0 0 15px color-mix(in srgb, var(--gold) 70%, transparent);
 }
-
 .logo span { color: var(--netflix-red); }
 
+.nav-links {
+  display: none;
+  gap: 24px;
+  margin-left: 40px;
+}
 .nav-links a {
   color: var(--text);
   text-decoration: none;
   font-weight: 500;
-  font-size: 0.95rem;
-  transition: color 0.2s;
+  font-size: clamp(0.9rem, 2.5vw, 1rem);
 }
-
 .nav-links a:hover,
-.nav-links a.active { color: var(--text-muted); }
-
-.search-container input {
-  background: rgba(40,40,40,0.7);
-  border: 1px solid color-mix(in srgb, var(--text) 30%, transparent);
-  color: var(--text);
-  padding: 0.5rem 0.8rem 0.5rem 2.4rem;
-  border-radius: 6px;
-  width: 220px;
-  transition: width 0.4s ease, background 0.3s;
+.nav-links a.active {
+  color: var(--muted);
 }
 
+.nav-right {
+  display: flex;
+  align-items: center;
+  gap: 16px;
+}
+.search-container {
+  position: relative;
+}
+.search-container input {
+  background: rgba(50,50,50,0.7);
+  border: 1px solid #444;
+  color: white;
+  padding: 8px 12px 8px 36px;
+  border-radius: 4px;
+  width: clamp(140px, 35vw, 180px);
+  transition: width 0.3s, background 0.3s;
+  font-size: 0.9rem;
+}
 .search-container input:focus {
-  width: 300px;
-  background: rgba(60,60,60,0.9);
+  width: clamp(200px, 45vw, 260px);
+  background: rgba(70,70,70,0.9);
   outline: none;
-  box-shadow: 0 0 0 2px var(--netflix-red);
+}
+.search-icon {
+  position: absolute;
+  left: 10px;
+  top: 50%;
+  transform: translateY(-50%);
+  color: #aaa;
 }
 
 /* ── HERO ────────────────────────────────────────────────── */
 .hero {
-  height: 95vh;
-  min-height: 620px;
-  background-size: cover;
-  background-position: center 25%;
+  height: 80vh;
+  min-height: 480px;
+  max-height: 90vh;
+  background: url('https://images.unsplash.com/photo-1446776811953-b23d57bd21aa?auto=format&fit=crop&q=80&w=2000') center 30% / cover no-repeat;
   position: relative;
   display: flex;
-  align-items: end;
+  align-items: flex-end;
   padding-bottom: 12%;
 }
 
@@ -108,79 +117,67 @@ nav.scrolled {
   content: "";
   position: absolute;
   inset: 0;
-  background: linear-gradient(
-    to right,
-    var(--bg) 20%,
-    transparent 50%,
-    var(--bg) 85%
-  );
-  z-index: 1;
+  background: linear-gradient(to right, #141414 20%, transparent 55%, #141414 90%);
 }
 
 .hero-content {
   position: relative;
   z-index: 2;
-  max-width: 680px;
-  margin-left: 4%;
+  max-width: 90%;
+  margin: 0 auto;
+  padding: 0 5%;
 }
 
 .hero-title {
   font-family: 'Impact', sans-serif;
-  font-size: clamp(3.5rem, 8vw, 6.2rem);
+  font-size: clamp(3.2rem, 12vw, 7rem);
   line-height: 0.92;
-  margin-bottom: 1rem;
-  letter-spacing: -2px;
-  text-shadow: 0 6px 30px rgba(0,0,0,0.9);
+  margin-bottom: 0.8rem;
+  text-shadow: 0 8px 30px black;
 }
 
 .hero-description {
-  font-size: clamp(1.1rem, 2.5vw, 1.4rem);
+  font-size: clamp(1rem, 4vw, 1.35rem);
   max-width: 520px;
-  line-height: 1.4;
-  margin-bottom: 1.8rem;
-  color: var(--text-muted);
+  margin-bottom: 1.5rem;
+  color: var(--muted);
 }
 
-/* ── BUTTONS ─────────────────────────────────────────────── */
 .btn {
-  padding: 0.8rem 2rem;
-  font-size: 1.1rem;
-  font-weight: 600;
+  padding: clamp(10px, 2.5vw, 12px) clamp(20px, 5vw, 32px);
+  font-size: clamp(0.95rem, 3vw, 1.1rem);
+  font-weight: 700;
   border: none;
-  border-radius: 6px;
+  border-radius: 4px;
   cursor: pointer;
-  display: inline-flex;
-  align-items: center;
-  gap: 0.6rem;
   transition: var(--transition);
+  margin-right: 12px;
 }
-
 .btn-play {
   background: white;
   color: black;
 }
-
-.btn-play:hover { background: #e0e0e0; transform: scale(1.06); }
-
+.btn-play:hover {
+  background: #e6e6e6;
+  transform: scale(1.05);
+}
 .btn-info {
-  background: rgba(255,255,255,0.2);
+  background: rgba(255,255,255,0.25);
   color: white;
-  backdrop-filter: blur(8px);
+}
+.btn-info:hover {
+  background: rgba(255,255,255,0.4);
 }
 
-.btn-info:hover { background: rgba(255,255,255,0.35); }
-
-/* ── CONTENT ROWS ────────────────────────────────────────── */
+/* ── CONTENT SECTIONS ────────────────────────────────────── */
 .content-section {
-  padding: 4.5rem 4% 3rem;
-  position: relative;
+  padding: clamp(40px, 8vw, 60px) 5% 40px;
 }
 
 .section-title {
-  font-size: 1.7rem;
+  font-size: clamp(1.4rem, 4vw, 1.9rem);
   font-weight: 600;
-  margin-bottom: 1.1rem;
-  padding-left: 0.5rem;
+  margin-bottom: 1rem;
 }
 
 .row-container {
@@ -189,122 +186,105 @@ nav.scrolled {
 
 .slider {
   display: flex;
-  gap: 0.6rem;
+  gap: 10px;
   overflow-x: auto;
-  scroll-snap-type: x mandatory;
   scroll-behavior: smooth;
-  padding: 0.6rem 0 1.5rem;
+  padding: 12px 0 24px;
   -webkit-overflow-scrolling: touch;
   scrollbar-width: none;
 }
-
 .slider::-webkit-scrollbar { display: none; }
 
 .card {
-  position: relative;
-  flex: 0 0 18vw;
+  flex: 0 0 clamp(130px, 28vw, 210px);
   aspect-ratio: 2 / 3;
-  min-width: 160px;
-  max-width: 240px;
   border-radius: 8px;
   overflow: hidden;
-  transition: var(--transition);
-  box-shadow: var(--card-shadow);
-  container-type: inline-size;
-}
-
-@container (min-width: 180px) {
-  .card-title { font-size: 1.05rem; }
+  position: relative;
+  transition: transform 0.4s ease;
+  box-shadow: 0 4px 14px rgba(0,0,0,0.6);
 }
 
 .card img {
   width: 100%;
   height: 100%;
   object-fit: cover;
+  object-position: center;
   transition: transform 0.45s ease;
 }
 
 .card:hover {
-  transform: scale(1.18) translateY(-12px);
-  z-index: 20;
-  box-shadow: 0 24px 48px rgba(0,0,0,0.7);
+  transform: scale(1.14);
+  z-index: 10;
 }
 
 .card:hover img {
-  transform: scale(1.09);
-  filter: brightness(0.9);
+  transform: scale(1.08);
 }
 
 .card-overlay {
   position: absolute;
   inset: 0 0 0 0;
-  background: linear-gradient(transparent 40%, rgba(0,0,0,0.92) 75%);
-  padding: 60% 1rem 1rem;
+  background: linear-gradient(transparent 45%, rgba(0,0,0,0.92) 78%);
+  padding: 65% 12px 12px;
   opacity: 0;
-  transform: translateY(15%);
-  transition: opacity 0.4s, transform 0.4s;
-  display: flex;
-  flex-direction: column;
-  justify-content: flex-end;
+  transition: opacity 0.35s;
+  font-size: clamp(0.85rem, 2.8vw, 1rem);
+  font-weight: 500;
 }
 
 .card:hover .card-overlay {
   opacity: 1;
-  transform: translateY(0);
 }
 
-.card-title {
-  font-weight: 600;
-  line-height: 1.25;
-  margin-bottom: 0.4rem;
-}
-
-/* ── ARROWS ──────────────────────────────────────────────── */
 .arrow {
   position: absolute;
   top: 50%;
   transform: translateY(-50%);
-  width: 50px;
+  width: 48px;
   height: 110px;
-  background: rgba(0,0,0,0.6);
+  background: rgba(0,0,0,0.65);
   color: white;
   border: none;
-  font-size: 2.8rem;
-  display: grid;
-  place-items: center;
+  font-size: 2.4rem;
   cursor: pointer;
-  z-index: 10;
+  z-index: 5;
   opacity: 0;
   transition: opacity 0.25s, background 0.2s;
-  border-radius: 0 8px 8px 0;
 }
 
-.row-container:hover .arrow { opacity: 0.8; }
+.row-container:hover .arrow {
+  opacity: 0.85;
+}
 
-.arrow:hover { background: var(--netflix-red); opacity: 1; }
+.arrow:hover {
+  background: var(--netflix-red);
+  opacity: 1;
+}
 
 .arrow-left  { left: 0; border-radius: 0 8px 8px 0; }
 .arrow-right { right: 0; border-radius: 8px 0 0 8px; }
 
 /* ── FOOTER ──────────────────────────────────────────────── */
 footer {
-  padding: 5rem 4% 3rem;
-  color: #888;
+  padding: 60px 5% 40px;
+  color: #777;
+  text-align: center;
   font-size: 0.9rem;
 }
 
-footer a { color: #aaa; text-decoration: none; }
-
-footer a:hover { color: var(--text); }
-
-/* ── RESPONSIVE ──────────────────────────────────────────── */
-@media (max-width: 1024px) {
-  .card { flex: 0 0 28vw; max-width: 180px; }
+/* ── RESPONSIVE ADJUSTMENTS ──────────────────────────────── */
+@media (min-width: 768px) {
+  .nav-links { display: flex; }
+  .hero { height: 95vh; min-height: 620px; }
+  .hero-content { max-width: 680px; margin-left: 5%; padding: 0; }
+  .card { flex: 0 0 210px; }
 }
 
-@media (max-width: 640px) {
-  .hero-title   { font-size: 2.8rem; }
-  .hero-description { font-size: 1.05rem; }
-  .card { flex: 0 0 42vw; min-width: 140px; }
-  nav { height: 60px; }
+@media (max-width: 480px) {
+  nav { height: 60px; padding: 0 3%; }
+  .search-container input { width: 130px; }
+  .search-container input:focus { width: 180px; }
+  .btn { padding: 8px 18px; font-size: 0.95rem; }
+  .arrow { width: 40px; font-size: 2rem; height: 90px; }
 }

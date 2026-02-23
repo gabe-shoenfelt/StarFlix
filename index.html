@@ -1,326 +1,461 @@
 <!DOCTYPE html>
 <html lang="en">
 <head>
-    <meta charset="UTF-8" />
-    <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
-    <title>StarFlix - Star Wars Streaming</title>
-    <link rel="preconnect" href="https://fonts.googleapis.com">
-    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-    <link href="https://fonts.googleapis.com/css2?family=Roboto:wght@300;400;500;700&family=Impact&display=swap" rel="stylesheet">
-    <style>
-        :root {
-            --bg: #141414;
-            --text: #ffffff;
-            --muted: #b3b3b3;
-            --red: #e50914;
-            --gold: #ffd700;
-            --transition: all 0.35s cubic-bezier(0.165, 0.84, 0.44, 1);
-        }
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
+  <title>StarFlix – Star Wars</title>
+  <link rel="stylesheet" href="style.css">
 
-        * { margin:0; padding:0; box-sizing:border-box; }
-        body {
-            font-family: 'Roboto', sans-serif;
-            background: var(--bg);
-            color: var(--text);
-            overflow-x: hidden;
-        }
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Roboto:wght@300;400;500;700&family=Impact&display=swap" rel="stylesheet">
 
-        nav {
-            position: fixed;
-            top: 0; left: 0; right: 0;
-            height: 68px;
-            padding: 0 4%;
-            background: linear-gradient(to bottom, rgba(20,20,20,0.9), transparent);
-            z-index: 1000;
-            transition: background 0.4s;
-        }
-        nav.scrolled { background: var(--bg); }
+  <style>
+    :root {
+      --bg: #141414;
+      --text: #ffffff;
+      --muted: #b3b3b3;
+      --red: #e50914;
+      --gold: #ffd700;
+      --transition: all 0.35s cubic-bezier(0.165, 0.84, 0.44, 1);
+    }
 
-        .nav-content {
-            display: flex;
-            align-items: center;
-            justify-content: space-between;
-            height: 100%;
-        }
+    * {
+      margin: 0;
+      padding: 0;
+      box-sizing: border-box;
+    }
 
-        .logo {
-            font-family: 'Impact', sans-serif;
-            font-size: 2.4rem;
-            letter-spacing: -3px;
-            color: var(--gold);
-            text-shadow: 0 0 15px var(--gold);
-        }
-        .logo span { color: var(--red); }
+    body {
+      font-family: 'Roboto', system-ui, sans-serif;
+      background: var(--bg);
+      color: var(--text);
+      overflow-x: hidden;
+      line-height: 1.4;
+    }
 
-        .nav-links {
-            display: flex;
-            gap: 28px;
-            margin-left: 50px;
-        }
-        .nav-links a {
-            color: var(--text);
-            text-decoration: none;
-            font-weight: 500;
-        }
-        .nav-links a:hover,
-        .nav-links a.active { color: var(--muted); }
+    /* ── NAVBAR ──────────────────────────────────────────────── */
+    nav {
+      position: fixed;
+      inset: 0 0 auto;
+      height: 68px;
+      padding: 0 4%;
+      background: linear-gradient(to bottom, rgba(20,20,20,0.92), transparent);
+      z-index: 1000;
+      transition: background 0.4s;
+    }
 
-        .nav-right {
-            display: flex;
-            align-items: center;
-            gap: 24px;
-        }
-        .search-container {
-            position: relative;
-        }
-        .search-container input {
-            background: rgba(50,50,50,0.7);
-            border: 1px solid #444;
-            color: white;
-            padding: 8px 12px 8px 40px;
-            border-radius: 4px;
-            width: 240px;
-            transition: width 0.3s, background 0.3s;
-        }
-        .search-container input:focus {
-            width: 320px;
-            background: rgba(70,70,70,0.9);
-            outline: none;
-        }
-        .search-icon {
-            position: absolute;
-            left: 12px;
-            top: 50%;
-            transform: translateY(-50%);
-            color: #aaa;
-        }
+    nav.scrolled {
+      background: var(--bg);
+    }
 
-        .hero {
-            height: 95vh;
-            min-height: 620px;
-            background: url('https://images.unsplash.com/photo-1446776811953-b23d57bd21aa?auto=format&fit=crop&q=80&w=2000') center/cover no-repeat;
-            position: relative;
-            display: flex;
-            align-items: flex-end;
-            padding-bottom: 10%;
-        }
-        .hero::before {
-            content: "";
-            position: absolute;
-            inset: 0;
-            background: linear-gradient(to right, #141414 25%, transparent 55%, #141414 90%);
-        }
+    .nav-content {
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+      height: 100%;
+      max-width: 1600px;
+      margin: 0 auto;
+    }
 
-        .hero-content {
-            position: relative;
-            z-index: 2;
-            max-width: 650px;
-            margin-left: 5%;
-        }
-        .hero-title {
-            font-family: 'Impact', sans-serif;
-            font-size: clamp(4rem, 9vw, 7rem);
-            line-height: 0.9;
-            margin-bottom: 1rem;
-            text-shadow: 0 6px 25px black;
-        }
-        .hero-description {
-            font-size: 1.4rem;
-            max-width: 520px;
-            margin-bottom: 2rem;
-            color: var(--muted);
-        }
+    .logo {
+      font-family: 'Impact', sans-serif;
+      font-size: clamp(2rem, 6vw, 2.8rem);
+      letter-spacing: -3px;
+      color: var(--gold);
+      text-shadow: 0 0 15px color-mix(in srgb, var(--gold) 70%, transparent);
+    }
+    .logo span { color: var(--red); }
 
-        .btn {
-            padding: 12px 32px;
-            font-size: 1.1rem;
-            font-weight: bold;
-            border: none;
-            border-radius: 4px;
-            cursor: pointer;
-            transition: var(--transition);
-        }
-        .btn-play {
-            background: white;
-            color: black;
-        }
-        .btn-play:hover { background: #e0e0e0; transform: scale(1.05); }
-        .btn-info {
-            background: rgba(255,255,255,0.25);
-            color: white;
-        }
-        .btn-info:hover { background: rgba(255,255,255,0.4); }
+    .nav-links {
+      display: none;
+      gap: 24px;
+      margin-left: 40px;
+    }
+    .nav-links a {
+      color: var(--text);
+      text-decoration: none;
+      font-weight: 500;
+      font-size: 0.95rem;
+    }
+    .nav-links a:hover,
+    .nav-links a.active {
+      color: var(--muted);
+    }
 
-        .content-section {
-            padding: 60px 5% 40px;
-        }
-        .section-title {
-            font-size: 1.8rem;
-            font-weight: 600;
-            margin-bottom: 1rem;
-        }
+    .nav-right {
+      display: flex;
+      align-items: center;
+      gap: 18px;
+    }
+    .search-container {
+      position: relative;
+    }
+    .search-container input {
+      background: rgba(50,50,50,0.7);
+      border: 1px solid #444;
+      color: white;
+      padding: 8px 12px 8px 36px;
+      border-radius: 4px;
+      width: 160px;
+      transition: width 0.3s, background 0.3s;
+      font-size: 0.9rem;
+    }
+    .search-container input:focus {
+      width: 220px;
+      background: rgba(70,70,70,0.9);
+      outline: none;
+    }
+    .search-icon {
+      position: absolute;
+      left: 10px;
+      top: 50%;
+      transform: translateY(-50%);
+      color: #aaa;
+    }
 
-        .row-container {
-            position: relative;
-        }
-        .slider {
-            display: flex;
-            gap: 10px;
-            overflow-x: auto;
-            scroll-behavior: smooth;
-            padding: 10px 0 20px;
-            scrollbar-width: none;
-        }
-        .slider::-webkit-scrollbar { display: none; }
+    /* ── HERO ────────────────────────────────────────────────── */
+    .hero {
+      height: 80vh;
+      min-height: 480px;
+      background: url('https://images.unsplash.com/photo-1446776811953-b23d57bd21aa?auto=format&fit=crop&q=80&w=2000') center 30% / cover no-repeat;
+      position: relative;
+      display: flex;
+      align-items: flex-end;
+      padding-bottom: 12%;
+    }
 
-        .card {
-            flex: 0 0 220px;
-            height: 330px;
-            border-radius: 8px;
-            overflow: hidden;
-            position: relative;
-            transition: transform 0.4s ease;
-            box-shadow: 0 4px 12px rgba(0,0,0,0.6);
-        }
-        .card:hover {
-            transform: scale(1.2);
-            z-index: 10;
-        }
-        .card img {
-            width: 100%;
-            height: 100%;
-            object-fit: cover;
-            transition: transform 0.45s;
-        }
-        .card:hover img { transform: scale(1.08); }
+    .hero::before {
+      content: "";
+      position: absolute;
+      inset: 0;
+      background: linear-gradient(to right, #141414 20%, transparent 55%, #141414 90%);
+    }
 
-        .card-overlay {
-            position: absolute;
-            bottom: 0; left: 0; right: 0;
-            background: linear-gradient(transparent, rgba(0,0,0,0.9));
-            padding: 80px 16px 16px;
-            opacity: 0;
-            transition: opacity 0.3s;
-        }
-        .card:hover .card-overlay { opacity: 1; }
+    .hero-content {
+      position: relative;
+      z-index: 2;
+      max-width: 90%;
+      margin: 0 auto;
+      padding: 0 5%;
+    }
 
-        .arrow {
-            position: absolute;
-            top: 50%;
-            transform: translateY(-50%);
-            width: 50px;
-            height: 120px;
-            background: rgba(0,0,0,0.6);
-            color: white;
-            border: none;
-            font-size: 2.5rem;
-            cursor: pointer;
-            z-index: 5;
-            opacity: 0;
-            transition: opacity 0.2s;
-        }
-        .row-container:hover .arrow { opacity: 1; }
-        .arrow:hover { background: var(--red); }
-        .arrow-left  { left: 0; border-radius: 0 8px 8px 0; }
-        .arrow-right { right: 0; border-radius: 8px 0 0 8px; }
+    .hero-title {
+      font-family: 'Impact', sans-serif;
+      font-size: clamp(3.2rem, 12vw, 7rem);
+      line-height: 0.92;
+      margin-bottom: 0.8rem;
+      text-shadow: 0 8px 30px black;
+    }
 
-        footer {
-            padding: 60px 5% 40px;
-            color: #777;
-            text-align: center;
-            font-size: 0.9rem;
-        }
-    </style>
+    .hero-description {
+      font-size: clamp(1rem, 4vw, 1.35rem);
+      max-width: 520px;
+      margin-bottom: 1.5rem;
+      color: var(--muted);
+    }
+
+    .btn {
+      padding: clamp(10px, 2.5vw, 12px) clamp(20px, 5vw, 32px);
+      font-size: clamp(0.95rem, 3vw, 1.1rem);
+      font-weight: 700;
+      border: none;
+      border-radius: 4px;
+      cursor: pointer;
+      transition: var(--transition);
+      margin-right: 12px;
+    }
+    .btn-play {
+      background: white;
+      color: black;
+    }
+    .btn-play:hover {
+      background: #e6e6e6;
+      transform: scale(1.05);
+    }
+    .btn-info {
+      background: rgba(255,255,255,0.25);
+      color: white;
+    }
+    .btn-info:hover {
+      background: rgba(255,255,255,0.4);
+    }
+
+    /* ── CONTENT ROWS ────────────────────────────────────────── */
+    .content-section {
+      padding: clamp(40px, 8vw, 60px) 5% 40px;
+    }
+
+    .section-title {
+      font-size: clamp(1.4rem, 4vw, 1.9rem);
+      font-weight: 600;
+      margin-bottom: 1rem;
+    }
+
+    .row-container {
+      position: relative;
+    }
+
+    .slider {
+      display: flex;
+      gap: 10px;
+      overflow-x: auto;
+      scroll-behavior: smooth;
+      padding: 12px 0 24px;
+      -webkit-overflow-scrolling: touch;
+      scrollbar-width: none;
+    }
+    .slider::-webkit-scrollbar {
+      display: none;
+    }
+
+    .card {
+      flex: 0 0 clamp(130px, 28vw, 210px);
+      aspect-ratio: 2 / 3;
+      border-radius: 8px;
+      overflow: hidden;
+      position: relative;
+      transition: transform 0.4s ease;
+      box-shadow: 0 4px 14px rgba(0,0,0,0.6);
+    }
+
+    .card img {
+      width: 100%;
+      height: 100%;
+      object-fit: cover;
+      object-position: center;
+      transition: transform 0.45s ease;
+    }
+
+    .card:hover {
+      transform: scale(1.14);
+      z-index: 10;
+    }
+
+    .card:hover img {
+      transform: scale(1.08);
+    }
+
+    .card-overlay {
+      position: absolute;
+      inset: 0 0 0 0;
+      background: linear-gradient(transparent 45%, rgba(0,0,0,0.92) 78%);
+      padding: 65% 12px 12px;
+      opacity: 0;
+      transition: opacity 0.35s;
+      font-size: clamp(0.85rem, 2.8vw, 1rem);
+      font-weight: 500;
+    }
+
+    .card:hover .card-overlay {
+      opacity: 1;
+    }
+
+    .arrow {
+      position: absolute;
+      top: 50%;
+      transform: translateY(-50%);
+      width: 48px;
+      height: 110px;
+      background: rgba(0,0,0,0.65);
+      color: white;
+      border: none;
+      font-size: 2.4rem;
+      cursor: pointer;
+      z-index: 5;
+      opacity: 0;
+      transition: opacity 0.25s, background 0.2s;
+    }
+
+    .row-container:hover .arrow {
+      opacity: 0.85;
+    }
+
+    .arrow:hover {
+      background: var(--red);
+      opacity: 1;
+    }
+
+    .arrow-left  { left: 0; border-radius: 0 8px 8px 0; }
+    .arrow-right { right: 0; border-radius: 8px 0 0 8px; }
+
+    /* ── FOOTER ──────────────────────────────────────────────── */
+    footer {
+      padding: 60px 5% 40px;
+      color: #777;
+      text-align: center;
+      font-size: 0.9rem;
+    }
+
+    /* ── RESPONSIVE ──────────────────────────────────────────── */
+    @media (min-width: 768px) {
+      .nav-links {
+        display: flex;
+      }
+      .hero {
+        height: 95vh;
+        min-height: 620px;
+      }
+      .hero-content {
+        max-width: 680px;
+        margin-left: 5%;
+        padding: 0;
+      }
+      .card {
+        flex: 0 0 210px;
+      }
+    }
+
+    @media (max-width: 480px) {
+      nav {
+        height: 60px;
+        padding: 0 3%;
+      }
+      .search-container input {
+        width: 130px;
+      }
+      .search-container input:focus {
+        width: 180px;
+      }
+      .btn {
+        padding: 8px 18px;
+        font-size: 0.95rem;
+      }
+      .arrow {
+        width: 40px;
+        font-size: 2rem;
+        height: 90px;
+      }
+    }
+  </style>
 </head>
 <body>
 
-    <nav id="nav">
-        <div class="nav-content">
-            <div style="display:flex; align-items:center;">
-                <div class="logo">STAR<span>FLIX</span></div>
-                <div class="nav-links">
-                    <a href="#" class="active">Home</a>
-                    <a href="#">Series</a>
-                    <a href="#">Movies</a>
-                    <a href="#">New</a>
-                    <a href="#">My List</a>
-                </div>
-            </div>
-            <div class="nav-right">
-                <div class="search-container">
-                    <span class="search-icon">🔍</span>
-                    <input type="text" placeholder="Titles, people, genres...">
-                </div>
-                <span style="font-size:1.4rem; cursor:pointer;">🔔</span>
-                <div style="width:36px; height:36px; border-radius:4px; overflow:hidden; border:2px solid white;">
-                    <img src="https://images.unsplash.com/photo-1507003211169-0a1dd7228f2d?auto=format&fit=crop&w=100" alt="Profile" style="width:100%;height:100%;object-fit:cover;">
-                </div>
-            </div>
+  <nav id="navbar">
+    <div class="nav-content">
+      <div style="display:flex; align-items:center;">
+        <div class="logo">STAR<span>FLIX</span></div>
+        <div class="nav-links">
+          <a href="#" class="active">Home</a>
+          <a href="#">Series</a>
+          <a href="#">Movies</a>
+          <a href="#">New</a>
+          <a href="#">My List</a>
         </div>
-    </nav>
+      </div>
 
-    <section class="hero">
-        <div class="hero-content">
-            <h1 class="hero-title">THE MANDALORIAN</h1>
-            <p class="hero-description">
-                A lone bounty hunter protects a mysterious child in the outer reaches of the galaxy.
-            </p>
-            <div>
-                <button class="btn btn-play">▶ Play</button>
-                <button class="btn btn-info">More Info</button>
-            </div>
+      <div class="nav-right">
+        <div class="search-container">
+          <span class="search-icon">🔍</span>
+          <input type="text" placeholder="Search...">
         </div>
-    </section>
-
-    <section class="content-section">
-        <h2 class="section-title">Continue Watching</h2>
-        <div class="row-container">
-            <button class="arrow arrow-left" onclick="scrollLeft(this)">‹</button>
-            <div class="slider">
-                <div class="card"><img src="https://images.unsplash.com/photo-1581833971385-983855972e47?auto=format&fit=crop&q=80" alt=""><div class="card-overlay"><div>The Mandalorian S3</div></div></div>
-                <div class="card"><img src="https://images.unsplash.com/photo-1557683316-973673baf926?auto=format&fit=crop&q=80" alt=""><div class="card-overlay"><div>Ahsoka</div></div></div>
-                <div class="card"><img src="https://images.unsplash.com/photo-1506905925346-21bda4d32df4?auto=format&fit=crop&q=80" alt=""><div class="card-overlay"><div>Andor</div></div></div>
-                <div class="card"><img src="https://images.unsplash.com/photo-1617791160505-6f00504e3519?auto=format&fit=crop&q=80" alt=""><div class="card-overlay"><div>Obi-Wan Kenobi</div></div></div>
-                <div class="card"><img src="https://images.unsplash.com/photo-1553356084-58ef4a67b2a7?auto=format&fit=crop&q=80" alt=""><div class="card-overlay"><div>Clone Wars</div></div></div>
-                <div class="card"><img src="https://images.unsplash.com/photo-1540979388789-7cee28a1cdc0?auto=format&fit=crop&q=80" alt=""><div class="card-overlay"><div>Rebels</div></div></div>
-            </div>
-            <button class="arrow arrow-right" onclick="scrollRight(this)">›</button>
+        <span style="font-size:1.4rem; cursor:pointer;">🔔</span>
+        <div style="width:36px;height:36px;border-radius:4px;overflow:hidden;border:2px solid white;">
+          <img src="https://images.unsplash.com/photo-1507003211169-0a1dd7228f2d?auto=format&fit=crop&w=100&h=100" alt="Profile" style="width:100%;height:100%;object-fit:cover;">
         </div>
-    </section>
+      </div>
+    </div>
+  </nav>
 
-    <section class="content-section">
-        <h2 class="section-title">Star Wars Movies</h2>
-        <div class="row-container">
-            <button class="arrow arrow-left" onclick="scrollLeft(this)">‹</button>
-            <div class="slider">
-                <div class="card"><img src="https://upload.wikimedia.org/wikipedia/en/8/87/StarWarsMoviePoster1977.jpg" alt=""><div class="card-overlay"><div>A New Hope</div></div></div>
-                <div class="card"><img src="https://upload.wikimedia.org/wikipedia/en/3/3c/SW_-_Empire_Strikes_Back.jpg" alt=""><div class="card-overlay"><div>Empire Strikes Back</div></div></div>
-                <div class="card"><img src="https://upload.wikimedia.org/wikipedia/en/b/b2/Star_Wars_Return_of_the_Jedi.jpg" alt=""><div class="card-overlay"><div>Return of the Jedi</div></div></div>
-                <div class="card"><img src="https://upload.wikimedia.org/wikipedia/en/b/b2/Star_Wars_Episode_I_The_Phantom_Menace_poster.jpg" alt=""><div class="card-overlay"><div>Phantom Menace</div></div></div>
-                <div class="card"><img src="https://upload.wikimedia.org/wikipedia/en/5/5e/Star_Wars_Episode_II_Attack_of_the_Clones_poster.jpg" alt=""><div class="card-overlay"><div>Attack of the Clones</div></div></div>
-                <div class="card"><img src="https://upload.wikimedia.org/wikipedia/en/9/93/Star_Wars_Episode_III_Revenge_of_the_Sith_poster.jpg" alt=""><div class="card-overlay"><div>Revenge of the Sith</div></div></div>
-            </div>
-            <button class="arrow arrow-right" onclick="scrollRight(this)">›</button>
+  <section class="hero">
+    <div class="hero-content">
+      <h1 class="hero-title">THE MANDALORIAN</h1>
+      <p class="hero-description">
+        Bounty hunters. The child. The way.
+      </p>
+      <div>
+        <button class="btn btn-play">▶ Play</button>
+        <button class="btn btn-info">More Info</button>
+      </div>
+    </div>
+  </section>
+
+  <section class="content-section">
+    <h2 class="section-title">Continue Watching</h2>
+    <div class="row-container">
+      <button class="arrow arrow-left" onclick="scrollSlider(this, -1)">‹</button>
+
+      <div class="slider">
+        <div class="card">
+          <img src="https://upload.wikimedia.org/wikipedia/en/3/3f/The_Mandalorian_season_3_poster.jpg" alt="The Mandalorian">
+          <div class="card-overlay"><div>The Mandalorian S3</div></div>
         </div>
-    </section>
+        <div class="card">
+          <img src="https://upload.wikimedia.org/wikipedia/commons/9/90/Ahsoka_black_background.svg" alt="Ahsoka">
+          <div class="card-overlay"><div>Ahsoka</div></div>
+        </div>
+        <div class="card">
+          <img src="https://upload.wikimedia.org/wikipedia/commons/1/1e/Logo_of_Star_Wars_series_Andor.svg" alt="Andor">
+          <div class="card-overlay"><div>Andor</div></div>
+        </div>
+        <div class="card">
+          <img src="https://upload.wikimedia.org/wikipedia/commons/c/c9/Obi_Wan_Kenobi_series_logo_simplified.svg" alt="Obi-Wan Kenobi">
+          <div class="card-overlay"><div>Obi-Wan Kenobi</div></div>
+        </div>
+        <div class="card">
+          <img src="https://upload.wikimedia.org/wikipedia/commons/3/3a/Star_Wars_The_Clone_Wars_Logo_-_The_Siege_of_Mandalore.png" alt="Clone Wars">
+          <div class="card-overlay"><div>Clone Wars</div></div>
+        </div>
+        <div class="card">
+          <img src="https://upload.wikimedia.org/wikipedia/commons/e/e1/Logo_Star_Wars_Rebels_schwarz.svg" alt="Rebels">
+          <div class="card-overlay"><div>Rebels</div></div>
+        </div>
+      </div>
 
-    <footer>
-        <p>Fan-made demo • Not affiliated with Disney/Lucasfilm • Images from Unsplash & Wikimedia</p>
-    </footer>
+      <button class="arrow arrow-right" onclick="scrollSlider(this, 1)">›</button>
+    </div>
+  </section>
 
-    <script>
-        window.addEventListener('scroll', () => {
-            document.getElementById('nav').classList.toggle('scrolled', window.scrollY > 100);
-        });
+  <section class="content-section">
+    <h2 class="section-title">Star Wars Movies</h2>
+    <div class="row-container">
+      <button class="arrow arrow-left" onclick="scrollSlider(this, -1)">‹</button>
+      <div class="slider">
+        <div class="card">
+          <img src="https://upload.wikimedia.org/wikipedia/en/8/87/StarWarsMoviePoster1977.jpg" alt="">
+          <div class="card-overlay"><div>A New Hope</div></div>
+        </div>
+        <div class="card">
+          <img src="https://upload.wikimedia.org/wikipedia/en/3/3c/SW_-_Empire_Strikes_Back.jpg" alt="">
+          <div class="card-overlay"><div>Empire Strikes Back</div></div>
+        </div>
+        <div class="card">
+          <img src="https://upload.wikimedia.org/wikipedia/en/b/b2/Star_Wars_Return_of_the_Jedi.jpg" alt="">
+          <div class="card-overlay"><div>Return of the Jedi</div></div>
+        </div>
+        <div class="card">
+          <img src="https://upload.wikimedia.org/wikipedia/en/b/b2/Star_Wars_Episode_I_The_Phantom_Menace_poster.jpg" alt="">
+          <div class="card-overlay"><div>Phantom Menace</div></div>
+        </div>
+        <div class="card">
+          <img src="https://upload.wikimedia.org/wikipedia/en/5/5e/Star_Wars_Episode_II_Attack_of_the_Clones_poster.jpg" alt="">
+          <div class="card-overlay"><div>Attack of the Clones</div></div>
+        </div>
+        <div class="card">
+          <img src="https://upload.wikimedia.org/wikipedia/en/9/93/Star_Wars_Episode_III_Revenge_of_the_Sith_poster.jpg" alt="">
+          <div class="card-overlay"><div>Revenge of the Sith</div></div>
+        </div>
+      </div>
+      <button class="arrow arrow-right" onclick="scrollSlider(this, 1)">›</button>
+    </div>
+  </section>
 
-        function scrollLeft(btn) {
-            const slider = btn.nextElementSibling;
-            slider.scrollBy({ left: -slider.clientWidth * 0.7, behavior: 'smooth' });
-        }
-        function scrollRight(btn) {
-            const slider = btn.previousElementSibling;
-            slider.scrollBy({ left: slider.clientWidth * 0.7, behavior: 'smooth' });
-        }
-    </script>
+  <footer>
+    <p>Fan-made demo • Images from Wikimedia Commons & Unsplash • Not affiliated with Disney or Lucasfilm</p>
+  </footer>
+
+  <script>
+    // Navbar scroll effect
+    window.addEventListener('scroll', () => {
+      document.getElementById('navbar').classList.toggle('scrolled', window.scrollY > 80);
+    });
+
+    // Slider scroll
+    function scrollSlider(btn, direction) {
+      const slider = btn.parentElement.querySelector('.slider');
+      const scrollAmount = slider.clientWidth * 0.75 * direction;
+      slider.scrollBy({ left: scrollAmount, behavior: 'smooth' });
+    }
+  </script>
 </body>
 </html>
