@@ -8,377 +8,139 @@
         @import url('https://fonts.googleapis.com/css2?family=Roboto:wght@400;500;700&family=Impact&display=swap');
 
         :root {
-            --netflix-red: #e50914;
             --star-wars-gold: #ffd700;
         }
 
-        * {
-            margin: 0;
-            padding: 0;
-            box-sizing: border-box;
-        }
+        * { margin:0; padding:0; box-sizing:border-box; }
 
         body {
             font-family: 'Roboto', sans-serif;
-            background-color: #141414;
-            color: #fff;
-            overflow-x: hidden;
+            background:#141414;
+            color:#fff;
+            overflow-x:hidden;
         }
 
         nav {
-            position: fixed;
-            top: 0;
-            left: 0;
-            right: 0;
-            height: 70px;
-            background: linear-gradient(to bottom, rgba(0,0,0,0.85), transparent);
-            display: flex;
-            align-items: center;
-            padding: 0 4%;
-            z-index: 1000;
-            transition: background 0.4s;
+            position:fixed; top:0; left:0; right:0; height:70px;
+            background:linear-gradient(to bottom,rgba(0,0,0,0.85),transparent);
+            display:flex; align-items:center; padding:0 4%;
+            z-index:1000; transition:background .4s;
         }
+        nav.scrolled { background:#141414; }
 
-        nav.scrolled {
-            background: #141414;
-        }
-
-        .nav-content {
-            width: 100%;
-            display: flex;
-            align-items: center;
-            justify-content: space-between;
-        }
+        .nav-content { width:100%; display:flex; align-items:center; justify-content:space-between; }
 
         .logo {
-            font-family: 'Impact', sans-serif;
-            font-size: 2.2rem;
-            font-weight: 900;
-            letter-spacing: -3px;
-            color: var(--star-wars-gold);
-            text-shadow: 0 0 15px var(--star-wars-gold);
-            cursor: pointer;
+            font-family:'Impact',sans-serif; font-size:2.2rem; letter-spacing:-3px;
+            color:var(--star-wars-gold); text-shadow:0 0 15px var(--star-wars-gold);
         }
-
-        .logo span {
-            color: var(--netflix-red);
-        }
-
-        .nav-links {
-            display: flex;
-            gap: 28px;
-            margin-left: 40px;
-        }
+        .logo span { color:var(--netflix-red); }
 
         .nav-links a {
-            color: #fff;
-            text-decoration: none;
-            font-weight: 500;
-            font-size: 15px;
-            transition: color 0.2s;
+            color:#fff; text-decoration:none; margin:0 14px; font-weight:500; font-size:15px;
+            cursor:pointer;
         }
+        .nav-links a.active { color:#b3b3b3; }
 
-        .nav-links a:hover,
-        .nav-links a.active {
-            color: #b3b3b3;
-        }
+        .nav-right { display:flex; align-items:center; gap:20px; }
 
-        .nav-right {
-            display: flex;
-            align-items: center;
-            gap: 24px;
-        }
-
-        .search-container {
-            position: relative;
-        }
-
+        .search-container { position:relative; }
         .search-container input {
-            background: rgba(0,0,0,0.75);
-            border: 1px solid #fff;
-            color: #fff;
-            padding: 6px 12px 6px 40px;
-            border-radius: 4px;
-            width: 280px;
-            font-size: 14px;
-            transition: width 0.3s;
+            background:rgba(0,0,0,0.75); border:1px solid #fff; color:#fff;
+            padding:6px 12px 6px 40px; border-radius:4px; width:280px; font-size:14px;
+            transition:width .3s;
         }
+        .search-container input:focus { width:340px; outline:none; }
 
-        .search-container input:focus {
-            width: 320px;
-            outline: none;
-        }
-
-        .search-icon {
-            position: absolute;
-            left: 12px;
-            top: 50%;
-            transform: translateY(-50%);
-            font-size: 18px;
-            color: #fff;
-        }
-
-        .nav-icon {
-            font-size: 22px;
-            cursor: pointer;
-            transition: transform 0.2s;
-        }
-
-        .nav-icon:hover {
-            transform: scale(1.15);
-        }
+        .search-icon { position:absolute; left:12px; top:50%; transform:translateY(-50%); font-size:18px; }
 
         .profile {
-            width: 32px;
-            height: 32px;
-            border-radius: 4px;
-            overflow: hidden;
-            border: 2px solid #fff;
+            width:32px; height:32px; border-radius:4px; overflow:hidden; border:2px solid #fff;
         }
-
-        .profile img {
-            width: 100%;
-            height: 100%;
-            object-fit: cover;
-        }
+        .profile img { width:100%; height:100%; object-fit:cover; }
 
         .hero {
-            height: 95vh;
-            background-size: cover;
-            background-position: center 30%;
-            position: relative;
-            display: flex;
-            align-items: flex-end;
-            padding-bottom: 8%;
+            height:95vh; background:url('https://images.unsplash.com/photo-1446776811953-b23d57bd21aa?auto=format&fit=crop&q=80&w=1920') center/cover;
+            position:relative; display:flex; align-items:flex-end; padding-bottom:8%;
         }
-
         .hero::before {
-            content: '';
-            position: absolute;
-            inset: 0;
-            background: linear-gradient(
-                to right,
-                rgba(20,20,20,0.85) 30%,
-                rgba(20,20,20,0.4) 60%,
-                rgba(20,20,20,0.85) 100%
-            );
-            z-index: 1;
+            content:''; position:absolute; inset:0;
+            background:linear-gradient(to right,rgba(20,20,20,0.85) 30%,rgba(20,20,20,0.4) 60%,rgba(20,20,20,0.85) 100%);
         }
 
-        .hero-content {
-            position: relative;
-            z-index: 2;
-            max-width: 620px;
-            margin-left: 4%;
-        }
+        .hero-content { position:relative; z-index:2; max-width:620px; margin-left:4%; }
 
-        .hero-badge {
-            display: flex;
-            align-items: center;
-            gap: 12px;
-            margin-bottom: 20px;
-        }
-
-        .hero-badge span {
-            background: #e50914;
-            color: white;
-            padding: 2px 10px;
-            font-size: 13px;
-            font-weight: 700;
-            border-radius: 2px;
-        }
-
-        .hero-title {
-            font-size: 4.8rem;
-            font-weight: 900;
-            line-height: 1.05;
-            margin-bottom: 20px;
-            text-shadow: 0 4px 20px rgba(0,0,0,0.9);
-            font-family: 'Impact', sans-serif;
-            letter-spacing: -2px;
-        }
-
-        .hero-description {
-            font-size: 1.35rem;
-            line-height: 1.35;
-            margin-bottom: 30px;
-            max-width: 480px;
-        }
-
-        .hero-buttons {
-            display: flex;
-            gap: 16px;
-        }
+        .hero-title { font-size:4.8rem; font-family:'Impact',sans-serif; line-height:1.05; margin-bottom:20px; text-shadow:0 4px 20px rgba(0,0,0,0.9); }
+        .hero-description { font-size:1.35rem; max-width:480px; margin-bottom:30px; }
 
         .btn {
-            padding: 12px 32px;
-            font-size: 1.1rem;
-            font-weight: 700;
-            border: none;
-            border-radius: 4px;
-            cursor: pointer;
-            display: flex;
-            align-items: center;
-            gap: 10px;
-            transition: all 0.3s;
+            padding:12px 32px; font-size:1.1rem; font-weight:700; border:none; border-radius:4px;
+            cursor:pointer; transition:all .3s;
         }
+        .btn-play { background:#fff; color:#000; }
+        .btn-play:hover { background:#e6e6e6; transform:scale(1.05); }
+        .btn-info { background:rgba(255,255,255,0.25); color:#fff; }
+        .btn-info:hover { background:rgba(255,255,255,0.4); }
 
-        .btn-play {
-            background: #fff;
-            color: #000;
-        }
-
-        .btn-play:hover {
-            background: #e6e6e6;
-            transform: scale(1.05);
-        }
-
-        .btn-info {
-            background: rgba(255,255,255,0.25);
-            color: #fff;
-        }
-
-        .btn-info:hover {
-            background: rgba(255,255,255,0.4);
-        }
-
-        .content-section {
-            padding: 60px 4% 40px;
-            position: relative;
-        }
-
-        .section-title {
-            font-size: 1.6rem;
-            font-weight: 600;
-            margin-bottom: 18px;
-            padding-left: 8px;
-        }
-
-        .row-container {
-            position: relative;
-        }
+        .content-section { padding:60px 4% 40px; }
+        .section-title { font-size:1.6rem; font-weight:600; margin-bottom:18px; padding-left:8px; }
 
         .slider {
-            display: flex;
-            gap: 8px;
-            overflow-x: auto;
-            scroll-behavior: smooth;
-            padding: 8px 0 20px;
-            scrollbar-width: none;
+            display:flex; gap:8px; overflow-x:auto; scroll-behavior:smooth; padding:8px 0 20px;
+            scrollbar-width:none;
         }
-
-        .slider::-webkit-scrollbar {
-            display: none;
-        }
+        .slider::-webkit-scrollbar { display:none; }
 
         .card {
-            position: relative;
-            flex: 0 0 220px;
-            height: 330px;
-            border-radius: 8px;
-            overflow: hidden;
-            transition: transform 0.4s cubic-bezier(0.25, 0.1, 0.25, 1);
-            cursor: pointer;
-            box-shadow: 0 4px 12px rgba(0,0,0,0.6);
+            position:relative; flex:0 0 220px; height:330px; border-radius:8px; overflow:hidden;
+            transition:transform .4s cubic-bezier(0.25,0.1,0.25,1); cursor:pointer;
+            box-shadow:0 4px 12px rgba(0,0,0,0.6);
         }
-
-        .card:hover {
-            transform: scale(1.22);
-            z-index: 20;
-            box-shadow: 0 20px 40px rgba(0,0,0,0.9);
-        }
+        .card:hover { transform:scale(1.22); z-index:20; box-shadow:0 20px 40px rgba(0,0,0,0.9); }
 
         .card img {
-            width: 100%;
-            height: 100%;
-            object-fit: cover;
-            transition: transform 0.4s;
+            width:100%; height:100%; object-fit:cover; transition:transform .4s;
         }
-
-        .card:hover img {
-            transform: scale(1.08);
-        }
+        .card:hover img { transform:scale(1.08); }
 
         .card-overlay {
-            position: absolute;
-            bottom: 0;
-            left: 0;
-            right: 0;
-            background: linear-gradient(transparent, rgba(0,0,0,0.95));
-            padding: 40px 16px 16px;
-            opacity: 0;
-            transition: opacity 0.3s;
+            position:absolute; bottom:0; left:0; right:0;
+            background:linear-gradient(transparent, rgba(0,0,0,0.95));
+            padding:40px 16px 16px; opacity:0; transition:opacity .3s;
+        }
+        .card:hover .card-overlay { opacity:1; }
+
+        .card-title { font-size:1.05rem; font-weight:600; }
+
+        .heart {
+            position:absolute; top:12px; right:12px; font-size:26px; cursor:pointer;
+            z-index:30; text-shadow:0 0 8px #000;
         }
 
-        .card:hover .card-overlay {
-            opacity: 1;
-        }
-
-        .card-title {
-            font-size: 1.05rem;
-            font-weight: 600;
-            line-height: 1.3;
+        .coming-soon {
+            position:absolute; top:12px; left:12px; background:#e50914; color:#fff;
+            padding:4px 10px; font-size:12px; border-radius:3px; z-index:30;
         }
 
         .arrow {
-            position: absolute;
-            top: 50%;
-            transform: translateY(-50%);
-            width: 48px;
-            height: 120px;
-            background: rgba(0,0,0,0.65);
-            color: white;
-            border: none;
-            font-size: 3rem;
-            display: flex;
-            align-items: center;
-            justify-content: center;
-            cursor: pointer;
-            z-index: 10;
-            opacity: 0;
-            transition: opacity 0.2s, background 0.2s;
+            position:absolute; top:50%; transform:translateY(-50%);
+            width:48px; height:120px; background:rgba(0,0,0,0.65); color:white;
+            border:none; font-size:3rem; cursor:pointer; z-index:10; opacity:0;
+            transition:opacity .2s;
         }
-
-        .row-container:hover .arrow {
-            opacity: 1;
-        }
-
-        .arrow:hover {
-            background: rgba(229, 9, 20, 0.85);
-        }
-
-        .arrow-left {
-            left: -10px;
-            border-top-right-radius: 6px;
-            border-bottom-right-radius: 6px;
-        }
-
-        .arrow-right {
-            right: -10px;
-            border-top-left-radius: 6px;
-            border-bottom-left-radius: 6px;
-        }
+        .row-container:hover .arrow { opacity:1; }
+        .arrow:hover { background:rgba(229,9,20,0.85); }
 
         footer {
-            padding: 60px 4% 40px;
-            color: #757575;
-            font-size: 14px;
-            text-align: center;
+            padding:60px 4% 40px; color:#757575; font-size:14px; text-align:center;
         }
 
-        footer a {
-            color: #757575;
-            text-decoration: none;
-        }
+        .tab-content { display:none; }
+        .tab-content.active { display:block; }
 
-        @media (max-width: 768px) {
-            .hero-title {
-                font-size: 3.2rem;
-            }
-            .card {
-                flex: 0 0 160px;
-                height: 240px;
-            }
+        @media (max-width:768px) {
+            .hero-title { font-size:3.2rem; }
+            .card { flex:0 0 160px; height:240px; }
         }
     </style>
 </head>
@@ -386,168 +148,255 @@
 
     <nav id="navbar">
         <div class="nav-content">
-            <div style="display: flex; align-items: center;">
+            <div style="display:flex;align-items:center;">
                 <div class="logo">STAR<span>FLIX</span></div>
                 <div class="nav-links">
-                    <a href="#" class="active">Home</a>
-                    <a href="#">TV Shows</a>
-                    <a href="#">Movies</a>
-                    <a href="#">New & Popular</a>
-                    <a href="#">My List</a>
+                    <a data-tab="home" class="active" onclick="switchTab('home')">Home</a>
+                    <a data-tab="tv" onclick="switchTab('tv')">TV Shows</a>
+                    <a data-tab="movies" onclick="switchTab('movies')">Movies</a>
+                    <a data-tab="new" onclick="switchTab('new')">New & Popular</a>
+                    <a data-tab="mylist" onclick="switchTab('mylist')">My List</a>
                 </div>
             </div>
 
             <div class="nav-right">
                 <div class="search-container">
                     <span class="search-icon">🔍</span>
-                    <input type="text" placeholder="Search Star Wars titles...">
+                    <input type="text" id="searchInput" placeholder="Search titles..." onkeyup="filterCards()">
                 </div>
                 <div class="nav-icon">🛎️</div>
                 <div class="profile">
-                    <img src="https://images.unsplash.com/photo-1581833971385-983855972e47?auto=format&fit=crop&q=80&w=100&h=100" alt="Mandalorian Profile">
+                    <img src="https://images.unsplash.com/photo-1581833971385-983855972e47?auto=format&fit=crop&q=80&w=100&h=100" alt="Sci-fi helmet">
                 </div>
             </div>
         </div>
     </nav>
 
-    <section class="hero" style="background-image: url('https://images.unsplash.com/photo-1446776811953-b23d57bd21aa?auto=format&fit=crop&q=80&w=1920');">
-        <div class="hero-content">
-            <div class="hero-badge">
-                <span>NEW SEASON</span>
-                <span style="background:#ffd700;color:#000;">STAR WARS</span>
+    <!-- HOME -->
+    <div id="home-content" class="tab-content active">
+        <section class="hero" style="background-image: url('https://images.unsplash.com/photo-1446776811953-b23d57bd21aa?auto=format&fit=crop&q=80&w=1920');">
+            <div class="hero-content">
+                <div class="hero-badge">
+                    <span>NEW SEASON</span>
+                    <span style="background:#ffd700;color:#000;">STAR WARS</span>
+                </div>
+                <h1 class="hero-title">THE MANDALORIAN</h1>
+                <p class="hero-description">The journey of a lone bounty hunter in the outer reaches of the galaxy far, far away.</p>
+                <div class="hero-buttons">
+                    <button class="btn btn-play">▶ Play</button>
+                    <button class="btn btn-info">ⓘ More Info</button>
+                </div>
             </div>
-            <h1 class="hero-title">THE MANDALORIAN</h1>
-            <p class="hero-description">
-                The journey of a lone bounty hunter in the outer reaches of the galaxy far, far away. 
-                This is the way.
-            </p>
-            <div class="hero-buttons">
-                <button class="btn btn-play" onclick="alert('▶ Playing The Mandalorian - Episode 1 (demo)')">
-                    ▶ Play
-                </button>
-                <button class="btn btn-info" onclick="alert('More info about The Mandalorian would load here.')">
-                    ⓘ More Info
-                </button>
-            </div>
-        </div>
-    </section>
+        </section>
 
-    <section class="content-section">
-        <h2 class="section-title">Continue Watching for Grogu</h2>
-        <div class="row-container">
-            <button class="arrow arrow-left" onclick="scrollSlider(this, -1)">‹</button>
-            <div class="slider">
-                <div class="card">
-                    <img src="https://static.wikia.nocookie.net/starwars/images/3/3f/The_Mandalorian_season_3_poster.jpg/revision/latest?cb=20230307000000" alt="Mandalorian">
-                    <div class="card-overlay">
-                        <div class="card-title">The Mandalorian • S3</div>
+        <section class="content-section">
+            <h2 class="section-title">Continue Watching</h2>
+            <div class="row-container">
+                <button class="arrow arrow-left" onclick="scrollSlider(this,-1)">‹</button>
+                <div class="slider" id="continue-slider">
+                    <div class="card" data-title="The Mandalorian">
+                        <img src="https://images.unsplash.com/photo-1581833971385-983855972e47?auto=format&fit=crop&q=80" alt="">
+                        <div class="card-overlay"><div class="card-title">The Mandalorian</div></div>
+                        <div class="heart" onclick="toggleMyList(this)">♡</div>
                     </div>
+                    <!-- more cards can be added here -->
                 </div>
-                <div class="card">
-                    <img src="https://upload.wikimedia.org/wikipedia/commons/9/90/Ahsoka_black_background.svg" alt="Ahsoka">
-                    <div class="card-overlay">
-                        <div class="card-title">Ahsoka</div>
-                    </div>
-                </div>
-                <div class="card">
-                    <img src="https://upload.wikimedia.org/wikipedia/commons/1/1e/Logo_of_Star_Wars_series_Andor.svg" alt="Andor">
-                    <div class="card-overlay">
-                        <div class="card-title">Andor</div>
-                    </div>
-                </div>
-                <div class="card">
-                    <img src="https://upload.wikimedia.org/wikipedia/commons/c/c9/Obi_Wan_Kenobi_series_logo_simplified.svg" alt="Obi-Wan">
-                    <div class="card-overlay">
-                        <div class="card-title">Obi-Wan Kenobi</div>
-                    </div>
-                </div>
-                <div class="card">
-                    <img src="https://static.wikia.nocookie.net/starwars/images/c/c0/Star_Wars_The_Clone_Wars_Season_7.jpg/revision/latest?cb=20200221000000" alt="Clone Wars">
-                    <div class="card-overlay">
-                        <div class="card-title">The Clone Wars • S7</div>
-                    </div>
-                </div>
-                <div class="card">
-                    <img src="https://upload.wikimedia.org/wikipedia/commons/e/e1/Logo_Star_Wars_Rebels_schwarz.svg" alt="Rebels">
-                    <div class="card-overlay">
-                        <div class="card-title">Star Wars Rebels</div>
-                    </div>
-                </div>
+                <button class="arrow arrow-right" onclick="scrollSlider(this,1)">›</button>
             </div>
-            <button class="arrow arrow-right" onclick="scrollSlider(this, 1)">›</button>
-        </div>
-    </section>
+        </section>
+    </div>
 
-    <section class="content-section">
-        <h2 class="section-title">Star Wars Movies</h2>
-        <div class="row-container">
-            <button class="arrow arrow-left" onclick="scrollSlider(this, -1)">‹</button>
-            <div class="slider">
-                <div class="card">
-                    <img src="https://upload.wikimedia.org/wikipedia/en/8/87/StarWarsMoviePoster1977.jpg" alt="A New Hope">
-                    <div class="card-overlay">
-                        <div class="card-title">A New Hope</div>
+    <!-- TV SHOWS -->
+    <div id="tv-content" class="tab-content">
+        <section class="content-section">
+            <h2 class="section-title">Star Wars TV Shows</h2>
+            <div class="row-container">
+                <button class="arrow arrow-left" onclick="scrollSlider(this,-1)">‹</button>
+                <div class="slider">
+                    <div class="card" data-title="The Mandalorian">
+                        <img src="https://images.unsplash.com/photo-1581833971385-983855972e47?auto=format&fit=crop&q=80" alt="">
+                        <div class="card-overlay"><div class="card-title">The Mandalorian</div></div>
+                        <div class="heart" onclick="toggleMyList(this)">♡</div>
+                    </div>
+                    <div class="card" data-title="The Book of Boba Fett">
+                        <img src="https://images.unsplash.com/photo-1553356084-58ef4a67b2a7?auto=format&fit=crop&q=80" alt="">
+                        <div class="card-overlay"><div class="card-title">The Book of Boba Fett</div></div>
+                        <div class="heart" onclick="toggleMyList(this)">♡</div>
+                    </div>
+                    <div class="card" data-title="The Acolyte">
+                        <img src="https://images.unsplash.com/photo-1557683316-973673baf926?auto=format&fit=crop&q=80" alt="">
+                        <div class="card-overlay"><div class="card-title">The Acolyte</div></div>
+                        <div class="heart" onclick="toggleMyList(this)">♡</div>
+                    </div>
+                    <div class="card" data-title="Ahsoka">
+                        <img src="https://images.unsplash.com/photo-1506905925346-21bda4d32df4?auto=format&fit=crop&q=80" alt="">
+                        <div class="card-overlay"><div class="card-title">Ahsoka</div></div>
+                        <div class="heart" onclick="toggleMyList(this)">♡</div>
+                    </div>
+                    <div class="card" data-title="Andor">
+                        <img src="https://images.unsplash.com/photo-1540979388789-7cee28a1cdc0?auto=format&fit=crop&q=80" alt="">
+                        <div class="card-overlay"><div class="card-title">Andor</div></div>
+                        <div class="heart" onclick="toggleMyList(this)">♡</div>
                     </div>
                 </div>
-                <div class="card">
-                    <img src="https://upload.wikimedia.org/wikipedia/en/3/3c/SW_-_Empire_Strikes_Back.jpg" alt="Empire Strikes Back">
-                    <div class="card-overlay">
-                        <div class="card-title">The Empire Strikes Back</div>
-                    </div>
-                </div>
-                <div class="card">
-                    <img src="https://upload.wikimedia.org/wikipedia/en/b/b2/Star_Wars_Return_of_the_Jedi.jpg" alt="Return of the Jedi">
-                    <div class="card-overlay">
-                        <div class="card-title">Return of the Jedi</div>
-                    </div>
-                </div>
-                <div class="card">
-                    <img src="https://upload.wikimedia.org/wikipedia/en/b/b2/Star_Wars_Episode_I_The_Phantom_Menace_poster.jpg" alt="Phantom Menace">
-                    <div class="card-overlay">
-                        <div class="card-title">The Phantom Menace</div>
-                    </div>
-                </div>
-                <div class="card">
-                    <img src="https://upload.wikimedia.org/wikipedia/en/5/5e/Star_Wars_Episode_II_Attack_of_the_Clones_poster.jpg" alt="Attack of the Clones">
-                    <div class="card-overlay">
-                        <div class="card-title">Attack of the Clones</div>
-                    </div>
-                </div>
-                <div class="card">
-                    <img src="https://upload.wikimedia.org/wikipedia/en/9/93/Star_Wars_Episode_III_Revenge_of_the_Sith_poster.jpg" alt="Revenge of the Sith">
-                    <div class="card-overlay">
-                        <div class="card-title">Revenge of the Sith</div>
-                    </div>
-                </div>
+                <button class="arrow arrow-right" onclick="scrollSlider(this,1)">›</button>
             </div>
-            <button class="arrow arrow-right" onclick="scrollSlider(this, 1)">›</button>
-        </div>
-    </section>
+        </section>
+    </div>
+
+    <!-- MOVIES -->
+    <div id="movies-content" class="tab-content">
+        <section class="content-section">
+            <h2 class="section-title">Star Wars Movies</h2>
+            <div class="row-container">
+                <button class="arrow arrow-left" onclick="scrollSlider(this,-1)">‹</button>
+                <div class="slider">
+                    <div class="card" data-title="A New Hope">
+                        <img src="https://images.unsplash.com/photo-1454789548928-9efd52dc4031?auto=format&fit=crop&q=80" alt="">
+                        <div class="card-overlay"><div class="card-title">A New Hope</div></div>
+                        <div class="heart" onclick="toggleMyList(this)">♡</div>
+                    </div>
+                    <div class="card" data-title="The Empire Strikes Back">
+                        <img src="https://images.unsplash.com/photo-1506905925346-21bda4d32df4?auto=format&fit=crop&q=80" alt="">
+                        <div class="card-overlay"><div class="card-title">The Empire Strikes Back</div></div>
+                        <div class="heart" onclick="toggleMyList(this)">♡</div>
+                    </div>
+                    <div class="card" data-title="Return of the Jedi">
+                        <img src="https://images.unsplash.com/photo-1446776811953-b23d57bd21aa?auto=format&fit=crop&q=80" alt="">
+                        <div class="card-overlay"><div class="card-title">Return of the Jedi</div></div>
+                        <div class="heart" onclick="toggleMyList(this)">♡</div>
+                    </div>
+                    <div class="card" data-title="Rogue One">
+                        <img src="https://images.unsplash.com/photo-1507003211169-0a1dd7228f2d?auto=format&fit=crop&q=80" alt="">
+                        <div class="card-overlay"><div class="card-title">Rogue One</div></div>
+                        <div class="heart" onclick="toggleMyList(this)">♡</div>
+                    </div>
+                </div>
+                <button class="arrow arrow-right" onclick="scrollSlider(this,1)">›</button>
+            </div>
+        </section>
+    </div>
+
+    <!-- NEW & POPULAR -->
+    <div id="new-content" class="tab-content">
+        <section class="content-section">
+            <h2 class="section-title">New & Popular</h2>
+            <div class="row-container">
+                <button class="arrow arrow-left" onclick="scrollSlider(this,-1)">‹</button>
+                <div class="slider">
+                    <!-- Mandalorian & Grogu – upcoming -->
+                    <div class="card" data-title="The Mandalorian & Grogu">
+                        <img src="https://images.unsplash.com/photo-1581833971385-983855972e47?auto=format&fit=crop&q=80" alt="">
+                        <div class="coming-soon">COMING 2026</div>
+                        <div class="card-overlay"><div class="card-title">The Mandalorian & Grogu</div></div>
+                        <div class="heart" onclick="toggleMyList(this)">♡</div>
+                    </div>
+
+                    <!-- Skeleton Crew – already released -->
+                    <div class="card" data-title="Skeleton Crew">
+                        <img src="https://images.unsplash.com/photo-1553356084-58ef4a67b2a7?auto=format&fit=crop&q=80" alt="">
+                        <div class="card-overlay"><div class="card-title">Skeleton Crew</div></div>
+                        <div class="heart" onclick="toggleMyList(this)">♡</div>
+                    </div>
+
+                    <!-- more can be added -->
+                </div>
+                <button class="arrow arrow-right" onclick="scrollSlider(this,1)">›</button>
+            </div>
+        </section>
+    </div>
+
+    <!-- MY LIST -->
+    <div id="mylist-content" class="tab-content">
+        <section class="content-section">
+            <h2 class="section-title">My List</h2>
+            <div class="row-container">
+                <div class="slider" id="mylist-slider"></div>
+            </div>
+        </section>
+    </div>
 
     <footer>
-        <p style="margin-bottom: 20px;">Made with ❤️ for Star Wars fans • This is a fan-made demo</p>
-        <p style="margin-bottom: 20px; font-weight: 600; color: #ffd700;">
-            Made by a Star Wars fan
-        </p>
-        <p>Questions? <a href="#">Contact the Force</a></p>
-        <p style="margin-top: 30px; font-size: 12px;">© 2026 StarFlix • Not affiliated with Disney or Lucasfilm</p>
+        <p>Made with ❤️ for Star Wars fans • This is a fan-made demo</p>
+        <p style="margin:16px 0; font-weight:600; color:#ffd700;">Made by a Star Wars fan</p>
+        <p>© 2026 StarFlix • Not affiliated with Disney or Lucasfilm</p>
     </footer>
 
     <script>
-        window.addEventListener('scroll', () => {
-            const navbar = document.getElementById('navbar');
-            if (window.scrollY > 100) {
-                navbar.classList.add('scrolled');
-            } else {
-                navbar.classList.remove('scrolled');
+        let myList = JSON.parse(localStorage.getItem('starflixMyList')) || [];
+
+        function saveMyList() {
+            localStorage.setItem('starflixMyList', JSON.stringify(myList));
+        }
+
+        function renderMyList() {
+            const slider = document.getElementById('mylist-slider');
+            slider.innerHTML = '';
+            if (myList.length === 0) {
+                slider.innerHTML = '<p style="color:#777; padding:20px;">Your list is empty. ❤️ cards to add them here!</p>';
+                return;
             }
-        });
+            myList.forEach(item => {
+                const div = document.createElement('div');
+                div.className = 'card';
+                div.innerHTML = `
+                    <img src="${item.img}" alt="">
+                    <div class="card-overlay"><div class="card-title">${item.title}</div></div>
+                `;
+                slider.appendChild(div);
+            });
+        }
+
+        function toggleMyList(el) {
+            const card = el.closest('.card');
+            const title = card.dataset.title;
+            const img = card.querySelector('img').src;
+
+            const index = myList.findIndex(i => i.title === title);
+            if (index > -1) {
+                myList.splice(index, 1);
+                el.textContent = '♡';
+            } else {
+                myList.push({title, img});
+                el.textContent = '❤️';
+            }
+            saveMyList();
+            renderMyList();
+        }
+
+        function switchTab(tab) {
+            document.querySelectorAll('.tab-content').forEach(c => c.classList.remove('active'));
+            document.getElementById(tab + '-content').classList.add('active');
+
+            document.querySelectorAll('.nav-links a').forEach(a => a.classList.remove('active'));
+            document.querySelector(`.nav-links a[data-tab="${tab}"]`).classList.add('active');
+
+            if (tab === 'mylist') renderMyList();
+        }
+
+        function filterCards() {
+            const term = document.getElementById('searchInput').value.toLowerCase().trim();
+            const activeTab = document.querySelector('.tab-content.active');
+            if (!activeTab) return;
+
+            const cards = activeTab.querySelectorAll('.card');
+            cards.forEach(card => {
+                const title = (card.dataset.title || '').toLowerCase();
+                card.style.display = title.includes(term) ? 'flex' : 'none';
+            });
+        }
 
         function scrollSlider(btn, direction) {
             const slider = btn.parentElement.querySelector('.slider');
-            const scrollAmount = slider.clientWidth * 0.75;
-            slider.scrollBy({ left: scrollAmount * direction, behavior: 'smooth' });
+            const amount = slider.clientWidth * 0.75 * direction;
+            slider.scrollBy({ left: amount, behavior: 'smooth' });
         }
+
+        // Init
+        window.onload = () => {
+            document.getElementById('home-content').classList.add('active');
+            renderMyList();
+        };
     </script>
 </body>
 </html>
