@@ -142,10 +142,38 @@
         .tab-content { display:none; }
         .tab-content.active { display:block; }
 
+        /* Modal for movie/show details */
+        #detail-modal {
+            display:none; position:fixed; inset:0; background:rgba(0,0,0,0.9);
+            z-index:2000; justify-content:center; align-items:center;
+        }
+        .modal-content {
+            position:relative; width:90%; max-width:900px; height:90vh; border-radius:12px;
+            overflow:hidden; background:#000;
+        }
+        .modal-bg {
+            position:absolute; inset:0; background-size:cover; background-position:center;
+            filter:blur(20px); opacity:0.5;
+        }
+        .modal-inner {
+            position:relative; z-index:2; height:100%; padding:40px; display:flex;
+            flex-direction:column; justify-content:center; max-width:600px;
+        }
+        .modal-title { font-size:3.5rem; font-family:'Impact',sans-serif; margin-bottom:16px; text-shadow:0 4px 20px #000; }
+        .modal-desc { font-size:1.3rem; line-height:1.5; margin-bottom:32px; color:#ddd; }
+        .modal-buttons .btn { margin-right:16px; }
+
+        .close-modal {
+            position:absolute; top:20px; right:30px; font-size:40px; color:white;
+            cursor:pointer; z-index:3;
+        }
+
         @media (max-width:768px) {
             .hero-title { font-size:3.2rem; }
             .card { flex:0 0 160px; height:240px; }
             .nav-links { gap:12px; font-size:13px; overflow-x:auto; white-space:nowrap; }
+            .modal-title { font-size:2.8rem; }
+            .modal-desc { font-size:1.1rem; }
         }
     </style>
 </head>
@@ -172,14 +200,13 @@
                 </div>
                 <div class="nav-icon">🛎️</div>
                 <div class="profile">
-                    <!-- Fixed working pfp -->
                     <img src="https://images.unsplash.com/photo-1560250097-0b93528c311a?w=100&h=100&auto=format&fit=crop&q=80" alt="Profile">
                 </div>
             </div>
         </div>
     </nav>
 
-    <!-- HOME - now shows hero + both main rows -->
+    <!-- HOME -->
     <div id="home-content" class="tab-content active">
         <section class="hero" style="background-image: url('https://images.unsplash.com/photo-1446776811953-b23d57bd21aa?w=1920&auto=format&fit=crop&q=80');">
             <div class="hero-content">
@@ -201,32 +228,32 @@
             <div class="row-container">
                 <button class="arrow arrow-left" onclick="scrollSlider(this,-1)">‹</button>
                 <div class="slider">
-                    <div class="card" data-title="The Mandalorian">
+                    <div class="card" data-title="The Mandalorian" data-img="https://images.unsplash.com/photo-1581833971385-983855972e47?w=220&auto=format&fit=crop&q=80" data-summary="A lone bounty hunter protects a mysterious child while evading the Empire.">
                         <img src="https://images.unsplash.com/photo-1581833971385-983855972e47?w=220&auto=format&fit=crop&q=80" alt="">
                         <div class="card-overlay"><div class="card-title">The Mandalorian</div></div>
                         <div class="heart" onclick="toggleMyList(this)">♡</div>
                     </div>
-                    <div class="card" data-title="Ahsoka">
+                    <div class="card" data-title="Ahsoka" data-img="https://images.unsplash.com/photo-1557683316-973673baf926?w=220&auto=format&fit=crop&q=80" data-summary="Former Jedi Ahsoka Tano hunts for Thrawn and reunites with old friends.">
                         <img src="https://images.unsplash.com/photo-1557683316-973673baf926?w=220&auto=format&fit=crop&q=80" alt="">
                         <div class="card-overlay"><div class="card-title">Ahsoka</div></div>
                         <div class="heart" onclick="toggleMyList(this)">♡</div>
                     </div>
-                    <div class="card" data-title="Andor">
+                    <div class="card" data-title="Andor" data-img="https://images.unsplash.com/photo-1506905925346-21bda4d32df4?w=220&auto=format&fit=crop&q=80" data-summary="Cassian Andor's journey into the Rebellion begins in the shadows of the Empire.">
                         <img src="https://images.unsplash.com/photo-1506905925346-21bda4d32df4?w=220&auto=format&fit=crop&q=80" alt="">
                         <div class="card-overlay"><div class="card-title">Andor</div></div>
                         <div class="heart" onclick="toggleMyList(this)">♡</div>
                     </div>
-                    <div class="card" data-title="Obi-Wan Kenobi">
+                    <div class="card" data-title="Obi-Wan Kenobi" data-img="https://images.unsplash.com/photo-1617791160505-6f00504e3519?w=220&auto=format&fit=crop&q=80" data-summary="Obi-Wan Kenobi emerges from hiding to protect a young Leia from Darth Vader.">
                         <img src="https://images.unsplash.com/photo-1617791160505-6f00504e3519?w=220&auto=format&fit=crop&q=80" alt="">
                         <div class="card-overlay"><div class="card-title">Obi-Wan Kenobi</div></div>
                         <div class="heart" onclick="toggleMyList(this)">♡</div>
                     </div>
-                    <div class="card" data-title="The Clone Wars">
+                    <div class="card" data-title="The Clone Wars" data-img="https://images.unsplash.com/photo-1553356084-58ef4a67b2a7?w=220&auto=format&fit=crop&q=80" data-summary="Animated series following Anakin, Obi-Wan, and Ahsoka during the Clone Wars.">
                         <img src="https://images.unsplash.com/photo-1553356084-58ef4a67b2a7?w=220&auto=format&fit=crop&q=80" alt="">
                         <div class="card-overlay"><div class="card-title">The Clone Wars</div></div>
                         <div class="heart" onclick="toggleMyList(this)">♡</div>
                     </div>
-                    <div class="card" data-title="Star Wars Rebels">
+                    <div class="card" data-title="Star Wars Rebels" data-img="https://images.unsplash.com/photo-1540979388789-7cee28a1cdc0?w=220&auto=format&fit=crop&q=80" data-summary="A ragtag crew fights the Empire in the years before A New Hope.">
                         <img src="https://images.unsplash.com/photo-1540979388789-7cee28a1cdc0?w=220&auto=format&fit=crop&q=80" alt="">
                         <div class="card-overlay"><div class="card-title">Star Wars Rebels</div></div>
                         <div class="heart" onclick="toggleMyList(this)">♡</div>
@@ -241,32 +268,32 @@
             <div class="row-container">
                 <button class="arrow arrow-left" onclick="scrollSlider(this,-1)">‹</button>
                 <div class="slider">
-                    <div class="card" data-title="A New Hope">
+                    <div class="card" data-title="A New Hope" data-img="https://images.unsplash.com/photo-1454789548928-9efd52dc4031?w=220&auto=format&fit=crop&q=80" data-summary="Luke Skywalker joins the Rebellion to destroy the Death Star and defeat the Empire.">
                         <img src="https://images.unsplash.com/photo-1454789548928-9efd52dc4031?w=220&auto=format&fit=crop&q=80" alt="">
                         <div class="card-overlay"><div class="card-title">A New Hope</div></div>
                         <div class="heart" onclick="toggleMyList(this)">♡</div>
                     </div>
-                    <div class="card" data-title="The Empire Strikes Back">
+                    <div class="card" data-title="The Empire Strikes Back" data-img="https://images.unsplash.com/photo-1506905925346-21bda4d32df4?w=220&auto=format&fit=crop&q=80" data-summary="The Rebels are on the run as Darth Vader hunts Luke Skywalker.">
                         <img src="https://images.unsplash.com/photo-1506905925346-21bda4d32df4?w=220&auto=format&fit=crop&q=80" alt="">
                         <div class="card-overlay"><div class="card-title">The Empire Strikes Back</div></div>
                         <div class="heart" onclick="toggleMyList(this)">♡</div>
                     </div>
-                    <div class="card" data-title="Return of the Jedi">
+                    <div class="card" data-title="Return of the Jedi" data-img="https://images.unsplash.com/photo-1446776811953-b23d57bd21aa?w=220&auto=format&fit=crop&q=80" data-summary="Luke confronts Darth Vader and the Emperor to end the Empire.">
                         <img src="https://images.unsplash.com/photo-1446776811953-b23d57bd21aa?w=220&auto=format&fit=crop&q=80" alt="">
                         <div class="card-overlay"><div class="card-title">Return of the Jedi</div></div>
                         <div class="heart" onclick="toggleMyList(this)">♡</div>
                     </div>
-                    <div class="card" data-title="The Phantom Menace">
+                    <div class="card" data-title="The Phantom Menace" data-img="https://images.unsplash.com/photo-1557683316-973673baf926?w=220&auto=format&fit=crop&q=80" data-summary="Young Anakin Skywalker is discovered as the Jedi face a new threat.">
                         <img src="https://images.unsplash.com/photo-1557683316-973673baf926?w=220&auto=format&fit=crop&q=80" alt="">
                         <div class="card-overlay"><div class="card-title">The Phantom Menace</div></div>
                         <div class="heart" onclick="toggleMyList(this)">♡</div>
                     </div>
-                    <div class="card" data-title="Attack of the Clones">
+                    <div class="card" data-title="Attack of the Clones" data-img="https://images.unsplash.com/photo-1553356084-58ef4a67b2a7?w=220&auto=format&fit=crop&q=80" data-summary="Anakin and Padmé fall in love as the Clone Wars begin.">
                         <img src="https://images.unsplash.com/photo-1553356084-58ef4a67b2a7?w=220&auto=format&fit=crop&q=80" alt="">
                         <div class="card-overlay"><div class="card-title">Attack of the Clones</div></div>
                         <div class="heart" onclick="toggleMyList(this)">♡</div>
                     </div>
-                    <div class="card" data-title="Revenge of the Sith">
+                    <div class="card" data-title="Revenge of the Sith" data-img="https://images.unsplash.com/photo-1540979388789-7cee28a1cdc0?w=220&auto=format&fit=crop&q=80" data-summary="Anakin turns to the dark side and becomes Darth Vader.">
                         <img src="https://images.unsplash.com/photo-1540979388789-7cee28a1cdc0?w=220&auto=format&fit=crop&q=80" alt="">
                         <div class="card-overlay"><div class="card-title">Revenge of the Sith</div></div>
                         <div class="heart" onclick="toggleMyList(this)">♡</div>
@@ -289,27 +316,27 @@
             <div class="row-container">
                 <button class="arrow arrow-left" onclick="scrollSlider(this,-1)">‹</button>
                 <div class="slider">
-                    <div class="card" data-title="The Mandalorian">
+                    <div class="card" data-title="The Mandalorian" data-img="https://images.unsplash.com/photo-1581833971385-983855972e47?w=220&auto=format&fit=crop&q=80" data-summary="A bounty hunter protects a mysterious child across the galaxy.">
                         <img src="https://images.unsplash.com/photo-1581833971385-983855972e47?w=220&auto=format&fit=crop&q=80" alt="">
                         <div class="card-overlay"><div class="card-title">The Mandalorian</div></div>
                         <div class="heart" onclick="toggleMyList(this)">♡</div>
                     </div>
-                    <div class="card" data-title="The Book of Boba Fett">
+                    <div class="card" data-title="The Book of Boba Fett" data-img="https://images.unsplash.com/photo-1553356084-58ef4a67b2a7?w=220&auto=format&fit=crop&q=80" data-summary="Boba Fett claims Jabba's throne on Tatooine.">
                         <img src="https://images.unsplash.com/photo-1553356084-58ef4a67b2a7?w=220&auto=format&fit=crop&q=80" alt="">
                         <div class="card-overlay"><div class="card-title">The Book of Boba Fett</div></div>
                         <div class="heart" onclick="toggleMyList(this)">♡</div>
                     </div>
-                    <div class="card" data-title="The Acolyte">
+                    <div class="card" data-title="The Acolyte" data-img="https://images.unsplash.com/photo-1557683316-973673baf926?w=220&auto=format&fit=crop&q=80" data-summary="A mystery-thriller set in the High Republic era.">
                         <img src="https://images.unsplash.com/photo-1557683316-973673baf926?w=220&auto=format&fit=crop&q=80" alt="">
                         <div class="card-overlay"><div class="card-title">The Acolyte</div></div>
                         <div class="heart" onclick="toggleMyList(this)">♡</div>
                     </div>
-                    <div class="card" data-title="Ahsoka">
+                    <div class="card" data-title="Ahsoka" data-img="https://images.unsplash.com/photo-1506905925346-21bda4d32df4?w=220&auto=format&fit=crop&q=80" data-summary="Ahsoka searches for Thrawn and Ezra Bridger.">
                         <img src="https://images.unsplash.com/photo-1506905925346-21bda4d32df4?w=220&auto=format&fit=crop&q=80" alt="">
                         <div class="card-overlay"><div class="card-title">Ahsoka</div></div>
                         <div class="heart" onclick="toggleMyList(this)">♡</div>
                     </div>
-                    <div class="card" data-title="Andor">
+                    <div class="card" data-title="Andor" data-img="https://images.unsplash.com/photo-1540979388789-7cee28a1cdc0?w=220&auto=format&fit=crop&q=80" data-summary="Cassian Andor’s path to becoming a rebel spy.">
                         <img src="https://images.unsplash.com/photo-1540979388789-7cee28a1cdc0?w=220&auto=format&fit=crop&q=80" alt="">
                         <div class="card-overlay"><div class="card-title">Andor</div></div>
                         <div class="heart" onclick="toggleMyList(this)">♡</div>
@@ -327,19 +354,34 @@
             <div class="row-container">
                 <button class="arrow arrow-left" onclick="scrollSlider(this,-1)">‹</button>
                 <div class="slider">
-                    <div class="card" data-title="A New Hope">
+                    <div class="card" data-title="A New Hope" data-img="https://images.unsplash.com/photo-1454789548928-9efd52dc4031?w=220&auto=format&fit=crop&q=80" data-summary="Luke Skywalker joins the Rebellion to destroy the Death Star.">
                         <img src="https://images.unsplash.com/photo-1454789548928-9efd52dc4031?w=220&auto=format&fit=crop&q=80" alt="">
                         <div class="card-overlay"><div class="card-title">A New Hope</div></div>
                         <div class="heart" onclick="toggleMyList(this)">♡</div>
                     </div>
-                    <div class="card" data-title="The Empire Strikes Back">
+                    <div class="card" data-title="The Empire Strikes Back" data-img="https://images.unsplash.com/photo-1506905925346-21bda4d32df4?w=220&auto=format&fit=crop&q=80" data-summary="The Rebels flee from Darth Vader’s forces.">
                         <img src="https://images.unsplash.com/photo-1506905925346-21bda4d32df4?w=220&auto=format&fit=crop&q=80" alt="">
                         <div class="card-overlay"><div class="card-title">The Empire Strikes Back</div></div>
                         <div class="heart" onclick="toggleMyList(this)">♡</div>
                     </div>
-                    <div class="card" data-title="Return of the Jedi">
+                    <div class="card" data-title="Return of the Jedi" data-img="https://images.unsplash.com/photo-1446776811953-b23d57bd21aa?w=220&auto=format&fit=crop&q=80" data-summary="Luke confronts Vader and the Emperor.">
                         <img src="https://images.unsplash.com/photo-1446776811953-b23d57bd21aa?w=220&auto=format&fit=crop&q=80" alt="">
                         <div class="card-overlay"><div class="card-title">Return of the Jedi</div></div>
+                        <div class="heart" onclick="toggleMyList(this)">♡</div>
+                    </div>
+                    <div class="card" data-title="The Phantom Menace" data-img="https://images.unsplash.com/photo-1557683316-973673baf926?w=220&auto=format&fit=crop&q=80" data-summary="The discovery of young Anakin Skywalker.">
+                        <img src="https://images.unsplash.com/photo-1557683316-973673baf926?w=220&auto=format&fit=crop&q=80" alt="">
+                        <div class="card-overlay"><div class="card-title">The Phantom Menace</div></div>
+                        <div class="heart" onclick="toggleMyList(this)">♡</div>
+                    </div>
+                    <div class="card" data-title="Attack of the Clones" data-img="https://images.unsplash.com/photo-1553356084-58ef4a67b2a7?w=220&auto=format&fit=crop&q=80" data-summary="The beginning of the Clone Wars.">
+                        <img src="https://images.unsplash.com/photo-1553356084-58ef4a67b2a7?w=220&auto=format&fit=crop&q=80" alt="">
+                        <div class="card-overlay"><div class="card-title">Attack of the Clones</div></div>
+                        <div class="heart" onclick="toggleMyList(this)">♡</div>
+                    </div>
+                    <div class="card" data-title="Revenge of the Sith" data-img="https://images.unsplash.com/photo-1540979388789-7cee28a1cdc0?w=220&auto=format&fit=crop&q=80" data-summary="Anakin’s fall to the dark side.">
+                        <img src="https://images.unsplash.com/photo-1540979388789-7cee28a1cdc0?w=220&auto=format&fit=crop&q=80" alt="">
+                        <div class="card-overlay"><div class="card-title">Revenge of the Sith</div></div>
                         <div class="heart" onclick="toggleMyList(this)">♡</div>
                     </div>
                     <div class="card" data-title="Rogue One">
@@ -360,13 +402,13 @@
             <div class="row-container">
                 <button class="arrow arrow-left" onclick="scrollSlider(this,-1)">‹</button>
                 <div class="slider">
-                    <div class="card" data-title="The Mandalorian & Grogu">
+                    <div class="card" data-title="The Mandalorian & Grogu" data-img="https://images.unsplash.com/photo-1581833971385-983855972e47?w=220&auto=format&fit=crop&q=80" data-summary="The Mandalorian and Grogu team up for a new adventure.">
                         <img src="https://images.unsplash.com/photo-1581833971385-983855972e47?w=220&auto=format&fit=crop&q=80" alt="">
                         <div class="coming-soon">COMING 2026</div>
                         <div class="card-overlay"><div class="card-title">The Mandalorian & Grogu</div></div>
                         <div class="heart" onclick="toggleMyList(this)">♡</div>
                     </div>
-                    <div class="card" data-title="The Acolyte">
+                    <div class="card" data-title="The Acolyte" data-img="https://images.unsplash.com/photo-1557683316-973673baf926?w=220&auto=format&fit=crop&q=80" data-summary="A mystery-thriller set in the High Republic era.">
                         <img src="https://images.unsplash.com/photo-1557683316-973673baf926?w=220&auto=format&fit=crop&q=80" alt="">
                         <div class="coming-soon">NEW</div>
                         <div class="card-overlay"><div class="card-title">The Acolyte</div></div>
@@ -390,32 +432,32 @@
             <div class="row-container">
                 <button class="arrow arrow-left" onclick="scrollSlider(this,-1)">‹</button>
                 <div class="slider">
-                    <div class="card" data-title="The Mandalorian">
+                    <div class="card" data-title="The Mandalorian" data-img="https://images.unsplash.com/photo-1581833971385-983855972e47?w=220&auto=format&fit=crop&q=80" data-summary="The Mandalorian appeared in Fortnite Chapter 2 Season 5.">
                         <img src="https://images.unsplash.com/photo-1581833971385-983855972e47?w=220&auto=format&fit=crop&q=80" alt="">
                         <div class="card-overlay"><div class="card-title">The Mandalorian</div></div>
                         <div class="heart" onclick="toggleMyList(this)">♡</div>
                     </div>
-                    <div class="card" data-title="The Book of Boba Fett">
+                    <div class="card" data-title="The Book of Boba Fett" data-img="https://images.unsplash.com/photo-1553356084-58ef4a67b2a7?w=220&auto=format&fit=crop&q=80" data-summary="Boba Fett and Fennec Shand joined Fortnite.">
                         <img src="https://images.unsplash.com/photo-1553356084-58ef4a67b2a7?w=220&auto=format&fit=crop&q=80" alt="">
                         <div class="card-overlay"><div class="card-title">The Book of Boba Fett</div></div>
                         <div class="heart" onclick="toggleMyList(this)">♡</div>
                     </div>
-                    <div class="card" data-title="Ahsoka">
+                    <div class="card" data-title="Ahsoka" data-img="https://images.unsplash.com/photo-1557683316-973673baf926?w=220&auto=format&fit=crop&q=80" data-summary="Ahsoka Tano appeared in Fortnite Chapter 4.">
                         <img src="https://images.unsplash.com/photo-1557683316-973673baf926?w=220&auto=format&fit=crop&q=80" alt="">
                         <div class="card-overlay"><div class="card-title">Ahsoka</div></div>
                         <div class="heart" onclick="toggleMyList(this)">♡</div>
                     </div>
-                    <div class="card" data-title="Obi-Wan Kenobi">
+                    <div class="card" data-title="Obi-Wan Kenobi" data-img="https://images.unsplash.com/photo-1617791160505-6f00504e3519?w=220&auto=format&fit=crop&q=80" data-summary="Obi-Wan Kenobi was featured in Fortnite.">
                         <img src="https://images.unsplash.com/photo-1617791160505-6f00504e3519?w=220&auto=format&fit=crop&q=80" alt="">
                         <div class="card-overlay"><div class="card-title">Obi-Wan Kenobi</div></div>
                         <div class="heart" onclick="toggleMyList(this)">♡</div>
                     </div>
-                    <div class="card" data-title="The Clone Wars">
+                    <div class="card" data-title="The Clone Wars" data-img="https://images.unsplash.com/photo-1553356084-58ef4a67b2a7?w=220&auto=format&fit=crop&q=80" data-summary="Clone Wars characters appeared in Fortnite events.">
                         <img src="https://images.unsplash.com/photo-1553356084-58ef4a67b2a7?w=220&auto=format&fit=crop&q=80" alt="">
                         <div class="card-overlay"><div class="card-title">The Clone Wars</div></div>
                         <div class="heart" onclick="toggleMyList(this)">♡</div>
                     </div>
-                    <div class="card" data-title="Star Wars Rebels">
+                    <div class="card" data-title="Star Wars Rebels" data-img="https://images.unsplash.com/photo-1540979388789-7cee28a1cdc0?w=220&auto=format&fit=crop&q=80" data-summary="Rebels characters have been in Fortnite.">
                         <img src="https://images.unsplash.com/photo-1540979388789-7cee28a1cdc0?w=220&auto=format&fit=crop&q=80" alt="">
                         <div class="card-overlay"><div class="card-title">Star Wars Rebels</div></div>
                         <div class="heart" onclick="toggleMyList(this)">♡</div>
@@ -517,6 +559,30 @@
             slider.scrollBy({ left: amount, behavior: 'smooth' });
         }
 
+        // Show details modal when clicking a card
+        document.addEventListener('click', (e) => {
+            const card = e.target.closest('.card');
+            if (!card || e.target.closest('.heart') || e.target.closest('.coming-soon')) return;
+
+            const title = card.dataset.title;
+            const img = card.dataset.img || card.querySelector('img').src;
+            const summary = card.dataset.summary || 'A thrilling Star Wars adventure in a galaxy far, far away. (demo summary)';
+
+            const modal = document.getElementById('detail-modal');
+            modal.querySelector('.modal-bg').style.backgroundImage = `url(${img})`;
+            modal.querySelector('.modal-title').textContent = title;
+            modal.querySelector('.modal-desc').textContent = summary;
+            modal.style.display = 'flex';
+        });
+
+        // Close modal
+        document.getElementById('detail-modal')?.addEventListener('click', (e) => {
+            if (e.target.id === 'detail-modal' || e.target.classList.contains('close-modal')) {
+                document.getElementById('detail-modal').style.display = 'none';
+            }
+        });
+
+        // Init
         window.onload = () => {
             document.getElementById('home-content').classList.add('active');
             renderMyList();
