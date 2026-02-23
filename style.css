@@ -2,7 +2,7 @@
   --bg: #141414;
   --text: #ffffff;
   --muted: #b3b3b3;
-  --netflix-red: #E50914;     /* Official Netflix brand red – direct from brand.netflix.com */
+  --netflix-red: #E50914;
   --gold: #ffd700;
   --transition: all 0.35s cubic-bezier(0.165, 0.84, 0.44, 1);
 }
@@ -14,20 +14,22 @@
 }
 
 body {
-  font-family: 'Roboto', system-ui, sans-serif;
+  font-family: 'Roboto', system-ui, -apple-system, sans-serif;
   background: var(--bg);
   color: var(--text);
   overflow-x: hidden;
-  line-height: 1.4;
+  line-height: 1.45;
 }
 
 /* ── NAVBAR ──────────────────────────────────────────────── */
 nav {
   position: fixed;
-  inset: 0 0 auto;
-  height: clamp(60px, 10vw, 70px);
+  top: 0;
+  left: 0;
+  right: 0;
+  height: clamp(60px, 9vw, 70px);
   padding: 0 4%;
-  background: linear-gradient(to bottom, rgba(20,20,20,0.92), transparent);
+  background: linear-gradient(to bottom, rgba(20,20,20,0.9), transparent);
   z-index: 1000;
   transition: background 0.4s ease;
 }
@@ -47,24 +49,29 @@ nav.scrolled {
 
 .logo {
   font-family: 'Impact', sans-serif;
-  font-size: clamp(2rem, 6vw, 2.8rem);
+  font-size: clamp(2.1rem, 6.5vw, 2.9rem);
   letter-spacing: -3px;
   color: var(--gold);
-  text-shadow: 0 0 15px color-mix(in srgb, var(--gold) 70%, transparent);
+  text-shadow: 0 0 16px color-mix(in srgb, var(--gold) 75%, transparent);
 }
-.logo span { color: var(--netflix-red); }
+
+.logo span {
+  color: var(--netflix-red);
+}
 
 .nav-links {
   display: none;
   gap: 24px;
   margin-left: 40px;
 }
+
 .nav-links a {
   color: var(--text);
   text-decoration: none;
   font-weight: 500;
-  font-size: clamp(0.9rem, 2.5vw, 1rem);
+  font-size: clamp(0.92rem, 2.4vw, 1rem);
 }
+
 .nav-links a:hover,
 .nav-links a.active {
   color: var(--muted);
@@ -75,37 +82,42 @@ nav.scrolled {
   align-items: center;
   gap: 16px;
 }
+
 .search-container {
   position: relative;
 }
+
 .search-container input {
-  background: rgba(50,50,50,0.7);
+  background: rgba(50, 50, 50, 0.75);
   border: 1px solid #444;
   color: white;
-  padding: 8px 12px 8px 36px;
+  padding: 8px 12px 8px 38px;
   border-radius: 4px;
-  width: clamp(140px, 35vw, 180px);
-  transition: width 0.3s, background 0.3s;
-  font-size: 0.9rem;
+  width: clamp(140px, 34vw, 180px);
+  transition: width 0.3s ease, background 0.25s;
+  font-size: 0.92rem;
 }
+
 .search-container input:focus {
-  width: clamp(200px, 45vw, 260px);
-  background: rgba(70,70,70,0.9);
+  width: clamp(200px, 44vw, 260px);
+  background: rgba(70, 70, 70, 0.95);
   outline: none;
 }
+
 .search-icon {
   position: absolute;
-  left: 10px;
+  left: 12px;
   top: 50%;
   transform: translateY(-50%);
-  color: #aaa;
+  color: #bbb;
+  font-size: 1.1rem;
 }
 
 /* ── HERO ────────────────────────────────────────────────── */
 .hero {
-  height: 80vh;
+  height: 82vh;
   min-height: 480px;
-  max-height: 90vh;
+  max-height: 92vh;
   background: url('https://images.unsplash.com/photo-1446776811953-b23d57bd21aa?auto=format&fit=crop&q=80&w=2000') center 30% / cover no-repeat;
   position: relative;
   display: flex;
@@ -117,7 +129,7 @@ nav.scrolled {
   content: "";
   position: absolute;
   inset: 0;
-  background: linear-gradient(to right, #141414 20%, transparent 55%, #141414 90%);
+  background: linear-gradient(to right, #141414 18%, transparent 58%, #141414 92%);
 }
 
 .hero-content {
@@ -130,54 +142,58 @@ nav.scrolled {
 
 .hero-title {
   font-family: 'Impact', sans-serif;
-  font-size: clamp(3.2rem, 12vw, 7rem);
-  line-height: 0.92;
-  margin-bottom: 0.8rem;
-  text-shadow: 0 8px 30px black;
+  font-size: clamp(3.4rem, 13vw, 7.2rem);
+  line-height: 0.9;
+  margin-bottom: 0.7rem;
+  text-shadow: 0 8px 32px rgba(0,0,0,0.9);
 }
 
 .hero-description {
-  font-size: clamp(1rem, 4vw, 1.35rem);
-  max-width: 520px;
-  margin-bottom: 1.5rem;
+  font-size: clamp(1.05rem, 4.2vw, 1.38rem);
+  max-width: 540px;
+  margin-bottom: 1.6rem;
   color: var(--muted);
 }
 
 .btn {
-  padding: clamp(10px, 2.5vw, 12px) clamp(20px, 5vw, 32px);
-  font-size: clamp(0.95rem, 3vw, 1.1rem);
+  padding: clamp(10px, 2.8vw, 12px) clamp(22px, 5.5vw, 34px);
+  font-size: clamp(0.96rem, 3.2vw, 1.12rem);
   font-weight: 700;
   border: none;
   border-radius: 4px;
   cursor: pointer;
   transition: var(--transition);
-  margin-right: 12px;
+  margin-right: 14px;
 }
+
 .btn-play {
   background: white;
   color: black;
 }
+
 .btn-play:hover {
-  background: #e6e6e6;
+  background: #f0f0f0;
   transform: scale(1.05);
 }
+
 .btn-info {
-  background: rgba(255,255,255,0.25);
+  background: rgba(255, 255, 255, 0.22);
   color: white;
 }
+
 .btn-info:hover {
-  background: rgba(255,255,255,0.4);
+  background: rgba(255, 255, 255, 0.38);
 }
 
-/* ── CONTENT SECTIONS ────────────────────────────────────── */
+/* ── CONTENT ROWS ────────────────────────────────────────── */
 .content-section {
-  padding: clamp(40px, 8vw, 60px) 5% 40px;
+  padding: clamp(48px, 9vw, 68px) 5% 48px;
 }
 
 .section-title {
-  font-size: clamp(1.4rem, 4vw, 1.9rem);
+  font-size: clamp(1.45rem, 4.5vw, 2rem);
   font-weight: 600;
-  margin-bottom: 1rem;
+  margin-bottom: 1.1rem;
 }
 
 .row-container {
@@ -189,20 +205,23 @@ nav.scrolled {
   gap: 10px;
   overflow-x: auto;
   scroll-behavior: smooth;
-  padding: 12px 0 24px;
+  padding: 12px 0 28px;
   -webkit-overflow-scrolling: touch;
   scrollbar-width: none;
 }
-.slider::-webkit-scrollbar { display: none; }
+
+.slider::-webkit-scrollbar {
+  display: none;
+}
 
 .card {
-  flex: 0 0 clamp(130px, 28vw, 210px);
+  flex: 0 0 clamp(135px, 29vw, 215px);
   aspect-ratio: 2 / 3;
   border-radius: 8px;
   overflow: hidden;
   position: relative;
-  transition: transform 0.4s ease;
-  box-shadow: 0 4px 14px rgba(0,0,0,0.6);
+  transition: transform 0.42s ease;
+  box-shadow: 0 5px 16px rgba(0,0,0,0.65);
 }
 
 .card img {
@@ -210,26 +229,26 @@ nav.scrolled {
   height: 100%;
   object-fit: cover;
   object-position: center;
-  transition: transform 0.45s ease;
+  transition: transform 0.48s ease;
 }
 
 .card:hover {
-  transform: scale(1.14);
+  transform: scale(1.15);
   z-index: 10;
 }
 
 .card:hover img {
-  transform: scale(1.08);
+  transform: scale(1.09);
 }
 
 .card-overlay {
   position: absolute;
-  inset: 0 0 0 0;
-  background: linear-gradient(transparent 45%, rgba(0,0,0,0.92) 78%);
-  padding: 65% 12px 12px;
+  inset: 0;
+  background: linear-gradient(transparent 42%, rgba(0,0,0,0.94) 76%);
+  padding: 68% 14px 14px;
   opacity: 0;
-  transition: opacity 0.35s;
-  font-size: clamp(0.85rem, 2.8vw, 1rem);
+  transition: opacity 0.38s;
+  font-size: clamp(0.88rem, 2.9vw, 1.02rem);
   font-weight: 500;
 }
 
@@ -241,20 +260,20 @@ nav.scrolled {
   position: absolute;
   top: 50%;
   transform: translateY(-50%);
-  width: 48px;
+  width: 50px;
   height: 110px;
-  background: rgba(0,0,0,0.65);
+  background: rgba(0,0,0,0.68);
   color: white;
   border: none;
-  font-size: 2.4rem;
+  font-size: 2.5rem;
   cursor: pointer;
   z-index: 5;
   opacity: 0;
-  transition: opacity 0.25s, background 0.2s;
+  transition: opacity 0.28s, background 0.2s;
 }
 
 .row-container:hover .arrow {
-  opacity: 0.85;
+  opacity: 0.88;
 }
 
 .arrow:hover {
@@ -267,24 +286,49 @@ nav.scrolled {
 
 /* ── FOOTER ──────────────────────────────────────────────── */
 footer {
-  padding: 60px 5% 40px;
-  color: #777;
+  padding: 70px 5% 50px;
+  color: #888;
   text-align: center;
-  font-size: 0.9rem;
+  font-size: 0.92rem;
 }
 
-/* ── RESPONSIVE ADJUSTMENTS ──────────────────────────────── */
+/* ── RESPONSIVE ──────────────────────────────────────────── */
 @media (min-width: 768px) {
-  .nav-links { display: flex; }
-  .hero { height: 95vh; min-height: 620px; }
-  .hero-content { max-width: 680px; margin-left: 5%; padding: 0; }
-  .card { flex: 0 0 210px; }
+  .nav-links {
+    display: flex;
+  }
+  .hero {
+    height: 95vh;
+    min-height: 640px;
+  }
+  .hero-content {
+    max-width: 700px;
+    margin-left: 5%;
+    padding: 0;
+  }
+  .card {
+    flex: 0 0 215px;
+  }
 }
 
 @media (max-width: 480px) {
-  nav { height: 60px; padding: 0 3%; }
-  .search-container input { width: 130px; }
-  .search-container input:focus { width: 180px; }
-  .btn { padding: 8px 18px; font-size: 0.95rem; }
-  .arrow { width: 40px; font-size: 2rem; height: 90px; }
+  nav {
+    height: 58px;
+    padding: 0 3%;
+  }
+  .search-container input {
+    width: 128px;
+  }
+  .search-container input:focus {
+    width: 175px;
+  }
+  .btn {
+    padding: 8px 20px;
+    font-size: 0.96rem;
+  }
+  .arrow {
+    width: 42px;
+    font-size: 2.1rem;
+    height: 92px;
+  }
 }
