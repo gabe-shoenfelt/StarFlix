@@ -2,7 +2,7 @@
   --bg: #141414;
   --text: #ffffff;
   --muted: #b3b3b3;
-  --netflix-red: #E50914;
+  --netflix-red: #E50914;   /* Official Netflix red – from brand.netflix.com */
   --gold: #ffd700;
   --transition: all 0.35s cubic-bezier(0.165, 0.84, 0.44, 1);
 }
@@ -14,11 +14,12 @@
 }
 
 body {
-  font-family: 'Roboto', system-ui, -apple-system, sans-serif;
+  font-family: 'Roboto', system-ui, sans-serif;
   background: var(--bg);
   color: var(--text);
   overflow-x: hidden;
   line-height: 1.45;
+  -webkit-font-smoothing: antialiased;
 }
 
 /* ── NAVBAR ──────────────────────────────────────────────── */
@@ -27,9 +28,9 @@ nav {
   top: 0;
   left: 0;
   right: 0;
-  height: clamp(60px, 9vw, 70px);
+  height: clamp(60px, 10vw, 70px);
   padding: 0 4%;
-  background: linear-gradient(to bottom, rgba(20,20,20,0.9), transparent);
+  background: linear-gradient(to bottom, rgba(20,20,20,0.92), transparent);
   z-index: 1000;
   transition: background 0.4s ease;
 }
@@ -88,7 +89,7 @@ nav.scrolled {
 }
 
 .search-container input {
-  background: rgba(50, 50, 50, 0.75);
+  background: rgba(50,50,50,0.75);
   border: 1px solid #444;
   color: white;
   padding: 8px 12px 8px 38px;
@@ -100,7 +101,7 @@ nav.scrolled {
 
 .search-container input:focus {
   width: clamp(200px, 44vw, 260px);
-  background: rgba(70, 70, 70, 0.95);
+  background: rgba(70,70,70,0.95);
   outline: none;
 }
 
@@ -177,12 +178,12 @@ nav.scrolled {
 }
 
 .btn-info {
-  background: rgba(255, 255, 255, 0.22);
+  background: rgba(255,255,255,0.22);
   color: white;
 }
 
 .btn-info:hover {
-  background: rgba(255, 255, 255, 0.38);
+  background: rgba(255,255,255,0.38);
 }
 
 /* ── CONTENT ROWS ────────────────────────────────────────── */
@@ -222,6 +223,7 @@ nav.scrolled {
   position: relative;
   transition: transform 0.42s ease;
   box-shadow: 0 5px 16px rgba(0,0,0,0.65);
+  background: #222; /* fallback gray if image fails to load */
 }
 
 .card img {
@@ -268,17 +270,18 @@ nav.scrolled {
   font-size: 2.5rem;
   cursor: pointer;
   z-index: 5;
-  opacity: 0;
+  opacity: 0.7;          /* slightly visible on mobile */
   transition: opacity 0.28s, background 0.2s;
 }
 
-.row-container:hover .arrow {
-  opacity: 0.88;
+.row-container:hover .arrow,
+.row-container:active .arrow {
+  opacity: 1;
 }
 
-.arrow:hover {
+.arrow:hover,
+.arrow:active {
   background: var(--netflix-red);
-  opacity: 1;
 }
 
 .arrow-left  { left: 0; border-radius: 0 8px 8px 0; }
@@ -294,41 +297,17 @@ footer {
 
 /* ── RESPONSIVE ──────────────────────────────────────────── */
 @media (min-width: 768px) {
-  .nav-links {
-    display: flex;
-  }
-  .hero {
-    height: 95vh;
-    min-height: 640px;
-  }
-  .hero-content {
-    max-width: 700px;
-    margin-left: 5%;
-    padding: 0;
-  }
-  .card {
-    flex: 0 0 215px;
-  }
+  .nav-links { display: flex; }
+  .hero { height: 95vh; min-height: 640px; }
+  .hero-content { max-width: 700px; margin-left: 5%; padding: 0; }
+  .card { flex: 0 0 215px; }
+  .arrow { opacity: 0; } /* hide arrows until hover on desktop */
 }
 
 @media (max-width: 480px) {
-  nav {
-    height: 58px;
-    padding: 0 3%;
-  }
-  .search-container input {
-    width: 128px;
-  }
-  .search-container input:focus {
-    width: 175px;
-  }
-  .btn {
-    padding: 8px 20px;
-    font-size: 0.96rem;
-  }
-  .arrow {
-    width: 42px;
-    font-size: 2.1rem;
-    height: 92px;
-  }
+  nav { height: 58px; padding: 0 3%; }
+  .search-container input { width: 128px; }
+  .search-container input:focus { width: 175px; }
+  .btn { padding: 8px 20px; font-size: 0.96rem; }
+  .arrow { width: 42px; font-size: 2.1rem; height: 92px; }
 }
