@@ -145,7 +145,7 @@
         @media (max-width:768px) {
             .hero-title { font-size:3.2rem; }
             .card { flex:0 0 160px; height:240px; }
-            .nav-links { gap:12px; font-size:13px; }
+            .nav-links { gap:12px; font-size:13px; overflow-x:auto; white-space:nowrap; }
         }
     </style>
 </head>
@@ -253,21 +253,6 @@
                     <div class="card" data-title="Return of the Jedi">
                         <img src="https://images.unsplash.com/photo-1446776811953-b23d57bd21aa?w=220&auto=format&fit=crop&q=80" alt="">
                         <div class="card-overlay"><div class="card-title">Return of the Jedi</div></div>
-                        <div class="heart" onclick="toggleMyList(this)">♡</div>
-                    </div>
-                    <div class="card" data-title="The Phantom Menace">
-                        <img src="https://images.unsplash.com/photo-1557683316-973673baf926?w=220&auto=format&fit=crop&q=80" alt="">
-                        <div class="card-overlay"><div class="card-title">The Phantom Menace</div></div>
-                        <div class="heart" onclick="toggleMyList(this)">♡</div>
-                    </div>
-                    <div class="card" data-title="Attack of the Clones">
-                        <img src="https://images.unsplash.com/photo-1553356084-58ef4a67b2a7?w=220&auto=format&fit=crop&q=80" alt="">
-                        <div class="card-overlay"><div class="card-title">Attack of the Clones</div></div>
-                        <div class="heart" onclick="toggleMyList(this)">♡</div>
-                    </div>
-                    <div class="card" data-title="Revenge of the Sith">
-                        <img src="https://images.unsplash.com/photo-1540979388789-7cee28a1cdc0?w=220&auto=format&fit=crop&q=80" alt="">
-                        <div class="card-overlay"><div class="card-title">Revenge of the Sith</div></div>
                         <div class="heart" onclick="toggleMyList(this)">♡</div>
                     </div>
                     <div class="card" data-title="Rogue One">
@@ -389,9 +374,15 @@
             <div class="row-container">
                 <button class="arrow arrow-left" onclick="scrollSlider(this,-1)">‹</button>
                 <div class="slider">
+                    <!-- Only actual movies/shows that appeared in Fortnite -->
                     <div class="card" data-title="The Mandalorian">
                         <img src="https://images.unsplash.com/photo-1581833971385-983855972e47?w=220&auto=format&fit=crop&q=80" alt="">
                         <div class="card-overlay"><div class="card-title">The Mandalorian</div></div>
+                        <div class="heart" onclick="toggleMyList(this)">♡</div>
+                    </div>
+                    <div class="card" data-title="The Book of Boba Fett">
+                        <img src="https://images.unsplash.com/photo-1553356084-58ef4a67b2a7?w=220&auto=format&fit=crop&q=80" alt="">
+                        <div class="card-overlay"><div class="card-title">The Book of Boba Fett</div></div>
                         <div class="heart" onclick="toggleMyList(this)">♡</div>
                     </div>
                     <div class="card" data-title="Ahsoka">
@@ -399,24 +390,19 @@
                         <div class="card-overlay"><div class="card-title">Ahsoka</div></div>
                         <div class="heart" onclick="toggleMyList(this)">♡</div>
                     </div>
-                    <div class="card" data-title="Darth Vader">
-                        <img src="https://images.unsplash.com/photo-1506905925346-21bda4d32df4?w=220&auto=format&fit=crop&q=80" alt="">
-                        <div class="card-overlay"><div class="card-title">Darth Vader</div></div>
-                        <div class="heart" onclick="toggleMyList(this)">♡</div>
-                    </div>
                     <div class="card" data-title="Obi-Wan Kenobi">
                         <img src="https://images.unsplash.com/photo-1617791160505-6f00504e3519?w=220&auto=format&fit=crop&q=80" alt="">
                         <div class="card-overlay"><div class="card-title">Obi-Wan Kenobi</div></div>
                         <div class="heart" onclick="toggleMyList(this)">♡</div>
                     </div>
-                    <div class="card" data-title="Stormtrooper">
+                    <div class="card" data-title="The Clone Wars">
                         <img src="https://images.unsplash.com/photo-1553356084-58ef4a67b2a7?w=220&auto=format&fit=crop&q=80" alt="">
-                        <div class="card-overlay"><div class="card-title">Stormtrooper</div></div>
+                        <div class="card-overlay"><div class="card-title">The Clone Wars</div></div>
                         <div class="heart" onclick="toggleMyList(this)">♡</div>
                     </div>
-                    <div class="card" data-title="Rey">
+                    <div class="card" data-title="Star Wars Rebels">
                         <img src="https://images.unsplash.com/photo-1540979388789-7cee28a1cdc0?w=220&auto=format&fit=crop&q=80" alt="">
-                        <div class="card-overlay"><div class="card-title">Rey</div></div>
+                        <div class="card-overlay"><div class="card-title">Star Wars Rebels</div></div>
                         <div class="heart" onclick="toggleMyList(this)">♡</div>
                     </div>
                     <div class="card" data-title="The Mandalorian & Grogu">
@@ -516,7 +502,6 @@
             slider.scrollBy({ left: amount, behavior: 'smooth' });
         }
 
-        // Init
         window.onload = () => {
             document.getElementById('home-content').classList.add('active');
             renderMyList();
