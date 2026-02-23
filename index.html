@@ -172,13 +172,14 @@
                 </div>
                 <div class="nav-icon">🛎️</div>
                 <div class="profile">
-                    <img src="https://images.unsplash.com/photo-1581833971385-983855972e47?w=100&auto=format&fit=crop&q=80" alt="Sci-fi helmet">
+                    <!-- Fixed working pfp -->
+                    <img src="https://images.unsplash.com/photo-1560250097-0b93528c311a?w=100&h=100&auto=format&fit=crop&q=80" alt="Profile">
                 </div>
             </div>
         </div>
     </nav>
 
-    <!-- HOME -->
+    <!-- HOME - now shows hero + both main rows -->
     <div id="home-content" class="tab-content active">
         <section class="hero" style="background-image: url('https://images.unsplash.com/photo-1446776811953-b23d57bd21aa?w=1920&auto=format&fit=crop&q=80');">
             <div class="hero-content">
@@ -255,8 +256,23 @@
                         <div class="card-overlay"><div class="card-title">Return of the Jedi</div></div>
                         <div class="heart" onclick="toggleMyList(this)">♡</div>
                     </div>
+                    <div class="card" data-title="The Phantom Menace">
+                        <img src="https://images.unsplash.com/photo-1557683316-973673baf926?w=220&auto=format&fit=crop&q=80" alt="">
+                        <div class="card-overlay"><div class="card-title">The Phantom Menace</div></div>
+                        <div class="heart" onclick="toggleMyList(this)">♡</div>
+                    </div>
+                    <div class="card" data-title="Attack of the Clones">
+                        <img src="https://images.unsplash.com/photo-1553356084-58ef4a67b2a7?w=220&auto=format&fit=crop&q=80" alt="">
+                        <div class="card-overlay"><div class="card-title">Attack of the Clones</div></div>
+                        <div class="heart" onclick="toggleMyList(this)">♡</div>
+                    </div>
+                    <div class="card" data-title="Revenge of the Sith">
+                        <img src="https://images.unsplash.com/photo-1540979388789-7cee28a1cdc0?w=220&auto=format&fit=crop&q=80" alt="">
+                        <div class="card-overlay"><div class="card-title">Revenge of the Sith</div></div>
+                        <div class="heart" onclick="toggleMyList(this)">♡</div>
+                    </div>
                     <div class="card" data-title="Rogue One">
-                        <img src="https://images.unsplash.com/photo-1507003211169-0a1dd7228f2d?w=220&auto=format&fit=crop&q=80" alt="">
+                        <img src="https://images.unsplash.com/photo-1462331940025-496dfbfc7564?w=220&auto=format&fit=crop&q=80" alt="">
                         <div class="card-overlay"><div class="card-title">Rogue One</div></div>
                         <div class="heart" onclick="toggleMyList(this)">♡</div>
                     </div>
@@ -327,7 +343,7 @@
                         <div class="heart" onclick="toggleMyList(this)">♡</div>
                     </div>
                     <div class="card" data-title="Rogue One">
-                        <img src="https://images.unsplash.com/photo-1507003211169-0a1dd7228f2d?w=220&auto=format&fit=crop&q=80" alt="">
+                        <img src="https://images.unsplash.com/photo-1462331940025-496dfbfc7564?w=220&auto=format&fit=crop&q=80" alt="">
                         <div class="card-overlay"><div class="card-title">Rogue One</div></div>
                         <div class="heart" onclick="toggleMyList(this)">♡</div>
                     </div>
@@ -374,7 +390,6 @@
             <div class="row-container">
                 <button class="arrow arrow-left" onclick="scrollSlider(this,-1)">‹</button>
                 <div class="slider">
-                    <!-- Only actual movies/shows that appeared in Fortnite -->
                     <div class="card" data-title="The Mandalorian">
                         <img src="https://images.unsplash.com/photo-1581833971385-983855972e47?w=220&auto=format&fit=crop&q=80" alt="">
                         <div class="card-overlay"><div class="card-title">The Mandalorian</div></div>
