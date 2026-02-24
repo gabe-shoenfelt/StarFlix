@@ -1,864 +1,384 @@
 <!DOCTYPE html>
 <html lang="en">
 <head>
-    <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>StarFlix - Watch Star Wars</title>
-    <style>
-        @import url('https://fonts.googleapis.com/css2?family=Roboto:wght@400;500;700&family=Impact&display=swap');
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>StarFlix - Watch Star Wars</title>
+  <style>
+    @import url('https://fonts.googleapis.com/css2?family=Roboto:wght@400;500;700&family=Impact&display=swap');
 
-        :root {
-            --netflix-red: #e50914;
-            --star-wars-gold: #ffd700;
-        }
+    :root {
+      --netflix-red: #e50914;
+      --star-wars-gold: #ffd700;
+    }
 
-        * { margin:0; padding:0; box-sizing:border-box; }
+    * { margin:0; padding:0; box-sizing:border-box; }
 
-        body {
-            font-family: 'Roboto', sans-serif;
-            background:#141414;
-            color:#fff;
-            overflow-x:hidden;
-        }
+    body {
+      font-family: 'Roboto', sans-serif;
+      background:#141414;
+      color:#fff;
+      overflow-x:hidden;
+    }
 
-        nav {
-            position:fixed; top:0; left:0; right:0; height:70px;
-            background:linear-gradient(to bottom,rgba(0,0,0,0.85),transparent);
-            display:flex; align-items:center; padding:0 4%;
-            z-index:1000; transition:background .4s;
-        }
-        nav.scrolled { background:#141414; }
+    nav {
+      position:fixed; top:0; left:0; right:0; height:70px;
+      background:linear-gradient(to bottom,rgba(0,0,0,0.85),transparent);
+      display:flex; align-items:center; padding:0 4%;
+      z-index:1000; transition:background .4s;
+    }
+    nav.scrolled { background:#141414; }
 
-        .nav-content { width:100%; display:flex; align-items:center; justify-content:space-between; }
+    .nav-content { width:100%; display:flex; align-items:center; justify-content:space-between; }
 
-        .logo {
-            font-family:'Impact',sans-serif; font-size:2.2rem; letter-spacing:-3px;
-            color:var(--star-wars-gold); text-shadow:0 0 15px var(--star-wars-gold);
-        }
-        .logo span { color:var(--netflix-red); }
+    .logo {
+      font-family:'Impact',sans-serif; font-size:2.2rem; letter-spacing:-3px;
+      color:var(--star-wars-gold); text-shadow:0 0 15px var(--star-wars-gold);
+    }
+    .logo span { color:var(--netflix-red); }
 
-        .nav-links {
-            display:flex; gap:20px; margin-left:40px;
-        }
-        .nav-links a {
-            color:#fff; text-decoration:none; font-weight:500; font-size:15px;
-            cursor:pointer; white-space:nowrap;
-        }
-        .nav-links a.active { color:#b3b3b3; }
+    .nav-links {
+      display:flex; gap:20px; margin-left:40px;
+    }
+    .nav-links a {
+      color:#fff; text-decoration:none; font-weight:500; font-size:15px;
+      cursor:pointer; white-space:nowrap;
+    }
+    .nav-links a.active { color:#b3b3b3; }
 
-        .nav-right { display:flex; align-items:center; gap:20px; }
+    .nav-right { display:flex; align-items:center; gap:20px; }
 
-        .login-btn {
-            background:var(--netflix-red); color:white; border:none; padding:8px 16px;
-            border-radius:4px; cursor:pointer; font-weight:600;
-        }
-        .login-btn:hover { background:#c40610; }
+    .login-btn {
+      background:var(--netflix-red); color:white; border:none; padding:8px 16px;
+      border-radius:4px; cursor:pointer; font-weight:600;
+    }
+    .login-btn:hover { background:#c40610; }
 
-        .search-container { position:relative; }
-        .search-container input {
-            background:rgba(0,0,0,0.75); border:1px solid #fff; color:#fff;
-            padding:6px 12px 6px 40px; border-radius:4px; width:280px; font-size:14px;
-            transition:width .3s;
-        }
-        .search-container input:focus { width:340px; outline:none; }
+    .search-container { position:relative; }
+    .search-container input {
+      background:rgba(0,0,0,0.75); border:1px solid #fff; color:#fff;
+      padding:6px 12px 6px 40px; border-radius:4px; width:280px; font-size:14px;
+      transition:width .3s;
+    }
+    .search-container input:focus { width:340px; outline:none; }
 
-        .search-icon { position:absolute; left:12px; top:50%; transform:translateY(-50%); font-size:18px; }
+    .search-icon { position:absolute; left:12px; top:50%; transform:translateY(-50%); font-size:18px; }
 
-        .hero {
-            height:95vh; background:url('https://images.unsplash.com/photo-1446776811953-b23d57bd21aa?w=1920&auto=format&fit=crop&q=80') center/cover;
-            position:relative; display:flex; align-items:flex-end; padding-bottom:8%;
-        }
-        .hero::before {
-            content:''; position:absolute; inset:0;
-            background:linear-gradient(to right,rgba(20,20,20,0.85) 30%,rgba(20,20,20,0.4) 60%,rgba(20,20,20,0.85) 100%);
-        }
+    .hero {
+      height:95vh; background:url('https://images.unsplash.com/photo-1446776811953-b23d57bd21aa?w=1920&auto=format&fit=crop&q=80') center/cover;
+      position:relative; display:flex; align-items:flex-end; padding-bottom:8%;
+    }
+    .hero::before {
+      content:''; position:absolute; inset:0;
+      background:linear-gradient(to right,rgba(20,20,20,0.85) 30%,rgba(20,20,20,0.4) 60%,rgba(20,20,20,0.85) 100%);
+    }
 
-        .hero-content { position:relative; z-index:2; max-width:620px; margin-left:4%; }
+    .hero-content { position:relative; z-index:2; max-width:620px; margin-left:4%; }
 
-        .hero-title { font-size:5.2rem; font-family:'Impact',sans-serif; line-height:1; margin-bottom:8px; text-shadow:0 4px 20px rgba(0,0,0,0.9); letter-spacing:-2px; }
-        .hero-subtitle { font-size:2.4rem; color:var(--star-wars-gold); margin-bottom:30px; text-shadow:0 2px 10px rgba(0,0,0,0.8); }
-        .hero-description { font-size:1.35rem; max-width:480px; margin-bottom:30px; }
+    .hero-title { font-size:5.2rem; font-family:'Impact',sans-serif; line-height:1; margin-bottom:8px; text-shadow:0 4px 20px rgba(0,0,0,0.9); letter-spacing:-2px; }
+    .hero-subtitle { font-size:2.4rem; color:var(--star-wars-gold); margin-bottom:30px; text-shadow:0 2px 10px rgba(0,0,0,0.8); }
+    .hero-description { font-size:1.35rem; max-width:480px; margin-bottom:30px; }
 
-        .btn {
-            padding:12px 32px; font-size:1.1rem; font-weight:700; border:none; border-radius:4px;
-            cursor:pointer; transition:all .3s;
-        }
-        .btn-info { background:rgba(255,255,255,0.25); color:#fff; }
-        .btn-info:hover { background:rgba(255,255,255,0.4); }
+    .btn {
+      padding:12px 32px; font-size:1.1rem; font-weight:700; border:none; border-radius:4px;
+      cursor:pointer; transition:all .3s;
+    }
+    .btn-info { background:rgba(255,255,255,0.25); color:#fff; }
+    .btn-info:hover { background:rgba(255,255,255,0.4); }
 
-        .content-section { padding:60px 4% 40px; }
-        .section-title { font-size:1.8rem; font-weight:600; margin-bottom:20px; padding-left:8px; }
+    .content-section { padding:60px 4% 40px; }
+    .section-title { font-size:1.8rem; font-weight:600; margin-bottom:20px; padding-left:8px; }
 
-        .row-container {
-            position:relative;
-            margin-bottom:50px;
-        }
+    .row-container {
+      position:relative;
+      margin-bottom:50px;
+    }
 
-        .slider {
-            display:flex; gap:12px; overflow-x:auto; scroll-behavior:smooth; padding:8px 60px 20px 0;
-            scrollbar-width:none;
-        }
-        .slider::-webkit-scrollbar { display:none; }
+    .slider {
+      display:flex; gap:12px; overflow-x:auto; scroll-behavior:smooth; padding:8px 60px 20px 0;
+      scrollbar-width:none;
+    }
+    .slider::-webkit-scrollbar { display:none; }
 
-        .card {
-            position:relative; flex:0 0 220px; height:330px; border-radius:8px; overflow:hidden;
-            transition:transform .4s cubic-bezier(0.25,0.1,0.25,1); cursor:pointer;
-            box-shadow:0 4px 12px rgba(0,0,0,0.6);
-        }
-        .card:hover { transform:scale(1.18); z-index:20; box-shadow:0 20px 40px rgba(0,0,0,0.9); }
+    .card {
+      position:relative; flex:0 0 220px; height:330px; border-radius:8px; overflow:hidden;
+      transition:transform .4s cubic-bezier(0.25,0.1,0.25,1); cursor:pointer;
+      box-shadow:0 4px 12px rgba(0,0,0,0.6);
+    }
+    .card:hover { transform:scale(1.18); z-index:20; box-shadow:0 20px 40px rgba(0,0,0,0.9); }
 
-        .card img {
-            width:100%; height:100%; object-fit:cover; transition:transform .4s;
-        }
-        .card:hover img { transform:scale(1.08); }
+    .card img {
+      width:100%; height:100%; object-fit:cover; transition:transform .4s;
+    }
+    .card:hover img { transform:scale(1.08); }
 
-        .card-overlay {
-            position:absolute; bottom:0; left:0; right:0;
-            background:linear-gradient(transparent, rgba(0,0,0,0.95));
-            padding:40px 16px 16px; opacity:0; transition:opacity .3s;
-        }
-        .card:hover .card-overlay { opacity:1; }
+    .card-overlay {
+      position:absolute; bottom:0; left:0; right:0;
+      background:linear-gradient(transparent, rgba(0,0,0,0.95));
+      padding:40px 16px 16px; opacity:0; transition:opacity .3s;
+    }
+    .card:hover .card-overlay { opacity:1; }
 
-        .card-title { font-size:1.05rem; font-weight:600; }
+    .card-title { font-size:1.05rem; font-weight:600; }
 
-        .heart {
-            position:absolute; top:12px; right:12px; font-size:26px; cursor:pointer;
-            z-index:30; text-shadow:0 0 8px #000;
-        }
+    .heart {
+      position:absolute; top:12px; right:12px; font-size:26px; cursor:pointer;
+      z-index:30; text-shadow:0 0 8px #000;
+    }
 
-        .coming-soon {
-            position:absolute; top:12px; left:12px; background:#e50914; color:#fff;
-            padding:4px 10px; font-size:12px; border-radius:3px; z-index:30;
-        }
+    .coming-soon {
+      position:absolute; top:12px; left:12px; background:#e50914; color:#fff;
+      padding:4px 10px; font-size:12px; border-radius:3px; z-index:30;
+    }
 
-        .arrow {
-            position:absolute; top:50%; transform:translateY(-50%);
-            width:50px; height:140px; background:rgba(0,0,0,0.6); color:white;
-            border:none; font-size:3.5rem; cursor:pointer; z-index:10; opacity:0;
-            transition:opacity .2s, background .2s;
-            border-radius:0 8px 8px 0;
-        }
-        .row-container:hover .arrow { opacity:1; }
-        .arrow:hover { background:rgba(229,9,20,0.8); }
-        .arrow.left { left:0; border-radius:8px 0 0 8px; }
-        .arrow.right { right:0; border-radius:0 8px 8px 0; }
+    .arrow {
+      position:absolute; top:50%; transform:translateY(-50%);
+      width:50px; height:140px; background:rgba(0,0,0,0.6); color:white;
+      border:none; font-size:3.5rem; cursor:pointer; z-index:10; opacity:0;
+      transition:opacity .2s, background .2s;
+      border-radius:0 8px 8px 0;
+    }
+    .row-container:hover .arrow { opacity:1; }
+    .arrow:hover { background:rgba(229,9,20,0.8); }
+    .arrow.left { left:0; border-radius:8px 0 0 8px; }
+    .arrow.right { right:0; border-radius:0 8px 8px 0; }
 
-        footer {
-            padding:60px 4% 40px; color:#757575; font-size:14px; text-align:center;
-        }
+    footer {
+      padding:60px 4% 40px; color:#757575; font-size:14px; text-align:center;
+    }
 
-        .tab-content { display:none; }
-        .tab-content.active { display:block; }
+    .tab-content { display:none; }
+    .tab-content.active { display:block; }
 
-        /* Card summary overlay */
-        #card-summary {
-            position:fixed; top:50%; left:50%; transform:translate(-50%,-50%);
-            background:rgba(0,0,0,0.9); color:var(--star-wars-gold);
-            padding:40px 60px; border-radius:16px; font-size:2rem;
-            font-family:'Impact',sans-serif; text-align:center;
-            z-index:1500; pointer-events:none; opacity:0; transition:opacity 0.8s;
-            max-width:85%; box-shadow:0 0 60px rgba(255,215,0,0.6);
-            border:2px solid var(--netflix-red);
-        }
+    #card-summary {
+      position:fixed; top:50%; left:50%; transform:translate(-50%,-50%);
+      background:rgba(0,0,0,0.9); color:var(--star-wars-gold);
+      padding:40px 60px; border-radius:16px; font-size:2rem;
+      font-family:'Impact',sans-serif; text-align:center;
+      z-index:1500; pointer-events:none; opacity:0; transition:opacity 0.8s;
+      max-width:85%; box-shadow:0 0 60px rgba(255,215,0,0.6);
+      border:2px solid var(--netflix-red);
+    }
 
-        /* Admin-only hyperspace */
-        #admin-hyperspace {
-            position:fixed; inset:0; pointer-events:none; z-index:9999;
-            background:radial-gradient(circle at center, #000 0%, #000 70%, #001122 100%);
-            opacity:0; transition:opacity 1s ease-out;
-        }
-        .admin-star {
-            position:absolute; background:#fff; border-radius:50%;
-            animation: admin-hyperspace 2.5s linear infinite;
-        }
-        @keyframes admin-hyperspace {
-            0% { transform:translate(0,0) scale(0.1); opacity:1; }
-            100% { transform:translate(var(--dx),var(--dy)) scale(3); opacity:0; }
-        }
+    /* ────────────────────────────────────────────── */
+    /* FUNNY LOGIN EFFECTS STYLES */
+    /* ────────────────────────────────────────────── */
 
-        /* Login Modal */
-        #login-modal {
-            display:none; position:fixed; inset:0; background:rgba(0,0,0,0.9);
-            z-index:2000; justify-content:center; align-items:center;
-        }
-        .modal-content {
-            background:#1a1a1a; padding:40px; border-radius:12px; width:90%; max-width:420px;
-            text-align:center; box-shadow:0 10px 40px rgba(229,9,20,0.4);
-        }
-        .modal-content input {
-            width:100%; padding:12px; margin:12px 0; border-radius:4px; border:1px solid #444;
-            background:#222; color:white; font-size:16px;
-        }
-        .modal-content button {
-            background:var(--netflix-red); color:white; border:none; padding:12px 32px;
-            border-radius:4px; font-size:16px; cursor:pointer; margin-top:16px;
-        }
-        .modal-content button:hover { background:#c40610; }
+    .effect {
+      position: fixed; inset: 0; background: rgba(0,0,0,0.85);
+      color: #ffd700; font-family: 'Impact', sans-serif; font-size: 3rem;
+      display: flex; flex-direction: column; align-items: center; justify-content: center;
+      opacity: 0; transition: opacity 1.5s; pointer-events: none; z-index: 9999;
+    }
 
-        .close-modal {
-            position:absolute; top:20px; right:30px; font-size:40px; color:white;
-            cursor:pointer; z-index:3;
-        }
+    .hidden { display: none !important; }
 
-        #admin-message {
-            margin-top:20px; padding:16px; background:rgba(229,9,20,0.2);
-            border:1px solid var(--netflix-red); border-radius:8px; color:#ffcccc;
-            font-weight:bold; display:none;
-        }
+    .text { text-align: center; max-width: 80%; text-shadow: 0 0 15px currentColor; }
 
-        #welcome-back {
-            position:fixed; top:80px; left:50%; transform:translateX(-50%);
-            background:rgba(0,0,0,0.7); color:var(--star-wars-gold); padding:8px 20px;
-            border-radius:8px; font-size:14px; z-index:999; display:none;
-            pointer-events:none;
-        }
+    .lightning { position:absolute; inset:0; background: linear-gradient(transparent, #00ffff, transparent); opacity:0; animation:flash 0.2s infinite alternate; }
+    .lightning1 { animation-delay:0s; }
+    .lightning2 { animation-delay:0.3s; }
+    @keyframes flash { 0%{opacity:0} 100%{opacity:0.7} }
 
-        @media (max-width:768px) {
-            .hero-title { font-size:3.8rem; }
-            .hero-subtitle { font-size:1.8rem; }
-            .card { flex:0 0 160px; height:240px; }
-            .nav-links { gap:12px; font-size:13px; overflow-x:auto; white-space:nowrap; }
-            #welcome-back { font-size:12px; padding:6px 16px; top:70px; }
-            #card-summary { font-size:1.5rem; padding:30px 40px; }
-            .arrow { width:40px; font-size:2.8rem; }
-        }
-    </style>
+    .red-glow { position:absolute; inset:0; background: radial-gradient(circle, #ff0000aa, transparent); opacity:0.6; animation:glow 3s infinite alternate; }
+    @keyframes glow { 0%{opacity:0.4} 100%{opacity:0.9} }
+
+    .soup { font-size:120px; animation:fling 1.5s forwards; }
+    @keyframes fling { 0%{transform:translateY(0) rotate(0)} 100%{transform:translateY(-500px) translateX(400px) rotate(1080deg); opacity:0} }
+
+    .lava { position:absolute; inset:0; background: linear-gradient(to top, #ff6600, #ff3300, #000); animation:rise 4s forwards; }
+    @keyframes rise { 0%{transform:translateY(100%)} 100%{transform:translateY(0)} }
+
+    .saber-glow { width:400px; height:20px; background: linear-gradient(to right, transparent, #00ff88, #00ff88, transparent); box-shadow:0 0 40px #00ff88; opacity:0; transform:scaleX(0); transition:all 1s ease-out 1.2s; }
+
+    .helmet { font-size:150px; animation:spin 2s forwards; }
+    @keyframes spin { 0%{transform:rotate(0deg)} 100%{transform:rotate(720deg)} }
+  </style>
 </head>
 <body>
 
-    <!-- Admin-only hyperspace -->
-    <div id="admin-hyperspace"></div>
-
-    <div id="welcome-back"></div>
-
-    <!-- Card summary overlay -->
-    <div id="card-summary"></div>
-
-    <nav id="navbar">
-        <div class="nav-content">
-            <div style="display:flex;align-items:center;">
-                <div class="logo">STAR<span>FLIX</span></div>
-                <div class="nav-links">
-                    <a data-tab="home" class="active" onclick="switchTab('home')">Home</a>
-                    <a data-tab="tv" onclick="switchTab('tv')">TV Shows</a>
-                    <a data-tab="movies" onclick="switchTab('movies')">Movies</a>
-                    <a data-tab="new" onclick="switchTab('new')">New & Popular</a>
-                    <a data-tab="fortnite" onclick="switchTab('fortnite')">As Seen in Fortnite</a>
-                    <a data-tab="lore" onclick="switchTab('lore')">Lore</a>
-                    <a data-tab="mylist" onclick="switchTab('mylist')">My List</a>
-                </div>
-            </div>
-
-            <div class="nav-right">
-                <div class="search-container">
-                    <span class="search-icon">🔍</span>
-                    <input type="text" id="searchInput" placeholder="Search titles..." onkeyup="filterCards()">
-                </div>
-                <button class="login-btn" id="loginBtn">Login</button>
-                <div class="nav-icon">🛎️</div>
-            </div>
+  <!-- NAV -->
+  <nav id="navbar">
+    <div class="nav-content">
+      <div style="display:flex;align-items:center;">
+        <div class="logo">STAR<span>FLIX</span></div>
+        <div class="nav-links">
+          <a data-tab="home" class="active" onclick="switchTab('home')">Home</a>
+          <a data-tab="tv" onclick="switchTab('tv')">TV Shows</a>
+          <a data-tab="movies" onclick="switchTab('movies')">Movies</a>
+          <a data-tab="new" onclick="switchTab('new')">New & Popular</a>
+          <a data-tab="fortnite" onclick="switchTab('fortnite')">As Seen in Fortnite</a>
+          <a data-tab="lore" onclick="switchTab('lore')">Lore</a>
+          <a data-tab="mylist" onclick="switchTab('mylist')">My List</a>
         </div>
-    </nav>
+      </div>
 
-    <!-- Login Modal -->
-    <div id="login-modal">
-        <div class="modal-content">
-            <h2 style="margin-bottom:24px; color:var(--star-wars-gold);">Enter the Galaxy</h2>
-            <input type="text" id="username" placeholder="Username">
-            <input type="password" id="password" placeholder="Password">
-            <button id="login-submit">Enter</button>
-            <div id="admin-message">ACCESS GRANTED – MAY THE FORCE SERVE <span style="color:#ff4444;font-weight:bold;">YOU</span> ⚔️</div>
-            <p style="margin-top:16px; font-size:14px; color:#aaa;">
-                <a href="#" onclick="document.getElementById('login-modal').style.display='none'">Close</a>
-            </p>
+      <div class="nav-right">
+        <div class="search-container">
+          <span class="search-icon">🔍</span>
+          <input type="text" id="searchInput" placeholder="Search titles..." onkeyup="filterCards()">
         </div>
+        <button class="login-btn" id="loginBtn">Login</button>
+        <div class="nav-icon">🛎️</div>
+      </div>
     </div>
+  </nav>
 
-    <!-- HOME -->
-    <div id="home-content" class="tab-content active">
-        <section class="hero" style="background-image: url('https://images.unsplash.com/photo-1446776811953-b23d57bd21aa?w=1920&auto=format&fit=crop&q=80');">
-            <div class="hero-content">
-                <h1 class="hero-title">MANDALORIAN AND GROGU</h1>
-                <div class="hero-subtitle">COMING 2026</div>
-                <p class="hero-description">The journey continues... Grogu and the Mandalorian face new adventures in a galaxy far, far away.</p>
-                <div class="hero-buttons">
-                    <button class="btn btn-info" onclick="alert('Coming soon!')">More Info</button>
-                </div>
-            </div>
-        </section>
-
-        <section class="content-section">
-            <h2 class="section-title">Continue Watching for Grogu</h2>
-            <div class="row-container">
-                <button class="arrow arrow-left left" onclick="scrollSlider(this,-1)">‹</button>
-                <div class="slider">
-                    <div class="card" data-title="The Mandalorian & Grogu" data-summary="Not released yet – coming soon!">
-                        <img src="https://images.unsplash.com/photo-1581833971385-983855972e47?w=220&auto=format&fit=crop&q=80" alt="">
-                        <div class="card-overlay"><div class="card-title">The Mandalorian & Grogu</div></div>
-                        <div class="heart" onclick="toggleMyList(this)">♡</div>
-                    </div>
-                    <div class="card" data-title="The Mandalorian" data-summary="A lone bounty hunter protects a mysterious child while evading the Empire.">
-                        <img src="https://images.unsplash.com/photo-1581833971385-983855972e47?w=220&auto=format&fit=crop&q=80" alt="">
-                        <div class="card-overlay"><div class="card-title">The Mandalorian</div></div>
-                        <div class="heart" onclick="toggleMyList(this)">♡</div>
-                    </div>
-                    <div class="card" data-title="Ahsoka" data-summary="Former Jedi Ahsoka Tano hunts for Thrawn and reunites with old friends.">
-                        <img src="https://images.unsplash.com/photo-1557683316-973673baf926?w=220&auto=format&fit=crop&q=80" alt="">
-                        <div class="card-overlay"><div class="card-title">Ahsoka</div></div>
-                        <div class="heart" onclick="toggleMyList(this)">♡</div>
-                    </div>
-                    <div class="card" data-title="Andor" data-summary="Cassian Andor's journey into the Rebellion begins in the shadows of the Empire.">
-                        <img src="https://images.unsplash.com/photo-1506905925346-21bda4d32df4?w=220&auto=format&fit=crop&q=80" alt="">
-                        <div class="card-overlay"><div class="card-title">Andor</div></div>
-                        <div class="heart" onclick="toggleMyList(this)">♡</div>
-                    </div>
-                    <div class="card" data-title="Obi-Wan Kenobi" data-summary="Obi-Wan Kenobi emerges from hiding to protect a young Leia from Darth Vader.">
-                        <img src="https://images.unsplash.com/photo-1617791160505-6f00504e3519?w=220&auto=format&fit=crop&q=80" alt="">
-                        <div class="card-overlay"><div class="card-title">Obi-Wan Kenobi</div></div>
-                        <div class="heart" onclick="toggleMyList(this)">♡</div>
-                    </div>
-                </div>
-                <button class="arrow arrow-right right" onclick="scrollSlider(this,1)">›</button>
-            </div>
-        </section>
-
-        <section class="content-section">
-            <h2 class="section-title">Recently Added Movies</h2>
-            <div class="row-container">
-                <button class="arrow arrow-left left" onclick="scrollSlider(this,-1)">‹</button>
-                <div class="slider">
-                    <div class="card" data-title="A New Hope" data-summary="Luke Skywalker joins the Rebellion to destroy the Death Star and defeat the Empire.">
-                        <img src="https://images.unsplash.com/photo-1454789548928-9efd52dc4031?w=220&auto=format&fit=crop&q=80" alt="">
-                        <div class="card-overlay"><div class="card-title">A New Hope</div></div>
-                        <div class="heart" onclick="toggleMyList(this)">♡</div>
-                    </div>
-                    <div class="card" data-title="The Empire Strikes Back" data-summary="The Rebels are on the run as Darth Vader hunts Luke Skywalker.">
-                        <img src="https://images.unsplash.com/photo-1506905925346-21bda4d32df4?w=220&auto=format&fit=crop&q=80" alt="">
-                        <div class="card-overlay"><div class="card-title">The Empire Strikes Back</div></div>
-                        <div class="heart" onclick="toggleMyList(this)">♡</div>
-                    </div>
-                    <div class="card" data-title="Return of the Jedi" data-summary="Luke confronts Darth Vader and the Emperor to end the Empire.">
-                        <img src="https://images.unsplash.com/photo-1446776811953-b23d57bd21aa?w=220&auto=format&fit=crop&q=80" alt="">
-                        <div class="card-overlay"><div class="card-title">Return of the Jedi</div></div>
-                        <div class="heart" onclick="toggleMyList(this)">♡</div>
-                    </div>
-                    <div class="card" data-title="The Phantom Menace" data-summary="Young Anakin Skywalker is discovered as the Jedi face a new threat.">
-                        <img src="https://images.unsplash.com/photo-1557683316-973673baf926?w=220&auto=format&fit=crop&q=80" alt="">
-                        <div class="card-overlay"><div class="card-title">The Phantom Menace</div></div>
-                        <div class="heart" onclick="toggleMyList(this)">♡</div>
-                    </div>
-                    <div class="card" data-title="Attack of the Clones" data-summary="Anakin and Padmé fall in love as the Clone Wars begin.">
-                        <img src="https://images.unsplash.com/photo-1553356084-58ef4a67b2a7?w=220&auto=format&fit=crop&q=80" alt="">
-                        <div class="card-overlay"><div class="card-title">Attack of the Clones</div></div>
-                        <div class="heart" onclick="toggleMyList(this)">♡</div>
-                    </div>
-                    <div class="card" data-title="Revenge of the Sith" data-summary="Anakin turns to the dark side and becomes Darth Vader.">
-                        <img src="https://images.unsplash.com/photo-1540979388789-7cee28a1cdc0?w=220&auto=format&fit=crop&q=80" alt="">
-                        <div class="card-overlay"><div class="card-title">Revenge of the Sith</div></div>
-                        <div class="heart" onclick="toggleMyList(this)">♡</div>
-                    </div>
-                    <div class="card" data-title="Rogue One" data-summary="Rebel spies steal the Death Star plans in a desperate mission. Everyone dies at the end of the movie.">
-                        <img src="https://images.unsplash.com/photo-1462331940025-496dfbfc7564?w=220&auto=format&fit=crop&q=80" alt="">
-                        <div class="card-overlay"><div class="card-title">Rogue One</div></div>
-                        <div class="heart" onclick="toggleMyList(this)">♡</div>
-                    </div>
-                    <div class="card" data-title="Solo: A Star Wars Story" data-summary="The story of a young Han Solo and how he became the smuggler we know in the original trilogy.">
-                        <img src="https://images.unsplash.com/photo-1553356084-58ef4a67b2a7?w=220&auto=format&fit=crop&q=80" alt="">
-                        <div class="card-overlay"><div class="card-title">Solo: A Star Wars Story</div></div>
-                        <div class="heart" onclick="toggleMyList(this)">♡</div>
-                    </div>
-                </div>
-                <button class="arrow arrow-right right" onclick="scrollSlider(this,1)">›</button>
-            </div>
-        </section>
-
-        <section class="content-section">
-            <h2 class="section-title">Recently Added TV Shows</h2>
-            <div class="row-container">
-                <button class="arrow arrow-left left" onclick="scrollSlider(this,-1)">‹</button>
-                <div class="slider">
-                    <div class="card" data-title="The Acolyte" data-summary="High Republic mystery-thriller ends with Darth Plagueis appearing.">
-                        <img src="https://images.unsplash.com/photo-1557683316-973673baf926?w=220&auto=format&fit=crop&q=80" alt="">
-                        <div class="card-overlay"><div class="card-title">The Acolyte</div></div>
-                        <div class="heart" onclick="toggleMyList(this)">♡</div>
-                    </div>
-                    <div class="card" data-title="Ahsoka" data-summary="Ahsoka searches for Thrawn and Ezra Bridger.">
-                        <img src="https://images.unsplash.com/photo-1506905925346-21bda4d32df4?w=220&auto=format&fit=crop&q=80" alt="">
-                        <div class="card-overlay"><div class="card-title">Ahsoka</div></div>
-                        <div class="heart" onclick="toggleMyList(this)">♡</div>
-                    </div>
-                    <div class="card" data-title="Andor" data-summary="Cassian Andor’s path to becoming a rebel spy.">
-                        <img src="https://images.unsplash.com/photo-1540979388789-7cee28a1cdc0?w=220&auto=format&fit=crop&q=80" alt="">
-                        <div class="card-overlay"><div class="card-title">Andor</div></div>
-                        <div class="heart" onclick="toggleMyList(this)">♡</div>
-                    </div>
-                    <div class="card" data-title="Obi-Wan Kenobi" data-summary="Obi-Wan Kenobi emerges from hiding to protect a young Leia from Darth Vader.">
-                        <img src="https://images.unsplash.com/photo-1617791160505-6f00504e3519?w=220&auto=format&fit=crop&q=80" alt="">
-                        <div class="card-overlay"><div class="card-title">Obi-Wan Kenobi</div></div>
-                        <div class="heart" onclick="toggleMyList(this)">♡</div>
-                    </div>
-                    <div class="card" data-title="The Book of Boba Fett" data-summary="Boba Fett claims Jabba's throne on Tatooine.">
-                        <img src="https://images.unsplash.com/photo-1553356084-58ef4a67b2a7?w=220&auto=format&fit=crop&q=80" alt="">
-                        <div class="card-overlay"><div class="card-title">The Book of Boba Fett</div></div>
-                        <div class="heart" onclick="toggleMyList(this)">♡</div>
-                    </div>
-                    <div class="card" data-title="The Mandalorian" data-summary="A lone bounty hunter protects a mysterious child while evading the Empire.">
-                        <img src="https://images.unsplash.com/photo-1581833971385-983855972e47?w=220&auto=format&fit=crop&q=80" alt="">
-                        <div class="card-overlay"><div class="card-title">The Mandalorian</div></div>
-                        <div class="heart" onclick="toggleMyList(this)">♡</div>
-                    </div>
-                </div>
-                <button class="arrow arrow-right right" onclick="scrollSlider(this,1)">›</button>
-            </div>
-        </section>
+  <!-- LOGIN MODAL -->
+  <div id="login-modal">
+    <div class="modal-content">
+      <h2 style="margin-bottom:24px; color:var(--star-wars-gold);">Enter the Galaxy</h2>
+      <input type="text" id="username" placeholder="Username">
+      <input type="password" id="password" placeholder="Password">
+      <button id="login-submit">Enter</button>
+      <div id="admin-message">ACCESS GRANTED – MAY THE FORCE SERVE <span style="color:#ff4444;font-weight:bold;">YOU</span> ⚔️</div>
+      <p style="margin-top:16px; font-size:14px; color:#aaa;">
+        <a href="#" onclick="document.getElementById('login-modal').style.display='none'">Close</a>
+      </p>
     </div>
+  </div>
 
-    <!-- TV SHOWS -->
-    <div id="tv-content" class="tab-content">
-        <section class="content-section">
-            <h2 class="section-title">Star Wars TV Shows</h2>
-            <div class="row-container">
-                <button class="arrow arrow-left left" onclick="scrollSlider(this,-1)">‹</button>
-                <div class="slider">
-                    <div class="card" data-title="The Mandalorian" data-summary="A lone bounty hunter protects a mysterious child while evading the Empire.">
-                        <img src="https://images.unsplash.com/photo-1581833971385-983855972e47?w=220&auto=format&fit=crop&q=80" alt="">
-                        <div class="card-overlay"><div class="card-title">The Mandalorian</div></div>
-                        <div class="heart" onclick="toggleMyList(this)">♡</div>
-                    </div>
-                    <div class="card" data-title="The Book of Boba Fett" data-summary="Boba Fett claims Jabba's throne on Tatooine.">
-                        <img src="https://images.unsplash.com/photo-1553356084-58ef4a67b2a7?w=220&auto=format&fit=crop&q=80" alt="">
-                        <div class="card-overlay"><div class="card-title">The Book of Boba Fett</div></div>
-                        <div class="heart" onclick="toggleMyList(this)">♡</div>
-                    </div>
-                    <div class="card" data-title="The Acolyte" data-summary="High Republic mystery-thriller ends with Darth Plagueis appearing.">
-                        <img src="https://images.unsplash.com/photo-1557683316-973673baf926?w=220&auto=format&fit=crop&q=80" alt="">
-                        <div class="card-overlay"><div class="card-title">The Acolyte</div></div>
-                        <div class="heart" onclick="toggleMyList(this)">♡</div>
-                    </div>
-                    <div class="card" data-title="Ahsoka" data-summary="Ahsoka searches for Thrawn and Ezra Bridger.">
-                        <img src="https://images.unsplash.com/photo-1506905925346-21bda4d32df4?w=220&auto=format&fit=crop&q=80" alt="">
-                        <div class="card-overlay"><div class="card-title">Ahsoka</div></div>
-                        <div class="heart" onclick="toggleMyList(this)">♡</div>
-                    </div>
-                    <div class="card" data-title="Obi-Wan Kenobi" data-summary="Obi-Wan Kenobi emerges from hiding to protect a young Leia from Darth Vader.">
-                        <img src="https://images.unsplash.com/photo-1617791160505-6f00504e3519?w=220&auto=format&fit=crop&q=80" alt="">
-                        <div class="card-overlay"><div class="card-title">Obi-Wan Kenobi</div></div>
-                        <div class="heart" onclick="toggleMyList(this)">♡</div>
-                    </div>
-                    <div class="card" data-title="Andor" data-summary="Cassian Andor’s path to becoming a rebel spy.">
-                        <img src="https://images.unsplash.com/photo-1540979388789-7cee28a1cdc0?w=220&auto=format&fit=crop&q=80" alt="">
-                        <div class="card-overlay"><div class="card-title">Andor</div></div>
-                        <div class="heart" onclick="toggleMyList(this)">♡</div>
-                    </div>
-                </div>
-                <button class="arrow arrow-right right" onclick="scrollSlider(this,1)">›</button>
-            </div>
-        </section>
-    </div>
+  <!-- HOME -->
+  <div id="home-content" class="tab-content active">
+    <section class="hero">
+      <div class="hero-content">
+        <h1 class="hero-title">MANDALORIAN AND GROGU</h1>
+        <div class="hero-subtitle">COMING 2026</div>
+        <p class="hero-description">The journey continues... Grogu and the Mandalorian face new adventures in a galaxy far, far away.</p>
+        <button class="btn btn-info" onclick="alert('Coming soon!')">More Info</button>
+      </div>
+    </section>
 
-    <!-- MOVIES -->
-    <div id="movies-content" class="tab-content">
-        <section class="content-section">
-            <h2 class="section-title">Star Wars Movies</h2>
-            <div class="row-container">
-                <button class="arrow arrow-left left" onclick="scrollSlider(this,-1)">‹</button>
-                <div class="slider">
-                    <div class="card" data-title="A New Hope" data-summary="Luke Skywalker joins the Rebellion to destroy the Death Star and defeat the Empire.">
-                        <img src="https://images.unsplash.com/photo-1454789548928-9efd52dc4031?w=220&auto=format&fit=crop&q=80" alt="">
-                        <div class="card-overlay"><div class="card-title">A New Hope</div></div>
-                        <div class="heart" onclick="toggleMyList(this)">♡</div>
-                    </div>
-                    <div class="card" data-title="The Empire Strikes Back" data-summary="The Rebels are on the run as Darth Vader hunts Luke Skywalker.">
-                        <img src="https://images.unsplash.com/photo-1506905925346-21bda4d32df4?w=220&auto=format&fit=crop&q=80" alt="">
-                        <div class="card-overlay"><div class="card-title">The Empire Strikes Back</div></div>
-                        <div class="heart" onclick="toggleMyList(this)">♡</div>
-                    </div>
-                    <div class="card" data-title="Return of the Jedi" data-summary="Luke confronts Darth Vader and the Emperor to end the Empire.">
-                        <img src="https://images.unsplash.com/photo-1446776811953-b23d57bd21aa?w=220&auto=format&fit=crop&q=80" alt="">
-                        <div class="card-overlay"><div class="card-title">Return of the Jedi</div></div>
-                        <div class="heart" onclick="toggleMyList(this)">♡</div>
-                    </div>
-                    <div class="card" data-title="The Phantom Menace" data-summary="Young Anakin Skywalker is discovered as the Jedi face a new threat.">
-                        <img src="https://images.unsplash.com/photo-1557683316-973673baf926?w=220&auto=format&fit=crop&q=80" alt="">
-                        <div class="card-overlay"><div class="card-title">The Phantom Menace</div></div>
-                        <div class="heart" onclick="toggleMyList(this)">♡</div>
-                    </div>
-                    <div class="card" data-title="Attack of the Clones" data-summary="Anakin and Padmé fall in love as the Clone Wars begin.">
-                        <img src="https://images.unsplash.com/photo-1553356084-58ef4a67b2a7?w=220&auto=format&fit=crop&q=80" alt="">
-                        <div class="card-overlay"><div class="card-title">Attack of the Clones</div></div>
-                        <div class="heart" onclick="toggleMyList(this)">♡</div>
-                    </div>
-                    <div class="card" data-title="Revenge of the Sith" data-summary="Anakin turns to the dark side and becomes Darth Vader.">
-                        <img src="https://images.unsplash.com/photo-1540979388789-7cee28a1cdc0?w=220&auto=format&fit=crop&q=80" alt="">
-                        <div class="card-overlay"><div class="card-title">Revenge of the Sith</div></div>
-                        <div class="heart" onclick="toggleMyList(this)">♡</div>
-                    </div>
-                    <div class="card" data-title="Rogue One" data-summary="Rebel spies steal the Death Star plans in a desperate mission. Everyone dies at the end of the movie.">
-                        <img src="https://images.unsplash.com/photo-1462331940025-496dfbfc7564?w=220&auto=format&fit=crop&q=80" alt="">
-                        <div class="card-overlay"><div class="card-title">Rogue One</div></div>
-                        <div class="heart" onclick="toggleMyList(this)">♡</div>
-                    </div>
-                    <div class="card" data-title="Solo: A Star Wars Story" data-summary="The story of a young Han Solo and how he became the smuggler we know in the original trilogy.">
-                        <img src="https://images.unsplash.com/photo-1553356084-58ef4a67b2a7?w=220&auto=format&fit=crop&q=80" alt="">
-                        <div class="card-overlay"><div class="card-title">Solo: A Star Wars Story</div></div>
-                        <div class="heart" onclick="toggleMyList(this)">♡</div>
-                    </div>
-                </div>
-                <button class="arrow arrow-right right" onclick="scrollSlider(this,1)">›</button>
-            </div>
-        </section>
-    </div>
+    <section class="content-section">
+      <h2 class="section-title">Continue Watching for Grogu</h2>
+      <div class="row-container">
+        <button class="arrow arrow-left" onclick="scrollSlider(this,-1)">‹</button>
+        <div class="slider">
+          <!-- your Grogu cards here -->
+        </div>
+        <button class="arrow arrow-right" onclick="scrollSlider(this,1)">›</button>
+      </div>
+    </section>
 
-    <!-- NEW & POPULAR -->
-    <div id="new-content" class="tab-content">
-        <section class="content-section">
-            <h2 class="section-title">New & Popular</h2>
-            <div class="row-container">
-                <button class="arrow arrow-left left" onclick="scrollSlider(this,-1)">‹</button>
-                <div class="slider">
-                    <div class="card" data-title="The Mandalorian & Grogu" data-summary="Not released yet – coming soon!">
-                        <img src="https://images.unsplash.com/photo-1581833971385-983855972e47?w=220&auto=format&fit=crop&q=80" alt="">
-                        <div class="coming-soon">COMING 2026</div>
-                        <div class="card-overlay"><div class="card-title">The Mandalorian & Grogu</div></div>
-                        <div class="heart" onclick="toggleMyList(this)">♡</div>
-                    </div>
-                    <div class="card" data-title="The Acolyte" data-summary="High Republic mystery-thriller ends with Darth Plagueis appearing.">
-                        <img src="https://images.unsplash.com/photo-1557683316-973673baf926?w=220&auto=format&fit=crop&q=80" alt="">
-                        <div class="coming-soon">NEW</div>
-                        <div class="card-overlay"><div class="card-title">The Acolyte</div></div>
-                        <div class="heart" onclick="toggleMyList(this)">♡</div>
-                    </div>
-                    <div class="card" data-title="Skeleton Crew" data-summary="A group of young adventurers in the Star Wars universe.">
-                        <img src="https://images.unsplash.com/photo-1553356084-58ef4a67b2a7?w=220&auto=format&fit=crop&q=80" alt="">
-                        <div class="card-overlay"><div class="card-title">Skeleton Crew</div></div>
-                        <div class="heart" onclick="toggleMyList(this)">♡</div>
-                    </div>
-                </div>
-                <button class="arrow arrow-right right" onclick="scrollSlider(this,1)">›</button>
-            </div>
-        </section>
-    </div>
+    <!-- Recently Added Movies and TV Shows sections here (as before) -->
+  </div>
 
-    <!-- AS SEEN IN FORTNITE -->
-    <div id="fortnite-content" class="tab-content">
-        <section class="content-section">
-            <h2 class="section-title">As Seen in Fortnite</h2>
-            <div class="row-container">
-                <button class="arrow arrow-left left" onclick="scrollSlider(this,-1)">‹</button>
-                <div class="slider">
-                    <div class="card" data-title="The Mandalorian" data-summary="The Mandalorian appeared in Fortnite Chapter 2 Season 5.">
-                        <img src="https://images.unsplash.com/photo-1581833971385-983855972e47?w=220&auto=format&fit=crop&q=80" alt="">
-                        <div class="card-overlay"><div class="card-title">The Mandalorian</div></div>
-                        <div class="heart" onclick="toggleMyList(this)">♡</div>
-                    </div>
-                    <div class="card" data-title="The Book of Boba Fett" data-summary="Boba Fett and Fennec Shand joined Fortnite.">
-                        <img src="https://images.unsplash.com/photo-1553356084-58ef4a67b2a7?w=220&auto=format&fit=crop&q=80" alt="">
-                        <div class="card-overlay"><div class="card-title">The Book of Boba Fett</div></div>
-                        <div class="heart" onclick="toggleMyList(this)">♡</div>
-                    </div>
-                    <div class="card" data-title="Ahsoka" data-summary="Ahsoka Tano appeared in Fortnite Chapter 4.">
-                        <img src="https://images.unsplash.com/photo-1557683316-973673baf926?w=220&auto=format&fit=crop&q=80" alt="">
-                        <div class="card-overlay"><div class="card-title">Ahsoka</div></div>
-                        <div class="heart" onclick="toggleMyList(this)">♡</div>
-                    </div>
-                    <div class="card" data-title="Obi-Wan Kenobi" data-summary="Obi-Wan Kenobi was featured in Fortnite.">
-                        <img src="https://images.unsplash.com/photo-1617791160505-6f00504e3519?w=220&auto=format&fit=crop&q=80" alt="">
-                        <div class="card-overlay"><div class="card-title">Obi-Wan Kenobi</div></div>
-                        <div class="heart" onclick="toggleMyList(this)">♡</div>
-                    </div>
-                    <div class="card" data-title="The Clone Wars" data-summary="Clone Wars characters appeared in Fortnite events.">
-                        <img src="https://images.unsplash.com/photo-1553356084-58ef4a67b2a7?w=220&auto=format&fit=crop&q=80" alt="">
-                        <div class="card-overlay"><div class="card-title">The Clone Wars</div></div>
-                        <div class="heart" onclick="toggleMyList(this)">♡</div>
-                    </div>
-                    <div class="card" data-title="Star Wars Rebels" data-summary="Rebels characters have been in Fortnite.">
-                        <img src="https://images.unsplash.com/photo-1540979388789-7cee28a1cdc0?w=220&auto=format&fit=crop&q=80" alt="">
-                        <div class="card-overlay"><div class="card-title">Star Wars Rebels</div></div>
-                        <div class="heart" onclick="toggleMyList(this)">♡</div>
-                    </div>
-                    <div class="card" data-title="The Mandalorian & Grogu" data-summary="Not released yet – coming soon!">
-                        <img src="https://images.unsplash.com/photo-1581833971385-983855972e47?w=220&auto=format&fit=crop&q=80" alt="">
-                        <div class="card-overlay"><div class="card-title">The Mandalorian & Grogu</div></div>
-                        <div class="heart" onclick="toggleMyList(this)">♡</div>
-                    </div>
-                    <div class="card" data-title="A New Hope" data-summary="Classic original trilogy entry featured in Fortnite events.">
-                        <img src="https://images.unsplash.com/photo-1454789548928-9efd52dc4031?w=220&auto=format&fit=crop&q=80" alt="">
-                        <div class="card-overlay"><div class="card-title">A New Hope</div></div>
-                        <div class="heart" onclick="toggleMyList(this)">♡</div>
-                    </div>
-                    <div class="card" data-title="The Empire Strikes Back" data-summary="Iconic sequel moments celebrated in Fortnite.">
-                        <img src="https://images.unsplash.com/photo-1506905925346-21bda4d32df4?w=220&auto=format&fit=crop&q=80" alt="">
-                        <div class="card-overlay"><div class="card-title">The Empire Strikes Back</div></div>
-                        <div class="heart" onclick="toggleMyList(this)">♡</div>
-                    </div>
-                    <div class="card" data-title="Return of the Jedi" data-summary="Epic conclusion to the original trilogy in Fortnite crossovers.">
-                        <img src="https://images.unsplash.com/photo-1446776811953-b23d57bd21aa?w=220&auto=format&fit=crop&q=80" alt="">
-                        <div class="card-overlay"><div class="card-title">Return of the Jedi</div></div>
-                        <div class="heart" onclick="toggleMyList(this)">♡</div>
-                    </div>
-                    <div class="card" data-title="The Phantom Menace" data-summary="Prequel era characters appeared in Fortnite.">
-                        <img src="https://images.unsplash.com/photo-1557683316-973673baf926?w=220&auto=format&fit=crop&q=80" alt="">
-                        <div class="card-overlay"><div class="card-title">The Phantom Menace</div></div>
-                        <div class="heart" onclick="toggleMyList(this)">♡</div>
-                    </div>
-                    <div class="card" data-title="Attack of the Clones" data-summary="Clone Wars era moments in Fortnite.">
-                        <img src="https://images.unsplash.com/photo-1553356084-58ef4a67b2a7?w=220&auto=format&fit=crop&q=80" alt="">
-                        <div class="card-overlay"><div class="card-title">Attack of the Clones</div></div>
-                        <div class="heart" onclick="toggleMyList(this)">♡</div>
-                    </div>
-                    <div class="card" data-title="Revenge of the Sith" data-summary="Dark prequel moments featured in Fortnite.">
-                        <img src="https://images.unsplash.com/photo-1540979388789-7cee28a1cdc0?w=220&auto=format&fit=crop&q=80" alt="">
-                        <div class="card-overlay"><div class="card-title">Revenge of the Sith</div></div>
-                        <div class="heart" onclick="toggleMyList(this)">♡</div>
-                    </div>
-                    <div class="card" data-title="Rogue One" data-summary="Rogue One characters appeared as skins in Fortnite on two separate occasions, along with Darth Vader and Imperial Stormtroopers getting added to the game as part of major Star Wars crossovers.">
-                        <img src="https://images.unsplash.com/photo-1462331940025-496dfbfc7564?w=220&auto=format&fit=crop&q=80" alt="">
-                        <div class="card-overlay"><div class="card-title">Rogue One</div></div>
-                        <div class="heart" onclick="toggleMyList(this)">♡</div>
-                    </div>
-                    <div class="card" data-title="Solo: A Star Wars Story" data-summary="Solo: A Star Wars Story characters and vehicles appeared in Fortnite events.">
-                        <img src="https://images.unsplash.com/photo-1553356084-58ef4a67b2a7?w=220&auto=format&fit=crop&q=80" alt="">
-                        <div class="card-overlay"><div class="card-title">Solo: A Star Wars Story</div></div>
-                        <div class="heart" onclick="toggleMyList(this)">♡</div>
-                    </div>
-                </div>
-                <button class="arrow arrow-right right" onclick="scrollSlider(this,1)">›</button>
-            </div>
-        </section>
-    </div>
+  <!-- Other tabs (tv-content, movies-content, etc.) go here -->
 
-    <!-- LORE TAB -->
-    <div id="lore-content" class="tab-content">
-        <section class="content-section">
-            <h2 class="section-title">Star Wars Lore: From Darth Plagueis to Episode VI</h2>
-            <div style="max-width:1000px; line-height:1.75; font-size:1.15rem; color:#ddd; padding:0 20px;">
-                <h3 style="color:var(--star-wars-gold); margin:40px 0 15px;">The High Republic & Darth Plagueis (The Acolyte)</h3>
-                <p>Centuries before the Skywalker saga, the Jedi Order is at the height of its power during the High Republic era. In <strong>The Acolyte</strong>, a series of brutal murders rocks the galaxy. Jedi investigators uncover a conspiracy involving a dark side user who has learned forbidden techniques. The season ends with a shocking reveal: the Sith Lord <strong>Darth Plagueis the Wise</strong> appears. Plagueis has mastered the ability to manipulate midi-chlorians to create life and cheat death — knowledge he will later pass on to his apprentice, Darth Sidious (Palpatine). This sets the foundation for the Sith’s return and the eventual fall of the Republic.</p>
+  <!-- FOOTER -->
+  <footer>
+    <p>Made with ❤️ for Star Wars fans • This is a fan-made demo</p>
+    <p style="margin:16px 0; font-weight:600; color:#ffd700;">Made by a Star Wars fan</p>
+    <p>© 2026 StarFlix • Not affiliated with Disney or Lucasfilm</p>
+  </footer>
 
-                <h3 style="color:var(--star-wars-gold); margin:40px 0 15px;">Episode I – The Phantom Menace (32 BBY)</h3>
-                <p>The Trade Federation blockades Naboo. Jedi Master Qui-Gon Jinn and his apprentice Obi-Wan Kenobi are sent to negotiate. They discover a young slave boy named Anakin Skywalker on Tatooine, who is unusually strong in the Force. Qui-Gon believes Anakin is the Chosen One prophesied to bring balance to the Force. The Jedi Council is hesitant, but Qui-Gon takes Anakin as his Padawan before dying in battle against Darth Maul. Obi-Wan takes Anakin as his apprentice. The Sith have returned after a thousand years.</p>
+  <!-- ────────────────────────────────────────────── -->
+  <!-- ALL FUNNY LOGIN EFFECTS -->
+  <!-- ────────────────────────────────────────────── -->
 
-                <h3 style="color:var(--star-wars-gold); margin:40px 0 15px;">Episode II – Attack of the Clones & The Clone Wars (22 BBY)</h3>
-                <p>Ten years later, tensions rise between the Republic and the Separatists. Anakin and Padmé Amidala fall in love and secretly marry. A clone army is discovered on Kamino, created from the template of bounty hunter Jango Fett. The Clone Wars begin. The animated series <strong>The Clone Wars</strong> follows Anakin, Obi-Wan, and Anakin’s new Padawan Ahsoka Tano as they fight across the galaxy. Ahsoka eventually leaves the Jedi Order after being framed for a crime.</p>
+  <div id="palpatine" class="effect hidden">
+    <div class="lightning lightning1"></div>
+    <div class="lightning lightning2"></div>
+    <div class="text">DEWIT...<br>Unlimited power... to your account!</div>
+  </div>
 
-                <h3 style="color:var(--star-wars-gold); margin:40px 0 15px;">Episode III – Revenge of the Sith (19 BBY)</h3>
-                <p>The Clone Wars reach their climax. Chancellor Palpatine (secretly Darth Sidious) manipulates Anakin’s fear of losing Padmé. Anakin turns to the dark side, becomes Darth Vader, and helps Palpatine wipe out the Jedi. Order 66 is executed. Obi-Wan defeats Anakin on Mustafar. Padmé dies giving birth to twins Luke and Leia. Vader is placed in his iconic suit. The Empire rises, and the Jedi are believed extinct.</p>
+  <div id="darthjarjar" class="effect hidden">
+    <div class="red-glow"></div>
+    <div class="text">MEESA DA SITH LORD NOW...<br>bombad login successful!</div>
+  </div>
 
-                <h3 style="color:var(--star-wars-gold); margin:40px 0 15px;">The Dark Times (Obi-Wan Kenobi, Andor, Rebels)</h3>
-                <p><strong>Obi-Wan Kenobi</strong> series: Obi-Wan lives in exile on Tatooine watching over young Luke. He confronts Darth Vader again and helps protect Leia. <strong>Andor</strong> shows the early days of the Rebellion and Cassian Andor’s radicalization. <strong>Star Wars Rebels</strong> follows a small crew (Ezra, Hera, Kanan, Sabine, Zeb, Chopper) who become key figures in the growing Rebel Alliance leading up to Episode IV.</p>
+  <div id="grogu" class="effect hidden">
+    <div class="soup">🥣</div>
+    <div class="text">No soup for you...<br>but login approved! 👶</div>
+  </div>
 
-                <h3 style="color:var(--star-wars-gold); margin:40px 0 15px;">Episode IV – A New Hope (0 BBY/ABY)</h3>
-                <p>Princess Leia is captured by the Empire while carrying the Death Star plans. Luke Skywalker, with Obi-Wan Kenobi and Han Solo, rescues her. They destroy the first Death Star at the Battle of Yavin. The Rebel Alliance scores its first major victory.</p>
+  <div id="highground" class="effect hidden">
+    <div class="lava"></div>
+    <div class="text">It's over, login...<br>I have the high ground!</div>
+  </div>
 
-                <h3 style="color:var(--star-wars-gold); margin:40px 0 15px;">Episode V – The Empire Strikes Back (3 ABY)</h3>
-                <p>The Empire hunts the Rebels. Luke trains with Yoda on Dagobah. Darth Vader reveals he is Luke’s father. Han Solo is frozen in carbonite and taken by Boba Fett. The Rebels are scattered.</p>
+  <div id="reynobody" class="effect hidden">
+    <div class="saber-glow"></div>
+    <div class="text">The belonging you seek...<br>is still not a Skywalker.<br>Welcome anyway.</div>
+  </div>
 
-                <h3 style="color:var(--star-wars-gold); margin:40px 0 15px;">Episode VI – Return of the Jedi (4 ABY)</h3>
-                <p>Luke confronts Vader and the Emperor on the second Death Star. With help from his friends and the Ewoks, the Rebels destroy the second Death Star. Vader redeems himself by killing the Emperor and saving Luke. The Empire falls. The galaxy celebrates the return of hope and balance.</p>
+  <div id="anakin" class="effect hidden">
+    <div class="helmet">⛑️</div>
+    <div class="text">NOOOOOO!...<br>but login successful anyway.</div>
+  </div>
 
-                <p style="margin-top:40px; font-style:italic; color:#aaa;">This timeline brings us from the rise of the Sith under Darth Plagueis all the way to the victory at Endor in Episode VI. The story continues in later eras with The Mandalorian, The Book of Boba Fett, Ahsoka, and beyond...</p>
-            </div>
-        </section>
-    </div>
+  <div id="thisistheway" class="effect hidden">
+    <div class="text">This is the way...<br>to your account.</div>
+  </div>
 
-    <!-- MY LIST -->
-    <div id="mylist-content" class="tab-content">
-        <section class="content-section">
-            <h2 class="section-title">My List</h2>
-            <div class="row-container">
-                <div class="slider" id="mylist-slider"></div>
-            </div>
-        </section>
-    </div>
+  <div id="babyyoda" class="effect hidden">
+    <div class="text">Mmm... soup good.<br>Login good too. 👶</div>
+  </div>
 
-    <footer>
-        <p>Made with ❤️ for Star Wars fans • This is a fan-made demo</p>
-        <p style="margin:16px 0; font-weight:600; color:#ffd700;">Made by a Star Wars fan</p>
-        <p>© 2026 StarFlix • Not affiliated with Disney or Lucasfilm</p>
-    </footer>
+  <div id="order66" class="effect hidden">
+    <div class="text">Order 66... executed.<br>Login granted.</div>
+  </div>
 
-    <script>
-        let myList = JSON.parse(localStorage.getItem('starflixMyList')) || [];
-        let currentUser = localStorage.getItem('starflixUser');
+  <div id="plagueis" class="effect hidden">
+    <div class="text">The dark side of the Force...<br>is a pathway to many abilities<br>some consider to be... funny.</div>
+  </div>
 
-        function saveMyList() {
-            localStorage.setItem('starflixMyList', JSON.stringify(myList));
-        }
+  <script>
+    function showEffect(id) {
+      const el = document.getElementById(id);
+      if (!el) return;
+      el.classList.remove('hidden');
+      el.style.opacity = '1';
+      setTimeout(() => {
+        el.style.opacity = '0';
+        setTimeout(() => el.classList.add('hidden'), 1500);
+      }, 5000);
+    }
 
-        function renderMyList() {
-            const slider = document.getElementById('mylist-slider');
-            slider.innerHTML = '';
-            if (myList.length === 0) {
-                slider.innerHTML = '<p style="color:#777; padding:20px;">Your list is empty. ❤️ cards to add them here!</p>';
-                return;
-            }
-            myList.forEach(item => {
-                const div = document.createElement('div');
-                div.className = 'card';
-                div.innerHTML = `
-                    <img src="${item.img}" alt="">
-                    <div class="card-overlay"><div class="card-title">${item.title}</div></div>
-                `;
-                slider.appendChild(div);
-            });
-        }
+    // Your existing scripts (myList, switchTab, filterCards, scrollSlider, etc.)
 
-        function toggleMyList(el) {
-            const card = el.closest('.card');
-            const title = card.dataset.title;
-            const img = card.querySelector('img').src;
+    // Login handler with funny effects
+    document.getElementById('login-submit').addEventListener('click', () => {
+      const username = document.getElementById('username').value.trim().toLowerCase();
+      const password = document.getElementById('password').value.trim();
+      let special = false;
 
-            const index = myList.findIndex(i => i.title === title);
-            if (index > -1) {
-                myList.splice(index, 1);
-                el.textContent = '♡';
-            } else {
-                myList.push({title, img});
-                el.textContent = '❤️';
-            }
-            saveMyList();
-            renderMyList();
-        }
+      if (username === 'palpatine' && password === 'dewit') {
+        showEffect('palpatine'); special = true;
+      } else if (username === 'darthjarjar' && password === 'meesasithlord') {
+        showEffect('darthjarjar'); special = true;
+      } else if (username === 'reynobody' && password === 'stillnotaskywalker') {
+        showEffect('reynobody'); special = true;
+      } else if (username === 'grogu' && password === 'nosoupforyou') {
+        showEffect('grogu'); special = true;
+      } else if (username === 'highground' && password === 'itsoveranakin') {
+        showEffect('highground'); special = true;
+      } else if (username === 'anakinskywalker' && password === 'notavader') {
+        showEffect('anakin'); special = true;
+      } else if (username === 'thisistheway' && password === 'thisisthepassword') {
+        showEffect('thisistheway'); special = true;
+      } else if (username === 'babyyoda' && password === 'souptime') {
+        showEffect('babyyoda'); special = true;
+      } else if (username === 'order66' && password === 'execute') {
+        showEffect('order66'); special = true;
+      } else if (username === 'darthplagueisthewise' && password === 'ironic') {
+        showEffect('plagueis'); special = true;
+      }
 
-        function switchTab(tab) {
-            document.querySelectorAll('.tab-content').forEach(c => c.classList.remove('active'));
-            document.getElementById(tab + '-content').classList.add('active');
+      // Normal login logic
+      if (!special) {
+        localStorage.setItem('starflixUser', username);
+        // updateUIForUser(...);
+        document.getElementById('login-modal').style.display = 'none';
+      } else {
+        // still log in after funny effect
+        localStorage.setItem('starflixUser', username);
+        // updateUIForUser(...);
+        setTimeout(() => document.getElementById('login-modal').style.display = 'none', 5500);
+      }
+    });
 
-            document.querySelectorAll('.nav-links a').forEach(a => a.classList.remove('active'));
-            document.querySelector(`.nav-links a[data-tab="${tab}"]`).classList.add('active');
-
-            if (tab === 'mylist') renderMyList();
-        }
-
-        function filterCards() {
-            const term = document.getElementById('searchInput').value.toLowerCase().trim();
-            const activeTab = document.querySelector('.tab-content.active');
-            if (!activeTab) return;
-
-            const cards = activeTab.querySelectorAll('.card');
-            cards.forEach(card => {
-                const title = (card.dataset.title || '').toLowerCase();
-                card.style.display = title.includes(term) ? 'flex' : 'none';
-            });
-        }
-
-        function scrollSlider(btn, direction) {
-            const slider = btn.parentElement.querySelector('.slider');
-            const amount = slider.clientWidth * 0.8 * direction;
-            slider.scrollBy({ left: amount, behavior: 'smooth' });
-        }
-
-        const loginBtn = document.getElementById('loginBtn');
-        const loginModal = document.getElementById('login-modal');
-        const usernameInput = document.getElementById('username');
-        const passwordInput = document.getElementById('password');
-        const loginSubmit = document.getElementById('login-submit');
-        const adminMsg = document.getElementById('admin-message');
-        const welcomeBanner = document.getElementById('welcome-back');
-
-        function updateUIForUser(user) {
-            if (user) {
-                welcomeBanner.textContent = `Welcome back, ${user}!`;
-                welcomeBanner.style.display = 'block';
-                loginBtn.textContent = 'Logout';
-                loginBtn.onclick = logout;
-            } else {
-                welcomeBanner.style.display = 'none';
-                loginBtn.textContent = 'Login';
-                loginBtn.onclick = () => loginModal.style.display = 'flex';
-            }
-        }
-
-        function logout() {
-            localStorage.removeItem('starflixUser');
-            updateUIForUser(null);
-            alert('Logged out successfully');
-        }
-
-        loginSubmit.addEventListener('click', () => {
-            const username = usernameInput.value.trim();
-            const password = passwordInput.value.trim();
-
-            if (!username || !password) {
-                alert('Please enter username and password');
-                return;
-            }
-
-            localStorage.setItem('starflixUser', username);
-
-            if (username.toLowerCase() === 'admin' && password.toLowerCase() === 'admin') {
-                adminMsg.style.display = 'block';
-                adminMsg.innerHTML = 'ADMIN ACCESS GRANTED – MAY THE FORCE SERVE <span style="color:#ff4444;font-weight:bold;">YOU</span> ⚔️';
-                triggerAdminHyperspace();
-            } else {
-                alert(`Welcome, ${username}!`);
-                adminMsg.style.display = 'none';
-            }
-
-            updateUIForUser(username);
-            loginModal.style.display = 'none';
-            usernameInput.value = '';
-            passwordInput.value = '';
-        });
-
-        loginModal.addEventListener('click', (e) => {
-            if (e.target === loginModal || e.target.classList.contains('close-modal')) {
-                loginModal.style.display = 'none';
-            }
-        });
-
-        function triggerAdminHyperspace() {
-            const container = document.getElementById('admin-hyperspace');
-            container.innerHTML = '';
-            for (let i = 0; i < 200; i++) {
-                const star = document.createElement('div');
-                star.className = 'admin-star';
-                const size = Math.random() * 4 + 1;
-                star.style.width = star.style.height = size + 'px';
-                star.style.left = Math.random() * 100 + 'vw';
-                star.style.top = Math.random() * 100 + 'vh';
-                star.style.background = Math.random() > 0.7 ? '#ff4444' : '#fff';
-                star.style.setProperty('--dx', (Math.random() - 0.5) * 4000 + 'px');
-                star.style.setProperty('--dy', (Math.random() - 0.5) * 4000 + 'px');
-                star.style.animationDelay = Math.random() * 1.5 + 's';
-                container.appendChild(star);
-            }
-            container.style.opacity = '1';
-            setTimeout(() => {
-                container.style.opacity = '0';
-                setTimeout(() => container.innerHTML = '', 2000);
-            }, 4500);
-        }
-
-        document.addEventListener('click', (e) => {
-            const card = e.target.closest('.card');
-            if (!card || e.target.closest('.heart') || e.target.closest('.coming-soon')) return;
-
-            const title = card.dataset.title;
-            const summary = card.dataset.summary;
-
-            const summaryEl = document.getElementById('card-summary');
-
-            if (title === 'The Mandalorian & Grogu') {
-                summaryEl.textContent = "Not released yet – coming soon!";
-            } else if (summary) {
-                summaryEl.textContent = summary;
-            } else {
-                return;
-            }
-
-            summaryEl.style.opacity = '1';
-            setTimeout(() => {
-                summaryEl.style.opacity = '0';
-            }, 4500);
-        });
-
-        window.onload = () => {
-            document.getElementById('home-content').classList.add('active');
-            renderMyList();
-            const savedUser = localStorage.getItem('starflixUser');
-            updateUIForUser(savedUser);
-        };
-    </script>
+    // ... your other existing JavaScript ...
+  </script>
 </body>
 </html>
