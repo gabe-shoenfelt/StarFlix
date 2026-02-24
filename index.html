@@ -38,7 +38,7 @@
         .logo span { color:var(--netflix-red); }
 
         .nav-links {
-            display:flex; gap:18px; margin-left:40px;
+            display:flex; gap:20px; margin-left:40px;
         }
         .nav-links a {
             color:#fff; text-decoration:none; font-weight:500; font-size:15px;
@@ -87,10 +87,15 @@
         .btn-info:hover { background:rgba(255,255,255,0.4); }
 
         .content-section { padding:60px 4% 40px; }
-        .section-title { font-size:1.6rem; font-weight:600; margin-bottom:18px; padding-left:8px; }
+        .section-title { font-size:1.8rem; font-weight:600; margin-bottom:20px; padding-left:8px; }
+
+        .row-container {
+            position:relative;
+            margin-bottom:50px;
+        }
 
         .slider {
-            display:flex; gap:8px; overflow-x:auto; scroll-behavior:smooth; padding:8px 0 20px;
+            display:flex; gap:12px; overflow-x:auto; scroll-behavior:smooth; padding:8px 60px 20px 0;
             scrollbar-width:none;
         }
         .slider::-webkit-scrollbar { display:none; }
@@ -100,7 +105,7 @@
             transition:transform .4s cubic-bezier(0.25,0.1,0.25,1); cursor:pointer;
             box-shadow:0 4px 12px rgba(0,0,0,0.6);
         }
-        .card:hover { transform:scale(1.22); z-index:20; box-shadow:0 20px 40px rgba(0,0,0,0.9); }
+        .card:hover { transform:scale(1.18); z-index:20; box-shadow:0 20px 40px rgba(0,0,0,0.9); }
 
         .card img {
             width:100%; height:100%; object-fit:cover; transition:transform .4s;
@@ -128,12 +133,15 @@
 
         .arrow {
             position:absolute; top:50%; transform:translateY(-50%);
-            width:48px; height:120px; background:rgba(0,0,0,0.65); color:white;
-            border:none; font-size:3rem; cursor:pointer; z-index:10; opacity:0;
-            transition:opacity .2s;
+            width:50px; height:140px; background:rgba(0,0,0,0.6); color:white;
+            border:none; font-size:3.5rem; cursor:pointer; z-index:10; opacity:0;
+            transition:opacity .2s, background .2s;
+            border-radius:0 8px 8px 0;
         }
         .row-container:hover .arrow { opacity:1; }
-        .arrow:hover { background:rgba(229,9,20,0.85); }
+        .arrow:hover { background:rgba(229,9,20,0.8); }
+        .arrow.left { left:0; border-radius:8px 0 0 8px; }
+        .arrow.right { right:0; border-radius:0 8px 8px 0; }
 
         footer {
             padding:60px 4% 40px; color:#757575; font-size:14px; text-align:center;
@@ -212,6 +220,7 @@
             .nav-links { gap:12px; font-size:13px; overflow-x:auto; white-space:nowrap; }
             #welcome-back { font-size:12px; padding:6px 16px; top:70px; }
             #card-summary { font-size:1.5rem; padding:30px 40px; }
+            .arrow { width:40px; font-size:2.8rem; }
         }
     </style>
 </head>
@@ -281,7 +290,7 @@
         <section class="content-section">
             <h2 class="section-title">Continue Watching for Grogu</h2>
             <div class="row-container">
-                <button class="arrow arrow-left" onclick="scrollSlider(this,-1)">‹</button>
+                <button class="arrow arrow-left left" onclick="scrollSlider(this,-1)">‹</button>
                 <div class="slider">
                     <div class="card" data-title="The Mandalorian & Grogu" data-summary="Not released yet – coming soon!">
                         <img src="https://images.unsplash.com/photo-1581833971385-983855972e47?w=220&auto=format&fit=crop&q=80" alt="">
@@ -309,7 +318,97 @@
                         <div class="heart" onclick="toggleMyList(this)">♡</div>
                     </div>
                 </div>
-                <button class="arrow arrow-right" onclick="scrollSlider(this,1)">›</button>
+                <button class="arrow arrow-right right" onclick="scrollSlider(this,1)">›</button>
+            </div>
+        </section>
+
+        <section class="content-section">
+            <h2 class="section-title">Recently Added Movies</h2>
+            <div class="row-container">
+                <button class="arrow arrow-left left" onclick="scrollSlider(this,-1)">‹</button>
+                <div class="slider">
+                    <div class="card" data-title="A New Hope" data-summary="Luke Skywalker joins the Rebellion to destroy the Death Star and defeat the Empire.">
+                        <img src="https://images.unsplash.com/photo-1454789548928-9efd52dc4031?w=220&auto=format&fit=crop&q=80" alt="">
+                        <div class="card-overlay"><div class="card-title">A New Hope</div></div>
+                        <div class="heart" onclick="toggleMyList(this)">♡</div>
+                    </div>
+                    <div class="card" data-title="The Empire Strikes Back" data-summary="The Rebels are on the run as Darth Vader hunts Luke Skywalker.">
+                        <img src="https://images.unsplash.com/photo-1506905925346-21bda4d32df4?w=220&auto=format&fit=crop&q=80" alt="">
+                        <div class="card-overlay"><div class="card-title">The Empire Strikes Back</div></div>
+                        <div class="heart" onclick="toggleMyList(this)">♡</div>
+                    </div>
+                    <div class="card" data-title="Return of the Jedi" data-summary="Luke confronts Darth Vader and the Emperor to end the Empire.">
+                        <img src="https://images.unsplash.com/photo-1446776811953-b23d57bd21aa?w=220&auto=format&fit=crop&q=80" alt="">
+                        <div class="card-overlay"><div class="card-title">Return of the Jedi</div></div>
+                        <div class="heart" onclick="toggleMyList(this)">♡</div>
+                    </div>
+                    <div class="card" data-title="The Phantom Menace" data-summary="Young Anakin Skywalker is discovered as the Jedi face a new threat.">
+                        <img src="https://images.unsplash.com/photo-1557683316-973673baf926?w=220&auto=format&fit=crop&q=80" alt="">
+                        <div class="card-overlay"><div class="card-title">The Phantom Menace</div></div>
+                        <div class="heart" onclick="toggleMyList(this)">♡</div>
+                    </div>
+                    <div class="card" data-title="Attack of the Clones" data-summary="Anakin and Padmé fall in love as the Clone Wars begin.">
+                        <img src="https://images.unsplash.com/photo-1553356084-58ef4a67b2a7?w=220&auto=format&fit=crop&q=80" alt="">
+                        <div class="card-overlay"><div class="card-title">Attack of the Clones</div></div>
+                        <div class="heart" onclick="toggleMyList(this)">♡</div>
+                    </div>
+                    <div class="card" data-title="Revenge of the Sith" data-summary="Anakin turns to the dark side and becomes Darth Vader.">
+                        <img src="https://images.unsplash.com/photo-1540979388789-7cee28a1cdc0?w=220&auto=format&fit=crop&q=80" alt="">
+                        <div class="card-overlay"><div class="card-title">Revenge of the Sith</div></div>
+                        <div class="heart" onclick="toggleMyList(this)">♡</div>
+                    </div>
+                    <div class="card" data-title="Rogue One" data-summary="Rebel spies steal the Death Star plans in a desperate mission. Everyone dies at the end of the movie.">
+                        <img src="https://images.unsplash.com/photo-1462331940025-496dfbfc7564?w=220&auto=format&fit=crop&q=80" alt="">
+                        <div class="card-overlay"><div class="card-title">Rogue One</div></div>
+                        <div class="heart" onclick="toggleMyList(this)">♡</div>
+                    </div>
+                    <div class="card" data-title="Solo: A Star Wars Story" data-summary="The story of a young Han Solo and how he became the smuggler we know in the original trilogy.">
+                        <img src="https://images.unsplash.com/photo-1553356084-58ef4a67b2a7?w=220&auto=format&fit=crop&q=80" alt="">
+                        <div class="card-overlay"><div class="card-title">Solo: A Star Wars Story</div></div>
+                        <div class="heart" onclick="toggleMyList(this)">♡</div>
+                    </div>
+                </div>
+                <button class="arrow arrow-right right" onclick="scrollSlider(this,1)">›</button>
+            </div>
+        </section>
+
+        <section class="content-section">
+            <h2 class="section-title">Recently Added TV Shows</h2>
+            <div class="row-container">
+                <button class="arrow arrow-left left" onclick="scrollSlider(this,-1)">‹</button>
+                <div class="slider">
+                    <div class="card" data-title="The Acolyte" data-summary="A mystery-thriller set in the High Republic era.">
+                        <img src="https://images.unsplash.com/photo-1557683316-973673baf926?w=220&auto=format&fit=crop&q=80" alt="">
+                        <div class="card-overlay"><div class="card-title">The Acolyte</div></div>
+                        <div class="heart" onclick="toggleMyList(this)">♡</div>
+                    </div>
+                    <div class="card" data-title="Ahsoka" data-summary="Ahsoka searches for Thrawn and Ezra Bridger.">
+                        <img src="https://images.unsplash.com/photo-1506905925346-21bda4d32df4?w=220&auto=format&fit=crop&q=80" alt="">
+                        <div class="card-overlay"><div class="card-title">Ahsoka</div></div>
+                        <div class="heart" onclick="toggleMyList(this)">♡</div>
+                    </div>
+                    <div class="card" data-title="Andor" data-summary="Cassian Andor’s path to becoming a rebel spy.">
+                        <img src="https://images.unsplash.com/photo-1540979388789-7cee28a1cdc0?w=220&auto=format&fit=crop&q=80" alt="">
+                        <div class="card-overlay"><div class="card-title">Andor</div></div>
+                        <div class="heart" onclick="toggleMyList(this)">♡</div>
+                    </div>
+                    <div class="card" data-title="Obi-Wan Kenobi" data-summary="Obi-Wan Kenobi emerges from hiding to protect a young Leia from Darth Vader.">
+                        <img src="https://images.unsplash.com/photo-1617791160505-6f00504e3519?w=220&auto=format&fit=crop&q=80" alt="">
+                        <div class="card-overlay"><div class="card-title">Obi-Wan Kenobi</div></div>
+                        <div class="heart" onclick="toggleMyList(this)">♡</div>
+                    </div>
+                    <div class="card" data-title="The Book of Boba Fett" data-summary="Boba Fett claims Jabba's throne on Tatooine.">
+                        <img src="https://images.unsplash.com/photo-1553356084-58ef4a67b2a7?w=220&auto=format&fit=crop&q=80" alt="">
+                        <div class="card-overlay"><div class="card-title">The Book of Boba Fett</div></div>
+                        <div class="heart" onclick="toggleMyList(this)">♡</div>
+                    </div>
+                    <div class="card" data-title="The Mandalorian" data-summary="A lone bounty hunter protects a mysterious child while evading the Empire.">
+                        <img src="https://images.unsplash.com/photo-1581833971385-983855972e47?w=220&auto=format&fit=crop&q=80" alt="">
+                        <div class="card-overlay"><div class="card-title">The Mandalorian</div></div>
+                        <div class="heart" onclick="toggleMyList(this)">♡</div>
+                    </div>
+                </div>
+                <button class="arrow arrow-right right" onclick="scrollSlider(this,1)">›</button>
             </div>
         </section>
     </div>
@@ -319,7 +418,7 @@
         <section class="content-section">
             <h2 class="section-title">Star Wars TV Shows</h2>
             <div class="row-container">
-                <button class="arrow arrow-left" onclick="scrollSlider(this,-1)">‹</button>
+                <button class="arrow arrow-left left" onclick="scrollSlider(this,-1)">‹</button>
                 <div class="slider">
                     <div class="card" data-title="The Mandalorian" data-summary="A lone bounty hunter protects a mysterious child while evading the Empire.">
                         <img src="https://images.unsplash.com/photo-1581833971385-983855972e47?w=220&auto=format&fit=crop&q=80" alt="">
@@ -352,7 +451,7 @@
                         <div class="heart" onclick="toggleMyList(this)">♡</div>
                     </div>
                 </div>
-                <button class="arrow arrow-right" onclick="scrollSlider(this,1)">›</button>
+                <button class="arrow arrow-right right" onclick="scrollSlider(this,1)">›</button>
             </div>
         </section>
     </div>
@@ -362,7 +461,7 @@
         <section class="content-section">
             <h2 class="section-title">Star Wars Movies</h2>
             <div class="row-container">
-                <button class="arrow arrow-left" onclick="scrollSlider(this,-1)">‹</button>
+                <button class="arrow arrow-left left" onclick="scrollSlider(this,-1)">‹</button>
                 <div class="slider">
                     <div class="card" data-title="A New Hope" data-summary="Luke Skywalker joins the Rebellion to destroy the Death Star and defeat the Empire.">
                         <img src="https://images.unsplash.com/photo-1454789548928-9efd52dc4031?w=220&auto=format&fit=crop&q=80" alt="">
@@ -394,13 +493,18 @@
                         <div class="card-overlay"><div class="card-title">Revenge of the Sith</div></div>
                         <div class="heart" onclick="toggleMyList(this)">♡</div>
                     </div>
-                    <div class="card" data-title="Rogue One" data-summary="Rebel spies steal the Death Star plans in a desperate mission.">
+                    <div class="card" data-title="Rogue One" data-summary="Rebel spies steal the Death Star plans in a desperate mission. Everyone dies at the end of the movie.">
                         <img src="https://images.unsplash.com/photo-1462331940025-496dfbfc7564?w=220&auto=format&fit=crop&q=80" alt="">
                         <div class="card-overlay"><div class="card-title">Rogue One</div></div>
                         <div class="heart" onclick="toggleMyList(this)">♡</div>
                     </div>
+                    <div class="card" data-title="Solo: A Star Wars Story" data-summary="The story of a young Han Solo and how he became the smuggler we know in the original trilogy.">
+                        <img src="https://images.unsplash.com/photo-1553356084-58ef4a67b2a7?w=220&auto=format&fit=crop&q=80" alt="">
+                        <div class="card-overlay"><div class="card-title">Solo: A Star Wars Story</div></div>
+                        <div class="heart" onclick="toggleMyList(this)">♡</div>
+                    </div>
                 </div>
-                <button class="arrow arrow-right" onclick="scrollSlider(this,1)">›</button>
+                <button class="arrow arrow-right right" onclick="scrollSlider(this,1)">›</button>
             </div>
         </section>
     </div>
@@ -410,7 +514,7 @@
         <section class="content-section">
             <h2 class="section-title">New & Popular</h2>
             <div class="row-container">
-                <button class="arrow arrow-left" onclick="scrollSlider(this,-1)">‹</button>
+                <button class="arrow arrow-left left" onclick="scrollSlider(this,-1)">‹</button>
                 <div class="slider">
                     <div class="card" data-title="The Mandalorian & Grogu" data-summary="Not released yet – coming soon!">
                         <img src="https://images.unsplash.com/photo-1581833971385-983855972e47?w=220&auto=format&fit=crop&q=80" alt="">
@@ -430,7 +534,7 @@
                         <div class="heart" onclick="toggleMyList(this)">♡</div>
                     </div>
                 </div>
-                <button class="arrow arrow-right" onclick="scrollSlider(this,1)">›</button>
+                <button class="arrow arrow-right right" onclick="scrollSlider(this,1)">›</button>
             </div>
         </section>
     </div>
@@ -440,9 +544,8 @@
         <section class="content-section">
             <h2 class="section-title">As Seen in Fortnite</h2>
             <div class="row-container">
-                <button class="arrow arrow-left" onclick="scrollSlider(this,-1)">‹</button>
+                <button class="arrow arrow-left left" onclick="scrollSlider(this,-1)">‹</button>
                 <div class="slider">
-                    <!-- All real titles here -->
                     <div class="card" data-title="The Mandalorian" data-summary="The Mandalorian appeared in Fortnite Chapter 2 Season 5.">
                         <img src="https://images.unsplash.com/photo-1581833971385-983855972e47?w=220&auto=format&fit=crop&q=80" alt="">
                         <div class="card-overlay"><div class="card-title">The Mandalorian</div></div>
@@ -508,23 +611,27 @@
                         <div class="card-overlay"><div class="card-title">Revenge of the Sith</div></div>
                         <div class="heart" onclick="toggleMyList(this)">♡</div>
                     </div>
-                    <div class="card" data-title="Rogue One" data-summary="Rogue One characters and themes in Fortnite events.">
+                    <div class="card" data-title="Rogue One" data-summary="Rogue One characters appeared as skins in Fortnite on two separate occasions, along with Darth Vader and Imperial Stormtroopers getting added to the game as part of major Star Wars crossovers.">
                         <img src="https://images.unsplash.com/photo-1462331940025-496dfbfc7564?w=220&auto=format&fit=crop&q=80" alt="">
                         <div class="card-overlay"><div class="card-title">Rogue One</div></div>
                         <div class="heart" onclick="toggleMyList(this)">♡</div>
                     </div>
+                    <div class="card" data-title="Solo: A Star Wars Story" data-summary="Solo: A Star Wars Story characters and vehicles appeared in Fortnite events.">
+                        <img src="https://images.unsplash.com/photo-1553356084-58ef4a67b2a7?w=220&auto=format&fit=crop&q=80" alt="">
+                        <div class="card-overlay"><div class="card-title">Solo: A Star Wars Story</div></div>
+                        <div class="heart" onclick="toggleMyList(this)">♡</div>
+                    </div>
                 </div>
-                <button class="arrow arrow-right" onclick="scrollSlider(this,1)">›</button>
+                <button class="arrow arrow-right right" onclick="scrollSlider(this,1)">›</button>
             </div>
         </section>
     </div>
 
-    <!-- LORE TAB - Extremely Detailed -->
+    <!-- LORE TAB -->
     <div id="lore-content" class="tab-content">
         <section class="content-section">
-            <h2 class="section-title">Star Wars Lore: From The Acolyte to Episode VI</h2>
+            <h2 class="section-title">Star Wars Lore: From Darth Plagueis to Episode VI</h2>
             <div style="max-width:1000px; line-height:1.75; font-size:1.15rem; color:#ddd; padding:0 20px;">
-
                 <h3 style="color:var(--star-wars-gold); margin:40px 0 15px;">The High Republic & Darth Plagueis (The Acolyte)</h3>
                 <p>Centuries before the Skywalker saga, the Jedi Order is at the height of its power during the High Republic era. In <strong>The Acolyte</strong>, a series of brutal murders rocks the galaxy. Jedi investigators uncover a conspiracy involving a dark side user who has learned forbidden techniques. The season ends with a shocking reveal: the Sith Lord <strong>Darth Plagueis the Wise</strong> appears. Plagueis has mastered the ability to manipulate midi-chlorians to create life and cheat death — knowledge he will later pass on to his apprentice, Darth Sidious (Palpatine). This sets the foundation for the Sith’s return and the eventual fall of the Republic.</p>
 
@@ -550,7 +657,6 @@
                 <p>Luke confronts Vader and the Emperor on the second Death Star. With help from his friends and the Ewoks, the Rebels destroy the second Death Star. Vader redeems himself by killing the Emperor and saving Luke. The Empire falls. The galaxy celebrates the return of hope and balance.</p>
 
                 <p style="margin-top:40px; font-style:italic; color:#aaa;">This timeline brings us from the rise of the Sith under Darth Plagueis all the way to the victory at Endor in Episode VI. The story continues in later eras with The Mandalorian, The Book of Boba Fett, Ahsoka, and beyond...</p>
-
             </div>
         </section>
     </div>
@@ -638,11 +744,10 @@
 
         function scrollSlider(btn, direction) {
             const slider = btn.parentElement.querySelector('.slider');
-            const amount = slider.clientWidth * 0.75 * direction;
+            const amount = slider.clientWidth * 0.8 * direction;
             slider.scrollBy({ left: amount, behavior: 'smooth' });
         }
 
-        // Login / Logout / Welcome logic
         const loginBtn = document.getElementById('loginBtn');
         const loginModal = document.getElementById('login-modal');
         const usernameInput = document.getElementById('username');
@@ -702,7 +807,6 @@
             }
         });
 
-        // Admin hyperspace effect
         function triggerAdminHyperspace() {
             const container = document.getElementById('admin-hyperspace');
             container.innerHTML = '';
@@ -726,7 +830,6 @@
             }, 4500);
         }
 
-        // Card click summary (except Mandalorian & Grogu)
         document.addEventListener('click', (e) => {
             const card = e.target.closest('.card');
             if (!card || e.target.closest('.heart') || e.target.closest('.coming-soon')) return;
@@ -750,7 +853,6 @@
             }, 4500);
         });
 
-        // Init
         window.onload = () => {
             document.getElementById('home-content').classList.add('active');
             renderMyList();
