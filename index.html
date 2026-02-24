@@ -166,7 +166,7 @@
       pointer-events:none;
     }
 
-    /* ── LOGIN MODAL ───────────────────────────────────────── */
+    /* LOGIN MODAL */
     #login-modal {
       position: fixed;
       inset: 0;
@@ -227,7 +227,7 @@
       font-weight: bold;
     }
 
-    /* ── ADMIN HYPERSPACE EFFECT ───────────────────────────── */
+    /* ADMIN HYPERSPACE EFFECT */
     #admin-hyperspace {
       position: fixed;
       inset: 0;
@@ -250,7 +250,7 @@
       100% { transform: translate(var(--dx), var(--dy)) scale(1); opacity: 0; }
     }
 
-    /* ── FUNNY EFFECTS ─────────────────────────────────────── */
+    /* FUNNY EFFECTS */
     .effect {
       position: fixed;
       inset: 0;
@@ -344,7 +344,7 @@
     </div>
   </div>
 
-  <!-- ── HOME ─────────────────────────────────────────────── -->
+  <!-- HOME -->
   <div id="home-content" class="tab-content active">
     <section class="hero">
       <div class="hero-content">
@@ -440,7 +440,7 @@
             <div class="card-overlay"><div class="card-title">Revenge of the Sith</div></div>
             <div class="heart" onclick="toggleMyList(this)">♡</div>
           </div>
-          <div class="card" data-title="Rogue One" data-summary="Rebel spies steal the Death Star plans in a desperate mission.">
+          <div class="card" data-title="Rogue One" data-summary="Rebel spies steal the Death Star plans in a desperate mission. Everyone dies at the end of the movie.">
             <img src="https://images.unsplash.com/photo-1462331940025-496dfbfc7564?w=220&auto=format&fit=crop&q=80" alt="">
             <div class="card-overlay"><div class="card-title">Rogue One</div></div>
             <div class="heart" onclick="toggleMyList(this)">♡</div>
@@ -454,59 +454,9 @@
         <button class="arrow arrow-right" onclick="scrollSlider(this.parentNode,1)">›</button>
       </div>
     </section>
-
-    <section class="content-section">
-      <h2 class="section-title">Recently Added TV Shows</h2>
-      <div class="row-container">
-        <button class="arrow arrow-left" onclick="scrollSlider(this.parentNode,-1)">‹</button>
-        <div class="slider">
-          <div class="card" data-title="The Acolyte" data-summary="High Republic mystery-thriller ends with Darth Plagueis appearing.">
-            <img src="https://images.unsplash.com/photo-1557683316-973673baf926?w=220&auto=format&fit=crop&q=80" alt="">
-            <div class="card-overlay"><div class="card-title">The Acolyte</div></div>
-            <div class="heart" onclick="toggleMyList(this)">♡</div>
-          </div>
-          <div class="card" data-title="The Mandalorian" data-summary="A lone bounty hunter protects a mysterious child while evading the Empire.">
-            <img src="https://images.unsplash.com/photo-1581833971385-983855972e47?w=220&auto=format&fit=crop&q=80" alt="">
-            <div class="card-overlay"><div class="card-title">The Mandalorian</div></div>
-            <div class="heart" onclick="toggleMyList(this)">♡</div>
-          </div>
-          <div class="card" data-title="Ahsoka" data-summary="Former Jedi Ahsoka Tano hunts for Thrawn and Ezra Bridger.">
-            <img src="https://images.unsplash.com/photo-1506905925346-21bda4d32df4?w=220&auto=format&fit=crop&q=80" alt="">
-            <div class="card-overlay"><div class="card-title">Ahsoka</div></div>
-            <div class="heart" onclick="toggleMyList(this)">♡</div>
-          </div>
-          <div class="card" data-title="The Book of Boba Fett" data-summary="Boba Fett takes over Jabba's throne on Tatooine.">
-            <img src="https://images.unsplash.com/photo-1553356084-58ef4a67b2a7?w=220&auto=format&fit=crop&q=80" alt="">
-            <div class="card-overlay"><div class="card-title">The Book of Boba Fett</div></div>
-            <div class="heart" onclick="toggleMyList(this)">♡</div>
-          </div>
-          <div class="card" data-title="Obi-Wan Kenobi" data-summary="Obi-Wan protects young Luke and faces his old apprentice.">
-            <img src="https://images.unsplash.com/photo-1617791160505-6f00504e3519?w=220&auto=format&fit=crop&q=80" alt="">
-            <div class="card-overlay"><div class="card-title">Obi-Wan Kenobi</div></div>
-            <div class="heart" onclick="toggleMyList(this)">♡</div>
-          </div>
-          <div class="card" data-title="Andor" data-summary="Cassian Andor’s path to becoming a rebel spy.">
-            <img src="https://images.unsplash.com/photo-1540979388789-7cee28a1cdc0?w=220&auto=format&fit=crop&q=80" alt="">
-            <div class="card-overlay"><div class="card-title">Andor</div></div>
-            <div class="heart" onclick="toggleMyList(this)">♡</div>
-          </div>
-          <div class="card" data-title="Rebels" data-summary="A small rebel cell fights the Empire in the years before A New Hope.">
-            <img src="https://images.unsplash.com/photo-1557683316-973673baf926?w=220&auto=format&fit=crop&q=80" alt="">
-            <div class="card-overlay"><div class="card-title">Rebels</div></div>
-            <div class="heart" onclick="toggleMyList(this)">♡</div>
-          </div>
-          <div class="card" data-title="The Bad Batch" data-summary="Clone Force 99 goes on rogue missions after Order 66.">
-            <img src="https://images.unsplash.com/photo-1553356084-58ef4a67b2a7?w=220&auto=format&fit=crop&q=80" alt="">
-            <div class="card-overlay"><div class="card-title">The Bad Batch</div></div>
-            <div class="heart" onclick="toggleMyList(this)">♡</div>
-          </div>
-        </div>
-        <button class="arrow arrow-right" onclick="scrollSlider(this.parentNode,1)">›</button>
-      </div>
-    </section>
   </div>
 
-  <!-- ── TV SHOWS TAB ──────────────────────────────────────── -->
+  <!-- TV SHOWS -->
   <div id="tv-content" class="tab-content">
     <section class="content-section">
       <h2 class="section-title">Star Wars TV Shows</h2>
@@ -569,7 +519,7 @@
     </section>
   </div>
 
-  <!-- ── MOVIES TAB ────────────────────────────────────────── -->
+  <!-- MOVIES -->
   <div id="movies-content" class="tab-content">
     <section class="content-section">
       <h2 class="section-title">Star Wars Movies</h2>
@@ -622,7 +572,7 @@
     </section>
   </div>
 
-  <!-- ── NEW & POPULAR ─────────────────────────────────────── -->
+  <!-- NEW & POPULAR -->
   <div id="new-content" class="tab-content">
     <section class="content-section">
       <h2 class="section-title">New & Popular</h2>
@@ -652,7 +602,7 @@
     </section>
   </div>
 
-  <!-- ── AS SEEN IN FORTNITE ──────────────────────────────── -->
+  <!-- AS SEEN IN FORTNITE -->
   <div id="fortnite-content" class="tab-content">
     <section class="content-section">
       <h2 class="section-title">As Seen in Fortnite</h2>
@@ -695,7 +645,7 @@
     </section>
   </div>
 
-  <!-- ── LORE TAB ──────────────────────────────────────────── -->
+  <!-- LORE -->
   <div id="lore-content" class="tab-content">
     <section class="content-section">
       <h2 class="section-title">Star Wars Lore: From The Acolyte to Episode VI</h2>
@@ -727,13 +677,12 @@
     </section>
   </div>
 
-  <!-- ── MY LIST TAB ───────────────────────────────────────── -->
+  <!-- MY LIST -->
   <div id="mylist-content" class="tab-content">
     <section class="content-section">
       <h2 class="section-title">My List</h2>
       <div class="row-container">
         <div class="slider" id="mylist-slider">
-          <!-- Items added via heart clicks would appear here in a real implementation -->
           <p style="color:#aaa; padding:40px; text-align:center;">Add titles by clicking the heart on any card</p>
         </div>
       </div>
@@ -747,7 +696,7 @@
     <p>© 2026 StarFlix • Not affiliated with Disney or Lucasfilm</p>
   </footer>
 
-  <!-- ── EFFECTS ───────────────────────────────────────────── -->
+  <!-- EFFECTS -->
   <div id="admin-hyperspace"></div>
 
   <div id="palpatine" class="effect hidden">
@@ -798,7 +747,7 @@
   </div>
 
   <script>
-    // ── Modal controls ──────────────────────────────────────
+    // Modal controls
     function openLoginModal() {
       document.getElementById('login-modal').style.display = 'flex';
     }
@@ -807,30 +756,30 @@
       document.getElementById('login-modal').style.display = 'none';
     }
 
-    // ── Admin hyperspace ────────────────────────────────────
+    // Admin hyperspace
     function triggerAdminHyperspace() {
       const container = document.getElementById('admin-hyperspace');
       container.innerHTML = '';
-      for (let i = 0; i < 180; i++) {
+      for (let i = 0; i < 200; i++) {
         const star = document.createElement('div');
         star.className = 'admin-star';
-        const size = Math.random() * 5 + 1;
+        const size = Math.random() * 4 + 1;
         star.style.width = star.style.height = size + 'px';
         star.style.left = Math.random() * 100 + 'vw';
         star.style.top = Math.random() * 100 + 'vh';
-        star.style.setProperty('--dx', (Math.random() - 0.5) * 3800 + 'px');
-        star.style.setProperty('--dy', (Math.random() - 0.5) * 3800 + 'px');
-        star.style.animationDelay = Math.random() * 1.8 + 's';
+        star.style.setProperty('--dx', (Math.random() - 0.5) * 4000 + 'px');
+        star.style.setProperty('--dy', (Math.random() - 0.5) * 4000 + 'px');
+        star.style.animationDelay = Math.random() * 1.5 + 's';
         container.appendChild(star);
       }
       container.style.opacity = '1';
       setTimeout(() => {
         container.style.opacity = '0';
-        setTimeout(() => container.innerHTML = '', 2500);
+        setTimeout(() => container.innerHTML = '', 2000);
       }, 4500);
     }
 
-    // ── Show funny effect ───────────────────────────────────
+    // Show funny effect
     function showEffect(id) {
       const el = document.getElementById(id);
       if (!el) return;
@@ -842,7 +791,26 @@
       }, 5000);
     }
 
-    // ── Login handler ───────────────────────────────────────
+    // Shared login success
+    function completeLogin(username) {
+      localStorage.setItem('starflixUser', username);
+      document.getElementById('welcome-back').textContent = `Welcome back, ${username}!`;
+      document.getElementById('welcome-back').style.display = 'block';
+
+      const loginBtn = document.getElementById('loginBtn');
+      loginBtn.textContent = 'Logout';
+      loginBtn.onclick = () => {
+        localStorage.removeItem('starflixUser');
+        document.getElementById('welcome-back').style.display = 'none';
+        loginBtn.textContent = 'Login';
+        loginBtn.onclick = openLoginModal;
+        alert('Logged out successfully');
+      };
+
+      closeLoginModal();
+    }
+
+    // Login handler
     document.getElementById('login-submit').addEventListener('click', () => {
       const u = document.getElementById('username');
       const p = document.getElementById('password');
@@ -857,16 +825,18 @@
 
       const adminMsg = document.getElementById('admin-message');
 
-      // Admin special case
+      // Admin
       if (lowerUser === 'admin' && password.toLowerCase() === 'admin') {
-        adminMsg.innerHTML = 'ADMIN ACCESS GRANTED – MAY THE FORCE SERVE <span style="color:#ff4444;font-weight:bold;">YOU</span> ⚔️';
+        adminMsg.innerHTML = 'ADMIN ACCESS GRANTED – HYPERSPACE ENGAGED ⚡';
         adminMsg.style.display = 'block';
         triggerAdminHyperspace();
+        completeLogin(username);
+        return;
       } else {
         adminMsg.style.display = 'none';
       }
 
-      // Other special effects
+      // Other secrets
       const effectsMap = {
         'palpatine': { pass: 'dewit', id: 'palpatine' },
         'darthjarjar': { pass: 'meesasithlord', id: 'darthjarjar' },
@@ -885,37 +855,15 @@
         showEffect(match.id);
       }
 
-      // Normal login – always save and update UI
-      localStorage.setItem('starflixUser', username);
-      document.getElementById('welcome-back').textContent = `Welcome back, ${username}!`;
-      document.getElementById('welcome-back').style.display = 'block';
-
-      // Force button to "Logout"
-      const loginBtn = document.getElementById('loginBtn');
-      loginBtn.textContent = 'Logout';
-      loginBtn.onclick = logoutFunction;
-
-      closeLoginModal();
-
-      u.value = '';
-      p.value = '';
+      // Normal login
+      completeLogin(username);
     });
-
-    // ── Logout function ─────────────────────────────────────
-    function logoutFunction() {
-      localStorage.removeItem('starflixUser');
-      document.getElementById('welcome-back').style.display = 'none';
-      const loginBtn = document.getElementById('loginBtn');
-      loginBtn.textContent = 'Login';
-      loginBtn.onclick = openLoginModal;
-      alert('Logged out successfully');
-    }
 
     document.getElementById('login-modal').addEventListener('click', e => {
       if (e.target === document.getElementById('login-modal')) closeLoginModal();
     });
 
-    // ── Tab switching ───────────────────────────────────────
+    // Tab switching
     function switchTab(tab) {
       document.querySelectorAll('.tab-content').forEach(c => c.classList.remove('active'));
       document.getElementById(tab + '-content').classList.add('active');
@@ -923,7 +871,7 @@
       document.querySelector(`.nav-links a[data-tab="${tab}"]`).classList.add('active');
     }
 
-    // ── Slider scroll ───────────────────────────────────────
+    // Slider scroll
     function scrollSlider(container, direction) {
       const slider = container.querySelector('.slider');
       if (!slider) return;
@@ -931,7 +879,7 @@
       slider.scrollBy({ left: amount, behavior: 'smooth' });
     }
 
-    // ── Search filter ───────────────────────────────────────
+    // Search filter
     function filterCards() {
       const term = document.getElementById('searchInput').value.toLowerCase().trim();
       const activeTab = document.querySelector('.tab-content.active');
@@ -942,12 +890,12 @@
       });
     }
 
-    // ── Heart toggle ────────────────────────────────────────
+    // Heart toggle
     function toggleMyList(el) {
       el.textContent = el.textContent === '♡' ? '❤️' : '♡';
     }
 
-    // ── Card summary popup ──────────────────────────────────
+    // Card summary popup
     document.addEventListener('click', e => {
       const card = e.target.closest('.card');
       if (!card || e.target.closest('.heart') || e.target.closest('.coming-soon')) return;
@@ -961,7 +909,7 @@
       setTimeout(() => popup.style.opacity = '0', 4500);
     });
 
-    // ── Page init ───────────────────────────────────────────
+    // Page init
     window.onload = () => {
       switchTab('home');
 
@@ -972,7 +920,13 @@
         document.getElementById('welcome-back').textContent = `Welcome back, ${user}!`;
         document.getElementById('welcome-back').style.display = 'block';
         loginBtn.textContent = 'Logout';
-        loginBtn.onclick = logoutFunction;
+        loginBtn.onclick = () => {
+          localStorage.removeItem('starflixUser');
+          document.getElementById('welcome-back').style.display = 'none';
+          loginBtn.textContent = 'Login';
+          loginBtn.onclick = openLoginModal;
+          alert('Logged out successfully');
+        };
       } else {
         loginBtn.onclick = openLoginModal;
       }
