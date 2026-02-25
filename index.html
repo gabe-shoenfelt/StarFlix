@@ -297,16 +297,11 @@
     .gonk-droid { font-size:120px; animation:gonk-bounce 2s infinite; }
     @keyframes gonk-bounce { 0%,100%{transform:translateY(0)} 50%{transform:translateY(-20px)} }
 
-    .trakata-saber { width:400px; height:20px; background: linear-gradient(to right, transparent, #00ff88, #00ff88, transparent); box-shadow:0 0 40px #00ff88; opacity:0; transform:scaleX(0); transition:all 1s ease-out 1.2s; }
-    .effect:not(.hidden) .trakata-saber { opacity:1; transform:scaleX(1); animation:trakata-flicker 4s infinite; }
-    @keyframes trakata-flicker { 0%,85%,90%,100%{opacity:1; transform:scaleX(1)} 87%,92%{opacity:0; transform:scaleX(0.3)} }
+    .sith-aura { position:absolute; inset:0; background: radial-gradient(circle, rgba(255,0,0,0.3) 0%, rgba(255,0,0,0.1) 50%, transparent 70%); border-radius:50%; animation:sith-pulse 3s infinite; }
+    .effect:not(.hidden) .sith-aura { opacity:1; }
+    @keyframes sith-pulse { 0%,100%{transform:scale(0.8); opacity:0.7} 50%{transform:scale(1.2); opacity:1} }
 
-    .trakata-sparks { font-size:80px; opacity:0; animation:trakata-sparks 4s infinite; position:absolute; top:50%; left:50%; transform:translate(-50%, -50%); }
-    .effect:not(.hidden) .trakata-sparks { opacity:1; }
-    @keyframes trakata-sparks { 0%,85%,90%,100%{opacity:0; transform:translate(-50%, -50%) scale(0)} 87%,92%{opacity:1; transform:translate(-50%, -50%) scale(1) rotate(45deg)} }
-
-    .trakata-sound { color:#ff6b35; font-weight:bold; animation:trakata-text 4s infinite; }
-    @keyframes trakata-text { 0%,85%,90%,100%{opacity:1} 87%,92%{opacity:0.3} }
+    .dark-text { color:#ff4444; font-weight:bold; text-shadow:0 0 15px #ff0000; }
   </style>
 </head>
 <body>
@@ -769,9 +764,8 @@
   </div>
 
   <div id="trakata" class="effect hidden">
-    <div class="trakata-saber"></div>
-    <div class="trakata-sparks">⚡</div>
-    <div class="text">TRÀKATA!<br><span class="trakata-sound">VZZZ... SNAP-HISS!</span><br>The blade was never truly off.</div>
+    <div class="sith-aura"></div>
+    <div class="text">TRÀKATA<br><span class="dark-text">Banned by Jedi and Sith alike</span><br>Congratulations! You've been successfully<br>deceived into logging in! 🎭</div>
   </div>
 
   <script>
