@@ -94,7 +94,7 @@
     }
 
     .slider {
-      display:flex; gap:12px; overflow-x:auto; scroll-behavior:smooth; padding:8px 40px 20px 40px; /* FIXED: adjusted padding for arrow space */
+      display:flex; gap:12px; overflow-x:auto; scroll-behavior:smooth; padding:8px 0 20px 0; /* arrows positioned outside */
       scrollbar-width:none;
     }
     .slider::-webkit-scrollbar { display:none; }
@@ -139,8 +139,8 @@
     }
     .row-container:hover .arrow { opacity:1; }
     .arrow:hover { background:rgba(229,9,20,0.8); }
-    .arrow.left { left:0; border-radius:8px 0 0 8px; }
-    .arrow.right { right:0; border-radius:0 8px 8px 0; }
+    .arrow.left { left:-40px; border-radius:8px 0 0 8px; }
+    .arrow.right { right:-40px; border-radius:0 8px 8px 0; }
 
     footer {
       padding:60px 4% 40px; color:#757575; font-size:14px; text-align:center;
