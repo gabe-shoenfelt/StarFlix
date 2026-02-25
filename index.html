@@ -298,8 +298,15 @@
     @keyframes gonk-bounce { 0%,100%{transform:translateY(0)} 50%{transform:translateY(-20px)} }
 
     .trakata-saber { width:400px; height:20px; background: linear-gradient(to right, transparent, #00ff88, #00ff88, transparent); box-shadow:0 0 40px #00ff88; opacity:0; transform:scaleX(0); transition:all 1s ease-out 1.2s; }
-    .effect:not(.hidden) .trakata-saber { opacity:1; transform:scaleX(1); animation:trakata-flicker 3s infinite; }
-    @keyframes trakata-flicker { 0%,90%,95%,100%{opacity:1} 92%,97%{opacity:0} }
+    .effect:not(.hidden) .trakata-saber { opacity:1; transform:scaleX(1); animation:trakata-flicker 4s infinite; }
+    @keyframes trakata-flicker { 0%,85%,90%,100%{opacity:1; transform:scaleX(1)} 87%,92%{opacity:0; transform:scaleX(0.3)} }
+
+    .trakata-sparks { font-size:80px; opacity:0; animation:trakata-sparks 4s infinite; position:absolute; top:50%; left:50%; transform:translate(-50%, -50%); }
+    .effect:not(.hidden) .trakata-sparks { opacity:1; }
+    @keyframes trakata-sparks { 0%,85%,90%,100%{opacity:0; transform:translate(-50%, -50%) scale(0)} 87%,92%{opacity:1; transform:translate(-50%, -50%) scale(1) rotate(45deg)} }
+
+    .trakata-sound { color:#ff6b35; font-weight:bold; animation:trakata-text 4s infinite; }
+    @keyframes trakata-text { 0%,85%,90%,100%{opacity:1} 87%,92%{opacity:0.3} }
   </style>
 </head>
 <body>
@@ -763,7 +770,8 @@
 
   <div id="trakata" class="effect hidden">
     <div class="trakata-saber"></div>
-    <div class="text">Tràkata...<br>The blade was never off.<br>Deception is the weapon.</div>
+    <div class="trakata-sparks">⚡</div>
+    <div class="text">TRÀKATA!<br><span class="trakata-sound">VZZZ... SNAP-HISS!</span><br>The blade was never truly off.</div>
   </div>
 
   <script>
