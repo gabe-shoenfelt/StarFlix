@@ -89,19 +89,15 @@
     .section-title { font-size:1.8rem; font-weight:600; margin-bottom:20px; padding-left:8px; }
 
     .row-container {
-      position: relative;
-      margin-bottom: 50px;
+      position:relative;
+      margin-bottom:50px;
     }
 
     .slider {
-      display: flex;
-      gap: 12px;
-      overflow-x: auto;
-      scroll-behavior: smooth;
-      padding: 8px 70px 20px 0;
-      scrollbar-width: none;
+      display:flex; gap:12px; overflow-x:auto; scroll-behavior:smooth; padding:8px 60px 20px 60px; /* FIXED: added left padding for left arrow space */
+      scrollbar-width:none;
     }
-    .slider::-webkit-scrollbar { display: none; }
+    .slider::-webkit-scrollbar { display:none; }
 
     .card {
       position:relative; flex:0 0 220px; height:330px; border-radius:8px; overflow:hidden;
@@ -135,44 +131,16 @@
     }
 
     .arrow {
-      position: absolute;
-      top: 50%;
-      transform: translateY(-50%);
-      width: 50px;
-      height: 140px;
-      background: rgba(0,0,0,0.6);
-      color: white;
-      border: none;
-      font-size: 3.5rem;
-      cursor: pointer;
-      z-index: 10;
-      opacity: 0;
-      transition: opacity .2s, background .2s, transform .2s;
-      border-radius: 0 8px 8px 0;
-      display: flex;
-      align-items: center;
-      justify-content: center;
-      user-select: none;
+      position:absolute; top:50%; transform:translateY(-50%);
+      width:60px; height:160px; background:rgba(0,0,0,0.65); color:white;
+      border:none; font-size:3.5rem; cursor:pointer; z-index:10; opacity:0;
+      transition:opacity .2s, background .2s;
+      display:flex; align-items:center; justify-content:center;
     }
-
-    .row-container:hover .arrow {
-      opacity: 1;
-    }
-
-    .arrow:hover {
-      background: rgba(229,9,20,0.8);
-      transform: translateY(-50%) scale(1.1);
-    }
-
-    .arrow.left {
-      left: 0;
-      border-radius: 8px 0 0 8px;
-    }
-
-    .arrow.right {
-      right: 0;
-      border-radius: 0 8px 8px 0;
-    }
+    .row-container:hover .arrow { opacity:1; }
+    .arrow:hover { background:rgba(229,9,20,0.8); }
+    .arrow.left { left:0; border-radius:8px 0 0 8px; }
+    .arrow.right { right:0; border-radius:0 8px 8px 0; }
 
     footer {
       padding:60px 4% 40px; color:#757575; font-size:14px; text-align:center;
@@ -266,21 +234,26 @@
       pointer-events: none;
       z-index: 9998;
       opacity: 0;
+      transition: opacity 1.2s;
       background: #000;
       transition: opacity 1.5s ease-in-out;
     }
 
     .admin-star {
       position: absolute;
-      background: #fff;
+      background: white;
       border-radius: 50%;
+      box-shadow: 0 0 8px white;
+      animation: hyperspace 4s linear forwards;
       box-shadow: 0 0 12px #fff, 0 0 24px #fff, 0 0 40px #88f;
       animation: hyperspace 5s linear forwards;
     }
 
     @keyframes hyperspace {
-      0%   { transform: translate(0,0) scale(0.05); opacity: 0.3; }
-      20%  { opacity: 1; }
+      0% { transform: translate(0,0) scale(0.1); opacity: 0.8; }
+      100% { transform: translate(var(--dx), var(--dy)) scale(1); opacity: 0; }
+      0% { transform: translate(0,0) scale(0.05); opacity: 0.3; }
+      20% { opacity: 1; }
       100% { transform: translate(var(--dx), var(--dy)) scale(1.2); opacity: 0; }
     }
 
@@ -392,7 +365,7 @@
     <section class="content-section">
       <h2 class="section-title">Continue Watching for Grogu</h2>
       <div class="row-container">
-        <button class="arrow arrow-left" onclick="scrollSlider(this,-1)">‹</button>
+        <button class="arrow arrow-left" onclick="scrollSlider(this, -1)">‹</button>
         <div class="slider">
           <div class="card" data-title="The Mandalorian & Grogu" data-summary="Not released yet – coming soon!">
             <img src="https://images.unsplash.com/photo-1581833971385-983855972e47?w=220&auto=format&fit=crop&q=80" alt="">
@@ -435,14 +408,14 @@
             <div class="heart" onclick="toggleMyList(this)">♡</div>
           </div>
         </div>
-        <button class="arrow arrow-right" onclick="scrollSlider(this,1)">›</button>
+        <button class="arrow arrow-right" onclick="scrollSlider(this, 1)">›</button>
       </div>
     </section>
 
     <section class="content-section">
       <h2 class="section-title">Recently Added Movies</h2>
       <div class="row-container">
-        <button class="arrow arrow-left" onclick="scrollSlider(this,-1)">‹</button>
+        <button class="arrow arrow-left" onclick="scrollSlider(this, -1)">‹</button>
         <div class="slider">
           <div class="card" data-title="A New Hope" data-summary="Luke Skywalker joins the Rebellion to destroy the Death Star.">
             <img src="https://images.unsplash.com/photo-1454789548928-9efd52dc4031?w=220&auto=format&fit=crop&q=80" alt="">
@@ -485,7 +458,7 @@
             <div class="heart" onclick="toggleMyList(this)">♡</div>
           </div>
         </div>
-        <button class="arrow arrow-right" onclick="scrollSlider(this,1)">›</button>
+        <button class="arrow arrow-right" onclick="scrollSlider(this, 1)">›</button>
       </div>
     </section>
   </div>
@@ -495,7 +468,7 @@
     <section class="content-section">
       <h2 class="section-title">Star Wars TV Shows</h2>
       <div class="row-container">
-        <button class="arrow arrow-left" onclick="scrollSlider(this,-1)">‹</button>
+        <button class="arrow arrow-left" onclick="scrollSlider(this, -1)">‹</button>
         <div class="slider">
           <div class="card" data-title="The Mandalorian" data-summary="A lone bounty hunter protects a mysterious child while evading the Empire.">
             <img src="https://images.unsplash.com/photo-1581833971385-983855972e47?w=220&auto=format&fit=crop&q=80" alt="">
@@ -548,7 +521,7 @@
             <div class="heart" onclick="toggleMyList(this)">♡</div>
           </div>
         </div>
-        <button class="arrow arrow-right" onclick="scrollSlider(this,1)">›</button>
+        <button class="arrow arrow-right" onclick="scrollSlider(this, 1)">›</button>
       </div>
     </section>
   </div>
@@ -558,7 +531,7 @@
     <section class="content-section">
       <h2 class="section-title">Star Wars Movies</h2>
       <div class="row-container">
-        <button class="arrow arrow-left" onclick="scrollSlider(this,-1)">‹</button>
+        <button class="arrow arrow-left" onclick="scrollSlider(this, -1)">‹</button>
         <div class="slider">
           <div class="card" data-title="Episode I: The Phantom Menace" data-summary="Young Anakin Skywalker is discovered as the Jedi face a new threat.">
             <img src="https://images.unsplash.com/photo-1557683316-973673baf926?w=220&auto=format&fit=crop&q=80" alt="">
@@ -601,7 +574,7 @@
             <div class="heart" onclick="toggleMyList(this)">♡</div>
           </div>
         </div>
-        <button class="arrow arrow-right" onclick="scrollSlider(this,1)">›</button>
+        <button class="arrow arrow-right" onclick="scrollSlider(this, 1)">›</button>
       </div>
     </section>
   </div>
@@ -611,7 +584,7 @@
     <section class="content-section">
       <h2 class="section-title">New & Popular</h2>
       <div class="row-container">
-        <button class="arrow arrow-left" onclick="scrollSlider(this,-1)">‹</button>
+        <button class="arrow arrow-left" onclick="scrollSlider(this, -1)">‹</button>
         <div class="slider">
           <div class="card" data-title="The Mandalorian & Grogu" data-summary="Not released yet – coming soon!">
             <img src="https://images.unsplash.com/photo-1581833971385-983855972e47?w=220&auto=format&fit=crop&q=80" alt="">
@@ -631,7 +604,7 @@
             <div class="heart" onclick="toggleMyList(this)">♡</div>
           </div>
         </div>
-        <button class="arrow arrow-right" onclick="scrollSlider(this,1)">›</button>
+        <button class="arrow arrow-right" onclick="scrollSlider(this, 1)">›</button>
       </div>
     </section>
   </div>
@@ -641,7 +614,7 @@
     <section class="content-section">
       <h2 class="section-title">As Seen in Fortnite</h2>
       <div class="row-container">
-        <button class="arrow arrow-left" onclick="scrollSlider(this,-1)">‹</button>
+        <button class="arrow arrow-left" onclick="scrollSlider(this, -1)">‹</button>
         <div class="slider">
           <div class="card" data-title="The Mandalorian" data-summary="The Mandalorian and Grogu skins released in Chapter 2 Season 5 (2021) and returned in Chapter 3 Season 3 (2023).">
             <img src="https://images.unsplash.com/photo-1581833971385-983855972e47?w=220&auto=format&fit=crop&q=80" alt="">
@@ -674,7 +647,7 @@
             <div class="heart" onclick="toggleMyList(this)">♡</div>
           </div>
         </div>
-        <button class="arrow arrow-right" onclick="scrollSlider(this,1)">›</button>
+        <button class="arrow arrow-right" onclick="scrollSlider(this, 1)">›</button>
       </div>
     </section>
   </div>
@@ -905,29 +878,18 @@
       document.querySelector(`.nav-links a[data-tab="${tab}"]`).classList.add('active');
     }
 
-    // FIXED SCROLL FUNCTION – now correctly positions and scrolls
-    function scrollSlider(btn, direction) {
-      const container = btn.closest('.row-container');
-      const slider = container.querySelector('.slider');
+    // FIXED SCROLL ARROWS
+    function scrollSlider(button, direction) {
+      const rowContainer = button.parentNode;
+      const slider = rowContainer.querySelector('.slider');
       if (!slider) return;
 
       const scrollAmount = slider.clientWidth * 0.8 * direction;
-      slider.scrollBy({ left: scrollAmount, behavior: 'smooth' });
-    }
-
-    // Show arrows only when needed + ensure correct positioning
-    window.addEventListener('load', () => {
-      document.querySelectorAll('.row-container').forEach(row => {
-        const slider = row.querySelector('.slider');
-        if (slider.scrollWidth > slider.clientWidth + 20) {
-          // Row needs scrolling → keep arrows visible on hover
-          row.style.position = 'relative';
-        } else {
-          // No overflow → hide arrows
-          row.querySelectorAll('.arrow').forEach(a => a.style.display = 'none');
-        }
+      slider.scrollBy({
+        left: scrollAmount,
+        behavior: 'smooth'
       });
-    });
+    }
 
     // Search filter
     function filterCards() {
@@ -950,7 +912,7 @@
       const card = e.target.closest('.card');
       if (!card || e.target.closest('.heart') || e.target.closest('.coming-soon')) return;
 
-      const title   = card.dataset.title;
+      const title = card.dataset.title;
       const summary = card.dataset.summary;
 
       const popup = document.getElementById('card-summary');
