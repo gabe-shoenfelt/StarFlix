@@ -853,8 +853,19 @@
       let selectedCount = 0;
       const totalGonks = document.querySelectorAll('#gonk .droid-option[data-gonk="true"]').length;
 
+      // Reset state
+      selectedCount = 0;
       droidOptions.forEach(option => {
         option.classList.remove('selected', 'wrong');
+        // Remove existing event listeners by cloning and replacing
+        const newOption = option.cloneNode(true);
+        option.parentNode.replaceChild(newOption, option);
+      });
+
+      // Re-query after cloning
+      const newDroidOptions = document.querySelectorAll('#gonk .droid-option');
+
+      newDroidOptions.forEach(option => {
         option.addEventListener('click', function() {
           if (this.classList.contains('selected') || this.classList.contains('wrong')) return;
 
