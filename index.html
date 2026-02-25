@@ -757,10 +757,12 @@
     // Modal controls
     function openLoginModal() {
       document.getElementById('login-modal').style.display = 'flex';
+      document.querySelectorAll('.arrow').forEach(arrow => arrow.style.display = 'none');
     }
 
     function closeLoginModal() {
       document.getElementById('login-modal').style.display = 'none';
+      document.querySelectorAll('.arrow').forEach(arrow => arrow.style.display = 'flex');
     }
 
     // Admin hyperspace
